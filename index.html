@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- ✅ ENCABEZADO -->
   <header>
     <h1>ARGENTEX</h1>
     <nav>
@@ -18,34 +17,23 @@
     </nav>
   </header>
 
-  <!-- ✅ HERO -->
-<section class="hero">
-  <div class="carousel">
-    <div class="track" id="track">
-      <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/1C8AF502-94A2-486C-BB6C-A8325B3307FD.jpg" alt="Impresión 1">
-      <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_0413.jpg" alt="Impresión 2">
-      <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1410.jpg" alt="Impresión 3">
-      <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1496.jpg" alt="Impresión 4">
-      <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1531.jpg" alt="Impresión 5">
+  <!-- HERO con carrusel de fondo -->
+  <section class="hero" id="galeria">
+    <div class="hero-carousel">
+      <div class="track" id="hero-track"></div>
+      <!-- flechas y puntos (opcionales) -->
+      <button class="arrow prev" aria-label="Anterior">‹</button>
+      <button class="arrow next" aria-label="Siguiente">›</button>
+      <div class="dots" id="hero-dots"></div>
     </div>
-  </div>
 
-  <div class="hero-content">
-    <h2>Impresión 3D de calidad</h2>
-    <p>Diseñamos y fabricamos objetos únicos.</p>
-    <a href="#contacto" class="cta">Contactanos</a>
-  </div>
-</section>
-
-  <!-- ✅ CARRUSEL AUTOMÁTICO -->
-  <section id="galeria" class="carousel" aria-label="Galería Argentex">
-    <button class="arrow prev" aria-label="Anterior">‹</button>
-    <div class="track" id="track"></div>
-    <button class="arrow next" aria-label="Siguiente">›</button>
-    <div class="dots" id="dots"></div>
+    <div class="hero-content">
+      <h2>Impresión 3D de calidad</h2>
+      <p>Diseñamos y fabricamos objetos únicos.</p>
+      <a href="#contacto" class="cta">Contactanos</a>
+    </div>
   </section>
 
-  <!-- ✅ PRODUCTOS -->
   <section id="productos" class="grid">
     <h3>Nuestros productos</h3>
     <div class="cards">
@@ -55,34 +43,35 @@
     </div>
   </section>
 
-  <!-- ✅ CONTACTO -->
   <section id="contacto" class="contacto">
     <h3>Contacto</h3>
     <p>Escribinos a <a href="mailto:arg.entex.2025@gmail.com">arg.entex.2025@gmail.com</a> o hablá por WhatsApp.</p>
   </section>
 
-  <!-- ✅ FOOTER -->
   <footer>
     <p>© 2025 Argentex – Impresión 3D Argentina</p>
   </footer>
 
-  <!-- ✅ JAVASCRIPT: CARRUSEL DINÁMICO -->
+  <!-- JS: carrusel dinámico de fondo -->
   <script>
   (async function() {
-    const username = "argentex2000-byte";   // ⚠️ Tu usuario de GitHub
-    const repo = "Argentex";                // ⚠️ Tu repositorio
-    const folder = "fondo";                 // ⚠️ Carpeta con las imágenes
-    const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folder}`;
+    const username = "argentex2000-byte";
+    const repo     = "Argentex";
+    const folder   = "fondo";
+    const apiUrl   = `https://api.github.com/repos/${username}/${repo}/contents/${folder}`;
 
-    const track = document.getElementById('track');
-    const dotsWrap = document.getElementById('dots');
+    const hero     = document.querySelector('.hero');
+    const track    = hero.querySelector('#hero-track');
+    const dotsWrap = hero.querySelector('#hero-dots');
+    const prevBtn  = hero.querySelector('.arrow.prev');
+    const nextBtn  = hero.querySelector('.arrow.next');
 
-    // 1️⃣ Obtener imágenes del repositorio
-    const res = await fetch(apiUrl);
+    // 1) Traer lista de imágenes del repo
+    const res   = await fetch(apiUrl);
     const files = await res.json();
     const images = files.filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f.name));
 
-    // 2️⃣ Crear dinámicamente las imágenes en el carrusel
+    // 2) Crear dinámicamente las slides
     images.forEach(img => {
       const el = document.createElement('img');
       el.className = 'slide';
@@ -90,12 +79,14 @@
       track.appendChild(el);
     });
 
-    const slides = Array.from(document.querySelectorAll('.slide'));
+    const slides = Array.from(track.querySelectorAll('.slide'));
+    if (slides.length === 0) return;
+
     let i = 0;
     let timer;
     const AUTOPLAY_MS = 3500;
 
-    // 3️⃣ Crear los puntos indicadores
+    // puntos
     slides.forEach((_, idx) => {
       const b = document.createElement('button');
       b.addEventListener('click', () => goTo(idx, true));
@@ -104,34 +95,24 @@
 
     function update() {
       track.style.transform = `translateX(-${i * 100}%)`;
-      [...dotsWrap.children].forEach((b, idx) =>
-        b.classList.toggle('active', idx === i)
-      );
+      [...dotsWrap.children].forEach((b, idx) => b.classList.toggle('active', idx === i));
     }
+    function goTo(idx, user=false) { i = (idx + slides.length) % slides.length; update(); if (user) restart(); }
+    function next() { goTo(i + 1); }
+    function prev() { goTo(i - 1, true); }
 
-    function goTo(idx, user = false) {
-      i = (idx + slides.length) % slides.length;
-      update();
-      if (user) restart();
-    }
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', () => goTo(i + 1, true));
 
-    function nextSlide() { goTo(i + 1); }
-    function prevSlide() { goTo(i - 1, true); }
+    function start(){ stop(); timer = setInterval(next, AUTOPLAY_MS); }
+    function stop(){ if (timer) clearInterval(timer); }
+    function restart(){ start(); }
 
-    document.querySelector('.arrow.prev').addEventListener('click', () => goTo(i - 1, true));
-    document.querySelector('.arrow.next').addEventListener('click', () => goTo(i + 1, true));
+    hero.addEventListener('mouseenter', stop);
+    hero.addEventListener('mouseleave', start);
 
-    function start() { stop(); timer = setInterval(nextSlide, AUTOPLAY_MS); }
-    function stop() { if (timer) clearInterval(timer); }
-    function restart() { start(); }
-
-    document.querySelector('.carousel').addEventListener('mouseenter', stop);
-    document.querySelector('.carousel').addEventListener('mouseleave', start);
-
-    update();
-    start();
+    update(); start();
   })();
   </script>
 </body>
 </html>
-
