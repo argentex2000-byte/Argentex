@@ -45,7 +45,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #ff6600;
+  color: var(--color-primario-hover);
 }
 
 /* HERO */
@@ -177,7 +177,7 @@ nav a:hover {
   cursor: pointer;
 }
 .dots button.active {
-  background: #ff6600;
+  background: var(--color-primario-hover);
   transform: scale(1.15);
 }
 
@@ -210,7 +210,7 @@ nav a:hover {
 }
 
 .contacto a {
-  color: #ff6600;
+  color: var(--color-primario-hover);
   text-decoration: none;
   font-weight: bold;
 }
