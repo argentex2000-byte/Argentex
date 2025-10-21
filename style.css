@@ -13,6 +13,7 @@ body {
   line-height: 1.6;
 }
 
+/* Header */
 header {
   background: #111;
   color: #fff;
@@ -21,39 +22,30 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+header h1 { font-size: 1.8rem; letter-spacing: 2px; }
+nav a { color: #fff; text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
 
-header h1 {
-  font-size: 1.8rem;
-  letter-spacing: 2px;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 1.5rem;
-  font-weight: 500;
-}
-
+/* Hero */
 .hero {
   text-align: center;
   padding: 6rem 2rem;
   background: linear-gradient(135deg, #0d0d0d, #2c2c2c);
   color: #fff;
 }
-<section class="carousel" aria-label="Galería Argentex">
-  <button class="arrow prev" aria-label="Anterior">‹</button>
+.hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+.hero p  { font-size: 1.2rem; margin-bottom: 2rem; }
+.cta {
+  display: inline-block;
+  background: #ff6600;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.cta:hover { background: #ff4500; }
 
-  <div class="track" id="track">
-    <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/1C8AF502-94A2-486C-BB6C-A8325B3307FD.jpg" alt="Impresión 1">
-    <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_0413.jpg" alt="Impresión 2">
-    <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1410.jpg" alt="Impresión 3">
-    <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1496.jpg" alt="Impresión 4">
-    <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1531.jpg" alt="Impresión 5">
-  </div>
-
-  <button class="arrow next" aria-label="Siguiente">›</button>
-  <div class="dots" id="dots"></div>
-</section>
 /* ==== Carrusel con track deslizante ==== */
 .carousel{
   width:100%;
@@ -65,13 +57,11 @@ nav a {
   background:#000;
   box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
-
 .track{
   display:flex;
   transition:transform .6s ease;
   will-change: transform;
 }
-
 .slide{
   flex:0 0 100%;
   width:100%;
@@ -79,7 +69,6 @@ nav a {
   object-fit: cover;                 /* se ve lleno y prolijo */
   display:block;
 }
-
 /* Flechas */
 .arrow{
   position:absolute;
@@ -95,7 +84,6 @@ nav a {
 .arrow:hover{ background:rgba(0,0,0,.7); }
 .arrow.prev{ left:10px; }
 .arrow.next{ right:10px; }
-
 /* Puntos */
 .dots{
   position:absolute; left:0; right:0; bottom:10px;
@@ -106,74 +94,23 @@ nav a {
   border:none; background:rgba(255,255,255,.5); cursor:pointer;
 }
 .dots button.active{ background:#ff6600; transform:scale(1.15); }
-
-/* Responsive: baja un poco la altura en móviles */
+/* Responsive */
 @media (max-width:768px){ .slide{ height: 360px; } }
 @media (max-width:480px){ .slide{ height: 260px; } }
-  }
-}
 
-.hero h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-.cta {
-  display: inline-block;
-  background: #ff6600;
-  color: #fff;
-  padding: 0.8rem 2rem;
-  text-decoration: none;
-  border-radius: 30px;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.cta:hover {
-  background: #ff4500;
-}
-
-.grid {
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
+/* Grid de productos */
+.grid { padding: 4rem 2rem; text-align: center; }
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 2rem; margin-top: 2rem;
 }
-
 .card {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
+  background: #fff; padding: 2rem; border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.contacto {
-  padding: 4rem 2rem;
-  background: #111;
-  color: #fff;
-  text-align: center;
-}
-
-.contacto a {
-  color: #ff6600;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  background: #000;
-  color: #aaa;
-  font-size: 0.9rem;
-}
+/* Contacto + Footer */
+.contacto { padding: 4rem 2rem; background: #111; color: #fff; text-align: center; }
+.contacto a { color: #ff6600; text-decoration: none; font-weight: bold; }
+footer { text-align: center; padding: 1.5rem; background: #000; color: #aaa; font-size: 0.9rem; }
