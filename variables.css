@@ -1,14 +1,41 @@
+/* ==========================================================
+   🎨 1. Paleta TECH INDUSTRIAL (moderna y elegante)
+   ========================================================== */
 :root {
-  /* 🎨 Paleta principal */
-  --color-primario: #00ADEF;    /* Celeste tecnológico */
-  --color-secundario: #003366;  /* Azul profundo */
-  --color-acento: #FF6B35;      /* Naranja impresión 3D */
-  --color-fondo: #F5F7FA;       /* Gris claro */
-  --color-texto: #222222;       /* Gris carbón */
-  --color-blanco: #ffffff;
-
-  /* 🧪 Tonos de apoyo */
-  --color-fondo-oscuro: #0D1117;
-  --color-gris: #e5e7eb;
-  --color-gris-oscuro: #374151;
+  --color-primario: #ff6600;         /* Naranja vivo */
+  --color-secundario: #004C91;       /* Azul acero */
+  --color-fondo: #0d0d0d;            /* Gris oscuro */
+  --color-neutro: #f8f8f8;           /* Gris claro */
+  --color-acento: #ffffff;           /* Blanco puro */
+  --color-texto: #ffffff;            /* Texto sobre fondo oscuro */
+  --color-primario-hover: #ff4500;   /* Naranja más oscuro al hover */
 }
+
+/* ==========================================================
+   🇦🇷 2. Paleta TECH + ARGENTINA (marca nacional moderna)
+   ========================================================== */
+/*
+:root {
+  --color-primario: #00ADEF;         /* Celeste tecnológico */
+  --color-secundario: #003366;       /* Azul profundo */
+  --color-acento: #FF6B35;           /* Naranja impresión 3D */
+  --color-fondo: #F5F7FA;            /* Gris muy claro */
+  --color-texto: #222222;            /* Gris carbón */
+  --color-neutro: #ffffff;           /* Blanco */
+  --color-primario-hover: #008BBE;   /* Celeste más oscuro */
+}
+*/
+
+/* ==========================================================
+   🧪 3. Paleta FUTURISTA MINIMALISTA (premium / startup)
+   ========================================================== */
+/*
+:root {
+  --color-fondo: #0B0C10;            /* Negro absoluto */--color-primario: #00FFF5;         /* Cian brillante */
+  --color-secundario: #1F2833;       /* Gris metal */
+  --color-acento: #FFFFFF;           /* Blanco puro */
+  --color-detalle: #FF6B00;          /* Naranja cálido */
+  --color-texto: #FFFFFF;            /* Texto claro */
+  --color-primario-hover: #00D4C4;   /* Cian más suave */
+}
+*/
