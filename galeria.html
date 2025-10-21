@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería – Argentex</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ====== Estilos específicos de la galería ====== */
+
+    .topbar {
+      background:#111; color:#fff;
+      padding:1rem 2rem;
+      display:flex; align-items:center; gap:1rem;
+      position:sticky; top:0; z-index:10;
+    }
+    .topbar a { color:#ff6600; text-decoration:none; }
+    .topbar a:hover { text-decoration:underline; }
+
+    .gallery-wrap { padding:2rem; max-width:1200px; margin:0 auto; }
+    .gallery-head { text-align:center; margin-bottom:1.5rem; }
+    .gallery-head h1 { font-size:clamp(1.6rem,3vw,2.4rem); }
+    .gallery-head p { color:#666; }
+
+    /* Grid responsivo */
+    .gallery-grid {
+      columns: 1;      /* fallback */
+      column-gap: 1rem;
+    }
+    @media (min-width:640px){ .gallery-grid{ columns: 2; } }
+    @media (min-width:980px){ .gallery-grid{ columns: 3; } }
+
+    .g-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+      background:#000;
+      cursor: zoom-in;
+    }
+    .g-item img {
+      width:100%; height:auto; display:block;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+    .g-item:hover img { transform: scale(1.03); opacity:.95; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; background: rgba(0,0,0,.85);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; padding: 2rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.6);
+    }
+    .lb-close, .lb-prev, .lb-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,.15); color:#fff; font-size: 26px;
+      display:grid; place-items:center; cursor:pointer;
+    }
+    .lb-close { top: 24px; right: 24px; transform:none; }
+    .lb-prev { left: 24px; }
+    .lb-next { right: 24px; }
+    .lb-prev:hover, .lb-next:hover, .lb-close:hover { background: rgba(255,255,255,.28); }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="index.html">← Volver</a>
+    <strong>Galería de trabajos</strong>
+  </div>
+
+  <main class="gallery-wrap">
+    <div class="gallery-head">
+      <h1>Galería</h1>
+      <p>Algunos de nuestros proyectos de impresión 3D. Hacé clic para ampliar.</p>
+    </div>
+
+    <div id="grid" class="gallery-grid" aria-live="polite"></div>
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lb-close" aria-label="Cerrar">✕</button>
+    <button class="lb-prev"  aria-label="Anterior">‹</button>
+    <img id="lb-img" alt="">
+    <button class="lb-next"  aria-label="Siguiente">›</button>
+  </div>
+
+  <script>
+  (async function(){
+    const username = "argentex2000-byte";
+    const repo     = "Argentex";
+    const folder   = "fondo";
+    const api      = `https://api.github.com/repos/${username}/${repo}/contents/${folder}`;
+    const rawBase  = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
+
+    const grid = document.getElementById('grid');
+
+    // 1) Traer imágenes del repo
+    const res = await fetch(api);
+    const files = await res.json();
+
+    // 2) Filtrar imágenes y ordenar por nombre (opcional)
+    const images = files
+      .filter(f => /\.(jpe?g|png|webp)$/i.test(f.name))
+      .sort((a,b) => a.name.localeCompare(b.name));
+
+    // 3) Render
+    const list = [];
+    images.forEach(f => {
+      const src = rawBase + f.name;
+      list.push(src);
+
+      const a = document.createElement('a');
+      a.href = src; a.className = 'g-item'; a.setAttribute('data-src', src);
+      a.innerHTML = `<img src="${src}" alt="Trabajo de impresión 3D" loading="lazy">`;
+      a.addEventListener('click', (e)=>{ e.preventDefault(); openLightbox(src); });
+      grid.appendChild(a);
+    });
+
+    // ===== Lightbox simple =====
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const btnClose = lb.querySelector('.lb-close');
+    const btnPrev  = lb.querySelector('.lb-prev');
+    const btnNext  = lb.querySelector('.lb-next');
+
+    let idx = 0;
+
+    function openLightbox(src){
+      idx = list.indexOf(src);
+      lbImg.src = src;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+    }
+    function closeLightbox(){
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.src = "";
+    }
+    function step(delta){
+      idx = (idx + delta + list.length) % list.length;
+      lbImg.src = list[idx];
+    }
+
+    btnClose.addEventListener('click', closeLightbox);
+    btnPrev .addEventListener('click', ()=> step(-1));
+    btnNext .addEventListener('click', ()=> step(+1));
+    lb.addEventListener('click', (e)=>{ if(e.target===lb) closeLightbox(); });
+    window.addEventListener('keydown', (e)=>{
+      if(!lb.classList.contains('open')) return;
+      if(e.key==='Escape') closeLightbox();
+      if(e.key==='ArrowLeft')  step(-1);
+      if(e.key==='ArrowRight') step(+1);
+    });
+  })();
+  </script>
+</body>
+</html>
