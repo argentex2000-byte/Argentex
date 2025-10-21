@@ -1,118 +1,52 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Argentex – Impresión 3D</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+<section class="hero" id="galeria">
+  <div class="hero-carousel">
+    <div class="track" id="hero-track"></div>
+    <button class="arrow prev" aria-label="Anterior">‹</button>
+    <button class="arrow next" aria-label="Siguiente">›</button>
+    <div class="dots" id="hero-dots"></div>
+  </div>
 
-<body>
-  <header>
-    <h1>ARGENTEX</h1>
-    <nav>
-      <a href="#productos">Productos</a>
-      <a href="#galeria">Galería</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </header>
+  <div class="hero-content">
+    <h2>Impresión 3D de calidad</h2>
+    <p>Diseñamos y fabricamos objetos únicos.</p>
+    <a href="#contacto" class="cta">Contactanos</a>
+  </div>
+</section>
+<script>
+(async function(){
+  const username="argentex2000-byte", repo="Argentex", folder="fondo";
+  const api=`https://api.github.com/repos/${username}/${repo}/contents/${folder}`;
+  const hero=document.querySelector('.hero');
+  const track=hero.querySelector('#hero-track');
+  const dots=hero.querySelector('#hero-dots');
+  const prev=hero.querySelector('.arrow.prev');
+  const next=hero.querySelector('.arrow.next');
 
-  <!-- HERO con carrusel de fondo -->
-  <section class="hero" id="galeria">
-    <div class="hero-carousel">
-      <div class="track" id="hero-track"></div>
-      <!-- flechas y puntos (opcionales) -->
-      <button class="arrow prev" aria-label="Anterior">‹</button>
-      <button class="arrow next" aria-label="Siguiente">›</button>
-      <div class="dots" id="hero-dots"></div>
-    </div>
+  const res=await fetch(api); const files=await res.json();
+  const images=files.filter(f=>/\.(jpg|jpeg|png|webp)$/i.test(f.name));
 
-    <div class="hero-content">
-      <h2>Impresión 3D de calidad</h2>
-      <p>Diseñamos y fabricamos objetos únicos.</p>
-      <a href="#contacto" class="cta">Contactanos</a>
-    </div>
-  </section>
+  images.forEach(f=>{
+    const img=document.createElement('img');
+    img.className='slide';
+    img.src=`https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/${f.name}`;
+    track.appendChild(img);
+  });
 
-  <section id="productos" class="grid">
-    <h3>Nuestros productos</h3>
-    <div class="cards">
-      <div class="card"><h4>Decoración</h4><p>Piezas personalizadas para tu hogar.</p></div>
-      <div class="card"><h4>Accesorios</h4><p>Funcionales y a medida.</p></div>
-      <div class="card"><h4>Prototipos</h4><p>Desarrollo rápido para tus ideas.</p></div>
-    </div>
-  </section>
+  const slides=[...track.querySelectorAll('.slide')];
+  if(!slides.length) return;
 
-  <section id="contacto" class="contacto">
-    <h3>Contacto</h3>
-    <p>Escribinos a <a href="mailto:arg.entex.2025@gmail.com">arg.entex.2025@gmail.com</a> o hablá por WhatsApp.</p>
-  </section>
+  let i=0, timer, AUTOPLAY=3500;
+  slides.forEach((_,idx)=>{ const b=document.createElement('button'); b.onclick=()=>go(idx,true); dots.appendChild(b); });
 
-  <footer>
-    <p>© 2025 Argentex – Impresión 3D Argentina</p>
-  </footer>
+  const update=()=>{ track.style.transform=`translateX(-${i*100}%)`; [...dots.children].forEach((b,idx)=>b.classList.toggle('active',idx===i)); };
+  const go=(idx,user=false)=>{ i=(idx+slides.length)%slides.length; update(); if(user) restart(); };
+  const nextFn=()=>go(i+1), prevFn=()=>go(i-1,true);
+  prev.onclick=prevFn; next.onclick=()=>go(i+1,true);
+  const start=()=>{ stop(); timer=setInterval(nextFn,AUTOPLAY); };
+  const stop =()=>{ if(timer) clearInterval(timer); };
+  const restart=()=>start();
+  hero.addEventListener('mouseenter',stop); hero.addEventListener('mouseleave',start);
 
-  <!-- JS: carrusel dinámico de fondo -->
-  <script>
-  (async function() {
-    const username = "argentex2000-byte";
-    const repo     = "Argentex";
-    const folder   = "fondo";
-    const apiUrl   = `https://api.github.com/repos/${username}/${repo}/contents/${folder}`;
-
-    const hero     = document.querySelector('.hero');
-    const track    = hero.querySelector('#hero-track');
-    const dotsWrap = hero.querySelector('#hero-dots');
-    const prevBtn  = hero.querySelector('.arrow.prev');
-    const nextBtn  = hero.querySelector('.arrow.next');
-
-    // 1) Traer lista de imágenes del repo
-    const res   = await fetch(apiUrl);
-    const files = await res.json();
-    const images = files.filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f.name));
-
-    // 2) Crear dinámicamente las slides
-    images.forEach(img => {
-      const el = document.createElement('img');
-      el.className = 'slide';
-      el.src = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/${img.name}`;
-      track.appendChild(el);
-    });
-
-    const slides = Array.from(track.querySelectorAll('.slide'));
-    if (slides.length === 0) return;
-
-    let i = 0;
-    let timer;
-    const AUTOPLAY_MS = 3500;
-
-    // puntos
-    slides.forEach((_, idx) => {
-      const b = document.createElement('button');
-      b.addEventListener('click', () => goTo(idx, true));
-      dotsWrap.appendChild(b);
-    });
-
-    function update() {
-      track.style.transform = `translateX(-${i * 100}%)`;
-      [...dotsWrap.children].forEach((b, idx) => b.classList.toggle('active', idx === i));
-    }
-    function goTo(idx, user=false) { i = (idx + slides.length) % slides.length; update(); if (user) restart(); }
-    function next() { goTo(i + 1); }
-    function prev() { goTo(i - 1, true); }
-
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', () => goTo(i + 1, true));
-
-    function start(){ stop(); timer = setInterval(next, AUTOPLAY_MS); }
-    function stop(){ if (timer) clearInterval(timer); }
-    function restart(){ start(); }
-
-    hero.addEventListener('mouseenter', stop);
-    hero.addEventListener('mouseleave', start);
-
-    update(); start();
-  })();
-  </script>
-</body>
-</html>
+  update(); start();
+})();
+</script>
