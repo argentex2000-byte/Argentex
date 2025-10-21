@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-@import url('variables.css');
-
+@import url('variables.css'); /* 👈 Importá tus variables aquí */
 
 * {
   margin: 0;
@@ -19,10 +18,10 @@ body {
   line-height: 1.6;
 }
 
-/* HEADER */
+/* === HEADER === */
 header {
   background: var(--color-secundario);
-  color: var(--color-blanco);
+  color: var(--color-neutro);
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -38,28 +37,27 @@ header h1 {
 }
 
 nav a {
-  color: #fff;
+  color: var(--color-neutro);
   text-decoration: none;
   margin-left: 1.5rem;
   font-weight: 500;
 }
 
 nav a:hover {
-  color: var(--color-primario-hover);
+  color: var(--color-acento);
 }
 
-/* HERO */
+/* === HERO === */
 .hero {
   position: relative;
   min-height: 100vh;
   display: grid;
   place-items: center;
   text-align: center;
-  color: #fff;
+  color: var(--color-neutro);
   overflow: hidden;
 }
 
-/* CARRUSEL de fondo */
 .hero-carousel {
   position: absolute;
   inset: 0;
@@ -82,17 +80,15 @@ nav a:hover {
   display: block;
 }
 
-/* Capa oscura sobre el carrusel */
+/* Capa oscura encima del carrusel */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25), rgba(0,0,0,0.65));
   z-index: 1;
-  pointer-events: none;
 }
 
-/* Contenido encima del carrusel */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -112,30 +108,32 @@ nav a:hover {
   margin-bottom: 2rem;
 }
 
-/* Reemplazá tu bloque .cta por este */
+/* === BOTÓN CTA === */
 .cta {
   display: inline-block;
-  background: var(--color-primario);
-  color: #fff;
+  background: var(--color-acento);
+  color: var(--color-neutro);
   padding: 0.8rem 2rem;
   text-decoration: none;
-  border-radius: 30px;
+  border-radius: 12px;
   font-weight: bold;
-  transition: background 0.3s;
+  letter-spacing: 0.3px;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
 
 .cta:hover {
   background: var(--color-primario-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 173, 239, 0.4);
 }
 
-
-.cta:active{
+.cta:active {
   transform: translateY(0);
-  box-shadow: 0 6px 14px rgba(255,107,53,.22);
+  box-shadow: 0 2px 10px rgba(0, 173, 239, 0.3);
 }
 
-
-/* Flechas del carrusel */
+/* === FLECHAS CARRUSEL === */
 .arrow {
   position: absolute;
   top: 50%;
@@ -146,18 +144,20 @@ nav a:hover {
   border: none;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.45);
-  color: #fff;
+  color: var(--color-neutro);
   font-size: 28px;
   line-height: 44px;
   cursor: pointer;
 }
+
 .arrow:hover {
   background: rgba(0, 0, 0, 0.7);
 }
+
 .arrow.prev { left: 14px; }
 .arrow.next { right: 14px; }
 
-/* Puntos indicadores */
+/* === PUNTOS DEL CARRUSEL === */
 .dots {
   position: absolute;
   left: 0;
@@ -168,6 +168,7 @@ nav a:hover {
   gap: 8px;
   justify-content: center;
 }
+
 .dots button {
   width: 10px;
   height: 10px;
@@ -176,15 +177,18 @@ nav a:hover {
   background: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 }
+
 .dots button.active {
-  background: var(--color-primario-hover);
+  background: var(--color-acento);
   transform: scale(1.15);
 }
 
-/* PRODUCTOS */
+/* === PRODUCTOS === */
 .grid {
   padding: 4rem 2rem;
   text-align: center;
+  background: var(--color-fondo);
+  color: var(--color-texto);
 }
 
 .cards {
@@ -195,35 +199,40 @@ nav a:hover {
 }
 
 .card {
-  background: #fff;
+  background: var(--color-neutro);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* CONTACTO */
+/* === CONTACTO === */
 .contacto {
   padding: 4rem 2rem;
-  background: #111;
-  color: #fff;
+  background: var(--color-secundario);
+  color: var(--color-neutro);
   text-align: center;
 }
 
 .contacto a {
-  color: var(--color-primario-hover);
+  color: var(--color-acento);
   text-decoration: none;
   font-weight: bold;
 }
 
+.contacto a:hover {
+  color: var(--color-primario);
+}
+
+/* === FOOTER === */
 footer {
   text-align: center;
   padding: 1.5rem;
-  background: #000;
-  color: #aaa;
+  background: var(--color-secundario);
+  color: var(--color-neutro);
   font-size: 0.9rem;
 }
 
-/* RESPONSIVE */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
