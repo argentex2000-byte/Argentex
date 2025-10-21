@@ -1,52 +1,119 @@
-<section class="hero" id="galeria">
-  <div class="hero-carousel">
-    <div class="track" id="hero-track"></div>
-    <button class="arrow prev" aria-label="Anterior">‹</button>
-    <button class="arrow next" aria-label="Siguiente">›</button>
-    <div class="dots" id="hero-dots"></div>
-  </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Argentex – Impresión 3D</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-  <div class="hero-content">
-    <h2>Impresión 3D de calidad</h2>
-    <p>Diseñamos y fabricamos objetos únicos.</p>
-    <a href="#contacto" class="cta">Contactanos</a>
-  </div>
-</section>
-<script>
-(async function(){
-  const username="argentex2000-byte", repo="Argentex", folder="fondo";
-  const api=`https://api.github.com/repos/${username}/${repo}/contents/${folder}`;
-  const hero=document.querySelector('.hero');
-  const track=hero.querySelector('#hero-track');
-  const dots=hero.querySelector('#hero-dots');
-  const prev=hero.querySelector('.arrow.prev');
-  const next=hero.querySelector('.arrow.next');
+<body>
+  <!-- ✅ ENCABEZADO -->
+  <header>
+    <h1>ARGENTEX</h1>
+    <nav>
+      <a href="#productos">Productos</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
 
-  const res=await fetch(api); const files=await res.json();
-  const images=files.filter(f=>/\.(jpg|jpeg|png|webp)$/i.test(f.name));
+  <!-- ✅ HERO CON CARRUSEL DE FONDO -->
+  <section class="hero" id="inicio">
+    <div class="hero-carousel">
+      <div class="track" id="track">
+        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/1C8AF502-94A2-486C-BB6C-A8325B3307FD.jpg" alt="Impresión 1">
+        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_0413.jpg" alt="Impresión 2">
+        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1410.jpg" alt="Impresión 3">
+        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1496.jpg" alt="Impresión 4">
+        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1531.jpg" alt="Impresión 5">
+      </div>
+      <button class="arrow prev" aria-label="Anterior">‹</button>
+      <button class="arrow next" aria-label="Siguiente">›</button>
+      <div class="dots" id="dots"></div>
+    </div>
 
-  images.forEach(f=>{
-    const img=document.createElement('img');
-    img.className='slide';
-    img.src=`https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/${f.name}`;
-    track.appendChild(img);
-  });
+    <div class="hero-content">
+      <h2>Impresión 3D de calidad</h2>
+      <p>Diseñamos y fabricamos objetos únicos.</p>
+      <a href="#contacto" class="cta">Contactanos</a>
+    </div>
+  </section>
 
-  const slides=[...track.querySelectorAll('.slide')];
-  if(!slides.length) return;
+  <!-- ✅ PRODUCTOS -->
+  <section id="productos" class="grid">
+    <h3>Nuestros productos</h3>
+    <div class="cards">
+      <div class="card"><h4>Decoración</h4><p>Piezas personalizadas para tu hogar.</p></div>
+      <div class="card"><h4>Accesorios</h4><p>Funcionales y a medida.</p></div>
+      <div class="card"><h4>Prototipos</h4><p>Desarrollo rápido para tus ideas.</p></div>
+    </div>
+  </section>
 
-  let i=0, timer, AUTOPLAY=3500;
-  slides.forEach((_,idx)=>{ const b=document.createElement('button'); b.onclick=()=>go(idx,true); dots.appendChild(b); });
+  <!-- ✅ GALERÍA -->
+  <section id="galeria" class="grid">
+    <h3>Galería de trabajos</h3>
+    <p>Algunos de nuestros proyectos más recientes de impresión 3D.</p>
+  </section>
 
-  const update=()=>{ track.style.transform=`translateX(-${i*100}%)`; [...dots.children].forEach((b,idx)=>b.classList.toggle('active',idx===i)); };
-  const go=(idx,user=false)=>{ i=(idx+slides.length)%slides.length; update(); if(user) restart(); };
-  const nextFn=()=>go(i+1), prevFn=()=>go(i-1,true);
-  prev.onclick=prevFn; next.onclick=()=>go(i+1,true);
-  const start=()=>{ stop(); timer=setInterval(nextFn,AUTOPLAY); };
-  const stop =()=>{ if(timer) clearInterval(timer); };
-  const restart=()=>start();
-  hero.addEventListener('mouseenter',stop); hero.addEventListener('mouseleave',start);
+  <!-- ✅ CONTACTO -->
+  <section id="contacto" class="contacto">
+    <h3>Contacto</h3>
+    <p>Escribinos a <a href="mailto:arg.entex.2025@gmail.com">arg.entex.2025@gmail.com</a> o hablá por WhatsApp.</p>
+  </section>
 
-  update(); start();
-})();
-</script>
+  <!-- ✅ FOOTER -->
+  <footer>
+    <p>© 2025 Argentex – Impresión 3D Argentina</p>
+  </footer>
+
+  <!-- ✅ JAVASCRIPT CARRUSEL -->
+  <script>
+    const track = document.getElementById('track');
+    const slides = document.querySelectorAll('.slide');
+    const dotsWrap = document.getElementById('dots');
+    const prevBtn = document.querySelector('.arrow.prev');
+    const nextBtn = document.querySelector('.arrow.next');
+
+    let index = 0;
+    let timer;
+    const AUTOPLAY_MS = 4000;
+
+    // Crear puntos
+    slides.forEach((_, idx) => {
+      const dot = document.createElement('button');
+      dot.addEventListener('click', () => goTo(idx, true));
+      dotsWrap.appendChild(dot);
+    });
+
+    const dots = dotsWrap.querySelectorAll('button');
+
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    function goTo(idx, user = false) {
+      index = (idx + slides.length) % slides.length;
+      update();
+      if (user) restart();
+    }
+
+    function nextSlide() { goTo(index + 1); }
+    function prevSlide() { goTo(index - 1); }
+
+    prevBtn.addEventListener('click', () => goTo(index - 1, true));
+    nextBtn.addEventListener('click', () => goTo(index + 1, true));
+
+    function start() { stop(); timer = setInterval(nextSlide, AUTOPLAY_MS); }
+    function stop() { if (timer) clearInterval(timer); }
+    function restart() { start(); }
+
+    document.querySelector('.hero-carousel').addEventListener('mouseenter', stop);
+    document.querySelector('.hero-carousel').addEventListener('mouseleave', start);
+
+    update();
+    start();
+  </script>
+</body>
+</html>
