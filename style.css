@@ -1,39 +1,70 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-}
-
-body {
-  background: #f8f8f8;
-  color: #222;
-  line-height: 1.6;
-}
-
-/* Header */
-header {
-  background: #111;
-  color: #fff;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-header h1 { font-size: 1.8rem; letter-spacing: 2px; }
-nav a { color: #fff; text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
-
-/* Hero */
 .hero {
+  position: relative;
+  height: 100vh; /* ocupa toda la altura de la pantalla */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 6rem 2rem;
-  background: linear-gradient(135deg, #0d0d0d, #2c2c2c);
   color: #fff;
+  overflow: hidden;
 }
-.hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-.hero p  { font-size: 1.2rem; margin-bottom: 2rem; }
+
+/* Carrusel como fondo */
+.carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  height: 100%;
+  width: 500%;
+  animation: slide 25s infinite;
+}
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* llena todo sin deformarse */
+}
+
+@keyframes slide {
+  0% { transform: translateX(0%); }
+  20% { transform: translateX(0%); }
+  25% { transform: translateX(-100%); }
+  45% { transform: translateX(-100%); }
+  50% { transform: translateX(-200%); }
+  70% { transform: translateX(-200%); }
+  75% { transform: translateX(-300%); }
+  95% { transform: translateX(-300%); }
+  100% { transform: translateX(-400%); }
+}
+
+/* Texto por encima */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  background: rgba(0,0,0,0.4); /* leve fondo para legibilidad */
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
 .cta {
   display: inline-block;
   background: #ff6600;
@@ -44,73 +75,7 @@ nav a { color: #fff; text-decoration: none; margin-left: 1.5rem; font-weight: 50
   font-weight: bold;
   transition: background 0.3s;
 }
-.cta:hover { background: #ff4500; }
 
-/* ==== Carrusel con track deslizante ==== */
-.carousel{
-  width:100%;
-  max-width: 960px;
-  margin:3rem auto;
-  position:relative;
-  overflow:hidden;
-  border-radius:16px;
-  background:#000;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
+.cta:hover {
+  background: #ff4500;
 }
-.track{
-  display:flex;
-  transition:transform .6s ease;
-  will-change: transform;
-}
-.slide {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100vh; /* ocupa el 100% del alto de la ventana */
-  object-fit: cover;
-  display: block;
-}
-/* Flechas */
-.arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:5;
-  width:44px;height:44px;
-  border:none;border-radius:50%;
-  background:rgba(0,0,0,.45);
-  color:#fff; font-size:28px; line-height:44px;
-  cursor:pointer;
-}
-.arrow:hover{ background:rgba(0,0,0,.7); }
-.arrow.prev{ left:10px; }
-.arrow.next{ right:10px; }
-/* Puntos */
-.dots{
-  position:absolute; left:0; right:0; bottom:10px;
-  display:flex; gap:8px; justify-content:center;
-}
-.dots button{
-  width:10px; height:10px; border-radius:50%;
-  border:none; background:rgba(255,255,255,.5); cursor:pointer;
-}
-.dots button.active{ background:#ff6600; transform:scale(1.15); }
-/* Responsive */
-@media (max-width:768px){ .slide{ height: 360px; } }
-@media (max-width:480px){ .slide{ height: 260px; } }
-
-/* Grid de productos */
-.grid { padding: 4rem 2rem; text-align: center; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem; margin-top: 2rem;
-}
-.card {
-  background: #fff; padding: 2rem; border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Contacto + Footer */
-.contacto { padding: 4rem 2rem; background: #111; color: #fff; text-align: center; }
-.contacto a { color: #ff6600; text-decoration: none; font-weight: bold; }
-footer { text-align: center; padding: 1.5rem; background: #000; color: #aaa; font-size: 0.9rem; }
