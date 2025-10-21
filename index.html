@@ -6,33 +6,34 @@
   <title>Argentex – Impresión 3D</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- ✅ ENCABEZADO -->
   <header>
     <h1>ARGENTEX</h1>
     <nav>
       <a href="#productos">Productos</a>
-      <a href="#servicios">Servicios</a>
+      <a href="#galeria">Galería</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
+  <!-- ✅ HERO -->
   <section class="hero">
     <h2>Impresión 3D de calidad</h2>
     <p>Diseñamos y fabricamos objetos únicos.</p>
     <a href="#contacto" class="cta">Contactanos</a>
   </section>
-  
-  <section id="galeria" class="carousel">
-  <div class="carousel-container">
-    <div class="slide"><img src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/1C8AF502-94A2-486C-BB6C-A8325B3307FD.jpg" alt="impresión 1"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_0413.jpg" alt="impresión 2"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1410.jpg" alt="impresión 3"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1496.jpg" alt="impresión 4"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1531.jpg" alt="impresión 5"></div>
-  </div>
-</section>
 
+  <!-- ✅ CARRUSEL AUTOMÁTICO -->
+  <section id="galeria" class="carousel" aria-label="Galería Argentex">
+    <button class="arrow prev" aria-label="Anterior">‹</button>
+    <div class="track" id="track"></div>
+    <button class="arrow next" aria-label="Siguiente">›</button>
+    <div class="dots" id="dots"></div>
+  </section>
 
+  <!-- ✅ PRODUCTOS -->
   <section id="productos" class="grid">
     <h3>Nuestros productos</h3>
     <div class="cards">
@@ -42,15 +43,82 @@
     </div>
   </section>
 
+  <!-- ✅ CONTACTO -->
   <section id="contacto" class="contacto">
     <h3>Contacto</h3>
-    <p>Escribinos a <a href="mailto:info@argentex.com">arg.entex.2025@gmail.com</a> o hablá por WhatsApp.</p>
+    <p>Escribinos a <a href="mailto:arg.entex.2025@gmail.com">arg.entex.2025@gmail.com</a> o hablá por WhatsApp.</p>
   </section>
 
+  <!-- ✅ FOOTER -->
   <footer>
     <p>© 2025 Argentex – Impresión 3D Argentina</p>
   </footer>
+
+  <!-- ✅ JAVASCRIPT: CARRUSEL DINÁMICO -->
+  <script>
+  (async function() {
+    const username = "argentex2000-byte";   // ⚠️ Tu usuario de GitHub
+    const repo = "Argentex";                // ⚠️ Tu repositorio
+    const folder = "fondo";                 // ⚠️ Carpeta con las imágenes
+    const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folder}`;
+
+    const track = document.getElementById('track');
+    const dotsWrap = document.getElementById('dots');
+
+    // 1️⃣ Obtener imágenes del repositorio
+    const res = await fetch(apiUrl);
+    const files = await res.json();
+    const images = files.filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f.name));
+
+    // 2️⃣ Crear dinámicamente las imágenes en el carrusel
+    images.forEach(img => {
+      const el = document.createElement('img');
+      el.className = 'slide';
+      el.src = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/${img.name}`;
+      track.appendChild(el);
+    });
+
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let i = 0;
+    let timer;
+    const AUTOPLAY_MS = 3500;
+
+    // 3️⃣ Crear los puntos indicadores
+    slides.forEach((_, idx) => {
+      const b = document.createElement('button');
+      b.addEventListener('click', () => goTo(idx, true));
+      dotsWrap.appendChild(b);
+    });
+
+    function update() {
+      track.style.transform = `translateX(-${i * 100}%)`;
+      [...dotsWrap.children].forEach((b, idx) =>
+        b.classList.toggle('active', idx === i)
+      );
+    }
+
+    function goTo(idx, user = false) {
+      i = (idx + slides.length) % slides.length;
+      update();
+      if (user) restart();
+    }
+
+    function nextSlide() { goTo(i + 1); }
+    function prevSlide() { goTo(i - 1, true); }
+
+    document.querySelector('.arrow.prev').addEventListener('click', () => goTo(i - 1, true));
+    document.querySelector('.arrow.next').addEventListener('click', () => goTo(i + 1, true));
+
+    function start() { stop(); timer = setInterval(nextSlide, AUTOPLAY_MS); }
+    function stop() { if (timer) clearInterval(timer); }
+    function restart() { start(); }
+
+    document.querySelector('.carousel').addEventListener('mouseenter', stop);
+    document.querySelector('.carousel').addEventListener('mouseleave', start);
+
+    update();
+    start();
+  })();
+  </script>
 </body>
-
 </html>
-
