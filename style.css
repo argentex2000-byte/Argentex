@@ -40,17 +40,20 @@ nav a {
   background: linear-gradient(135deg, #0d0d0d, #2c2c2c);
   color: #fff;
 }
-/* === Carrusel === */
+/* === Carrusel optimizado === */
 .carousel {
   width: 100%;
+  max-width: 900px;          /* limita el ancho */
+  margin: 3rem auto;
   overflow: hidden;
-  position: relative;
-  margin: 4rem 0;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  background: #000;
 }
 
 .carousel-container {
   display: flex;
-  width: 500%;
+  width: 500%;              /* 5 imágenes = 500% */
   animation: slide 25s infinite;
 }
 
@@ -60,23 +63,36 @@ nav a {
 
 .carousel-container img {
   width: 100%;
-  height: auto;
+  height: clamp(220px, 50vh, 420px); /* controla altura */
+  object-fit: cover;                 /* recorta sin deformar */
   display: block;
-  object-fit: cover;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 /* Animación automática */
 @keyframes slide {
-  0% { transform: translateX(0%); }
-  20% { transform: translateX(0%); }
-  25% { transform: translateX(-100%); }
-  45% { transform: translateX(-100%); }
-  50% { transform: translateX(-200%); }
-  70% { transform: translateX(-200%); }
-  75% { transform: translateX(-300%); }
-  95% { transform: translateX(-300%); }
+  0%   { transform: translateX(0%); }
+  20%  { transform: translateX(0%); }
+  25%  { transform: translateX(-100%); }
+  45%  { transform: translateX(-100%); }
+  50%  { transform: translateX(-200%); }
+  70%  { transform: translateX(-200%); }
+  75%  { transform: translateX(-300%); }
+  95%  { transform: translateX(-300%); }
   100% { transform: translateX(-400%); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carousel-container img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container img {
+    height: 220px;
+  }
 }
 
 .hero h2 {
