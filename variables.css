@@ -1,0 +1,14 @@
+:root {
+  /* 🎨 Paleta principal */
+  --color-primario: #00ADEF;    /* Celeste tecnológico */
+  --color-secundario: #003366;  /* Azul profundo */
+  --color-acento: #FF6B35;      /* Naranja impresión 3D */
+  --color-fondo: #F5F7FA;       /* Gris claro */
+  --color-texto: #222222;       /* Gris carbón */
+  --color-blanco: #ffffff;
+
+  /* 🧪 Tonos de apoyo */
+  --color-fondo-oscuro: #0D1117;
+  --color-gris: #e5e7eb;
+  --color-gris-oscuro: #374151;
+}
