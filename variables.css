@@ -1,16 +1,16 @@
 :root {
-  /* Énfasis y Acciones (Verde Esmeralda) */
-  --color-primario: #00C897;           
-  --color-primario-hover: #009E78;      
+  /* Énfasis y Acciones (El Azul Brillante de ARGENTEX) */
+  --color-primario: #00ADEF;           /* Azul Eléctrico (similar al logo original) */
+  --color-primario-hover: #008BBE;     /* Azul un poco más oscuro para el hover */
 
-  /* Estructura y Confianza (Azul Marino) */
-  --color-secundario: #00385F;         
+  /* Estructura y Confianza (Color del texto en el logo o un complemento) */
+  --color-secundario: #00385F;         /* Azul Marino Profundo (para secciones o footer) */
   
-  /* Alertas y Notificaciones (Rojo Coral) */
-  --color-acento: #FF6B6B;              
+  /* Alertas y Notificaciones (Acento de alto contraste en el fondo oscuro) */
+  --color-acento: #FFC300;             /* Amarillo/Dorado Brillante (Destaca mucho en negro) */
   
-  /* Fondos y Legibilidad */
-  --color-fondo: #F9F9FB;              
-  --color-texto: #333333;              
-  --color-neutro: #FFFFFF;             
+  /* ✅ FONDOS Y LEGIBILIDAD INVERTIDOS (Fondo Negro) */
+  --color-fondo: #111111;              /* Negro Carbón/Oscuro (Tu nuevo fondo) */
+  --color-texto: #F9F9FB;              /* Blanco Roto/Gris muy claro (Texto claro) */
+  --color-neutro: #FFFFFF;             /* Blanco Puro (Elementos que necesitan ser totalmente blancos, como el texto del logo) */
 }
