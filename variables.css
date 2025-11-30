@@ -1,10 +1,16 @@
 :root {
-  --color-primario: #00ADEF;         /* Celeste tecnológico */
-  --color-secundario: #000166;       
-  --color-acento: #1760b6;           
-  --color-fondo: #F5F7FA;            /* Gris muy claro */
-  --color-texto: #222222;            /* Gris carbón */
-  --color-neutro: #ffffff;           /* Blanco */
-  --color-primario-hover: #008BBE;   /* Celeste más oscuro */
+  /* Énfasis y Acciones (Verde Esmeralda) */
+  --color-primario: #00C897;           
+  --color-primario-hover: #009E78;      
+
+  /* Estructura y Confianza (Azul Marino) */
+  --color-secundario: #00385F;         
+  
+  /* Alertas y Notificaciones (Rojo Coral) */
+  --color-acento: #FF6B6B;              
+  
+  /* Fondos y Legibilidad */
+  --color-fondo: #F9F9FB;              
+  --color-texto: #333333;              
+  --color-neutro: #FFFFFF;             
 }
-*/
