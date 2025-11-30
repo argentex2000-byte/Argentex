@@ -12,5 +12,5 @@
   /* Fondos y Legibilidad: Todo debe ser oscuro */
   --color-fondo: #000000;              /* Negro Puro (El fondo principal) */
   --color-texto: #FFFFFF;              /* Blanco Puro (Texto EXCLUSIVAMENTE en blanco) */
-  --color-neutro: #FFFFFF;             /* Gris Oscuro/Negro (Para tarjetas o elementos que NO DEBEN ser blancos) */
+  --color-neutro: #333333;             /* Gris Oscuro/Negro (Para tarjetas o elementos que NO DEBEN ser blancos) */
 }
