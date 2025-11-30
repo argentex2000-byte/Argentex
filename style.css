@@ -204,8 +204,9 @@ nav a:hover {
 .grid {
   padding: 4rem 2rem;
   text-align: center;
-  /* El fondo de la sección es el gris claro que definiste antes, lo cambiamos al fondo oscuro */
+  /* El fondo de la sección es el fondo principal oscuro */
   background: var(--color-fondo); 
+  /* El texto de la sección es blanco */
   color: var(--color-texto);
 }
 
@@ -216,12 +217,12 @@ nav a:hover {
   margin-top: 2rem;
 }
 
-/* ✅ CORRECCIÓN CLAVE: Hacemos el fondo de la tarjeta oscuro y el texto CLARO */
+/* ✅ CORRECCIÓN CLAVE: Las tarjetas deben ser oscuras y tener texto CLARO */
 .card {
-  /* Usamos el color neutro oscuro que definiste: #333333 */
+  /* Usamos el color neutro oscuro (#333333) para el fondo de la tarjeta */
   background: var(--color-neutro); 
   
-  /* Aseguramos que el texto dentro de la tarjeta sea blanco */
+  /* Aseguramos que el texto dentro de la tarjeta sea blanco (#FFFFFF) */
   color: var(--color-texto); 
   
   padding: 2rem;
