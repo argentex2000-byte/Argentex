@@ -1,16 +1,16 @@
 :root {
-  /* Énfasis y Acciones (El Azul Brillante de ARGENTEX) */
-  --color-primario: #00ADEF;           /* Azul Eléctrico (similar al logo original) */
-  --color-primario-hover: #008BBE;     /* Azul un poco más oscuro para el hover */
+  /* Énfasis y Acciones: Usamos un tono de azul muy oscuro y el negro (000000) */
+  --color-primario: #000000;           /* Negro puro (Tu nuevo color primario para el footer y elementos principales) */
+  --color-primario-hover: #1A1A1A;     /* Negro muy oscuro (Para efectos hover) */
 
-  /* Estructura y Confianza (Color del texto en el logo o un complemento) */
-  --color-secundario: #00385F;         /* Azul Marino Profundo (para secciones o footer) */
+  /* Estructura y Confianza: Usamos un negro carbón para diferenciar fondos */
+  --color-secundario: #111111;         /* Negro Carbón (Ideal para el footer y header) */
   
-  /* Alertas y Notificaciones (Acento de alto contraste en el fondo oscuro) */
-  --color-acento: #FFC300;             /* Amarillo/Dorado Brillante (Destaca mucho en negro) */
+  /* Alertas y Notificaciones: Mantenemos un acento de alto contraste */
+  --color-acento: #FFC300;             /* Amarillo/Dorado Brillante (Acento visible en negro) */
   
-  /* ✅ FONDOS Y LEGIBILIDAD INVERTIDOS (Fondo Negro) */
-  --color-fondo: #111111;              /* Negro Carbón/Oscuro (Tu nuevo fondo) */
-  --color-texto: #F9F9FB;              /* Blanco Roto/Gris muy claro (Texto claro) */
-  --color-neutro: #FFFFFF;             /* Blanco Puro (Elementos que necesitan ser totalmente blancos, como el texto del logo) */
+  /* Fondos y Legibilidad: Todo debe ser oscuro */
+  --color-fondo: #000000;              /* Negro Puro (El fondo principal) */
+  --color-texto: #FFFFFF;              /* Blanco Puro (Texto EXCLUSIVAMENTE en blanco) */
+  --color-neutro: #333333;             /* Gris Oscuro/Negro (Para tarjetas o elementos que NO DEBEN ser blancos) */
 }
