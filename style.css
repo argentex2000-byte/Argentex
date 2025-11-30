@@ -231,6 +231,15 @@ nav a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
 }
 
+/* ✅ NUEVOS ESTILOS PARA ESPACIADO DE TÍTULOS */
+.grid h3 {
+    margin-bottom: 2rem;
+}
+
+.card h4 {
+    margin-bottom: 0.5rem;
+}
+
 /* === CONTACTO === */
 .contacto {
   padding: 4rem 2rem;
