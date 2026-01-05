@@ -9,13 +9,17 @@
 }
 
 /* === CONFIGURACIÓN "MICHROMA" (ESTILO TECH) === */
-/* Aplicamos Michroma a encabezados, navegación y botones */
+/* === CONFIGURACIÓN "MICHROMA" (ESTILO TECH) === */
 h1, h2, h3, h4, nav a, .cta {
   font-family: 'Michroma', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  
+  /* EL SECRETO: Forzar peso normal para que se vea nítida */
+  font-weight: 400 !important; 
+  
+  /* EL TOQUE FINAL: Michroma necesita aire para verse elegante */
+  letter-spacing: 2px; 
 }
-
 html {
   scroll-behavior: smooth;
 }
