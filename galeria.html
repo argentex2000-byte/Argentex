@@ -1,92 +1,304 @@
-<script>
-(async function(){
-  // CONFIGURACIÓN
-  const username = "argentex2000-byte";
-  const repo     = "Argentex";
-  const folder   = "fondo"; // Carpeta donde están las FOTOS
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería – Argentex</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
   
-  // URL de la base de las imágenes
-  const imgBaseUrl  = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
   
-  // URL de tu archivo de datos (Asumiendo que subes datos.json a la carpeta 'fondo' también)
-  // Si lo subes a la raíz del repo, quita el "/${folder}" de abajo.
-  const dataUrl     = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/datos.json`;
+  <link rel="stylesheet" href="style.css"/>
 
-  const grid = document.getElementById('grid');
+  <style>
+    /* Ajustes del contenedor principal */
+    .gallery-wrap { 
+        padding: 4rem 2rem; 
+        max-width: 1200px; 
+        margin: 0 auto; 
+        min-height: 80vh; 
+    }
 
-  try {
-      // 1) Traer la "Base de Datos" (el JSON)
-      const res = await fetch(dataUrl);
-      if (!res.ok) throw new Error("No se encontró el archivo datos.json");
-      const productos = await res.json();
+    /* Encabezado de la sección */
+    .gallery-head { text-align: center; margin-bottom: 3rem; }
+    
+    .gallery-head h1 { 
+        font-family: 'Michroma', sans-serif; 
+        color: var(--brand-cyan); 
+        font-size: clamp(1.6rem, 3vw, 2.4rem); 
+        margin-bottom: 1rem;
+    }
+    
+    .gallery-head p { 
+        color: var(--brand-gray); 
+        font-family: 'Montserrat', sans-serif;
+    }
 
-      // 2) Renderizar cada producto
-      productos.forEach(prod => {
-        // Construimos la URL completa de la imagen
-        const src = imgBaseUrl + prod.archivo;
+    /* --- GRID RESPONSIVO (Mampostería / Masonry) --- */
+    .gallery-grid {
+      display: grid;
+      /* Columnas automáticas: mínimo 300px de ancho */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
 
-        // Creamos la tarjeta (Article para mejor semántica)
-        const article = document.createElement('article');
-        article.className = 'g-item'; 
-        
-        // Insertamos el HTML con tus campos nuevos
-        article.innerHTML = `
-          <div class="img-wrapper">
-            <img src="${src}" alt="${prod.titulo}" loading="lazy">
-          </div>
-          <div class="info-content">
-            <h3>${prod.titulo}</h3>
-            <p class="desc">${prod.descripcion}</p>
-            
-            <div class="specs">
-              <span><strong>Mat:</strong> ${prod.material}</span>
-              <span><strong>Col:</strong> ${prod.color}</span>
-              <span><strong>Tam:</strong> ${prod.tamano}</span>
+    /* --- TARJETA DE PRODUCTO (NUEVO DISEÑO CON TEXTO) --- */
+    .g-item {
+      display: flex;
+      flex-direction: column;
+      background: var(--color-neutro);
+      border-radius: 12px;
+      overflow: hidden; /* Para recortar la imagen en las esquinas */
+      box-shadow: 0 6px 20px rgba(0,0,0, 0.5);
+      border: 1px solid #222;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .g-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(63, 181, 247, 0.15); /* Brillo azul sutil */
+    }
+
+    /* Imagen */
+    .img-wrapper {
+      height: 250px; /* Altura fija para uniformidad */
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+    }
+    .img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .g-item:hover .img-wrapper img { transform: scale(1.08); }
+
+    /* Información (Título, descripción, specs) */
+    .info-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-content h3 {
+      font-family: 'Michroma', sans-serif;
+      font-size: 1rem;
+      color: var(--brand-cyan);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+    }
+
+    .desc {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Especificaciones (Material, Color, Tamaño) */
+    .specs {
+      margin-top: auto; /* Empuja esto al final de la tarjeta */
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #333;
+      padding-top: 1rem;
+      font-size: 0.7rem;
+      font-family: 'Michroma', sans-serif;
+      color: var(--brand-orange);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* --- LIGHTBOX (Visor pantalla completa) --- */
+    .lightbox {
+      position: fixed; inset: 0; 
+      background: rgba(0,0,0, 0.95);
+      display: none; align-items: center; justify-content: center;
+      z-index: 2000; padding: 1rem;
+      backdrop-filter: blur(5px);
+    }
+    .lightbox.open { display: flex; }
+    
+    .lightbox img {
+      max-width: 95vw; max-height: 85vh; 
+      object-fit: contain; 
+      border-radius: 4px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    }
+    
+    .lb-close, .lb-prev, .lb-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 50px; height: 50px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.1); 
+      color: var(--brand-white); font-size: 24px;
+      display: grid; place-items: center; cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .lb-close { top: 20px; right: 20px; transform: none; background: transparent; font-size: 40px;}
+    .lb-prev { left: 20px; }
+    .lb-next { right: 20px; }
+    
+    .lb-prev:hover, .lb-next:hover { background: var(--brand-cyan); color: #000; }
+    .lb-close:hover { color: var(--brand-orange); }
+
+    /* Mensaje de carga / Error */
+    .loading-msg { color: #888; text-align: center; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <a href="index.html" aria-label="ARGENTEX - Ir al inicio">
+        <img src="favicon.png" alt="ARGENTEX Logo" class="header-logo">
+      </a>
+    </h1>
+    <nav aria-label="Navegación principal">
+      <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank">Productos</a>
+      <a href="galeria.html" style="color: var(--brand-cyan);">Galería</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main class="gallery-wrap">
+    <div class="gallery-head">
+      <h1>Galería de Trabajos</h1>
+      <p>Nuestros proyectos de impresión 3D más recientes.</p>
+    </div>
+
+    <div id="grid" class="gallery-grid" aria-live="polite">
+      <p class="loading-msg">Cargando trabajos...</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Argentex – Impresión 3D Argentina</p>
+  </footer>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lb-close" aria-label="Cerrar">✕</button>
+    <button class="lb-prev"  aria-label="Anterior">‹</button>
+    <img id="lb-img" alt="Vista ampliada">
+    <button class="lb-next"  aria-label="Siguiente">›</button>
+  </div>
+
+  <script>
+  (async function(){
+    // --- CONFIGURACIÓN ---
+    const username = "argentex2000-byte";
+    const repo     = "Argentex";
+    const folder   = "fondo"; 
+    
+    // URL base de las imágenes
+    const imgBaseUrl  = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
+    
+    // URL del archivo de datos (JSON)
+    const dataUrl     = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/datos.json`;
+
+    const grid = document.getElementById('grid');
+    const list = []; // Array para guardar las URLs para el lightbox
+
+    try {
+        // 1. Pedir el archivo JSON con la info
+        const res = await fetch(dataUrl);
+        if (!res.ok) throw new Error("No se pudo leer datos.json");
+        const productos = await res.json();
+
+        // Limpiar mensaje de carga
+        grid.innerHTML = "";
+
+        // 2. Crear una tarjeta por cada producto del JSON
+        productos.forEach(prod => {
+          // Construir la ruta completa de la imagen
+          const src = imgBaseUrl + prod.archivo;
+          list.push(src); // Guardar para el lightbox
+
+          // Crear elemento HTML
+          const article = document.createElement('article');
+          article.className = 'g-item'; 
+          
+          // Llenar el contenido HTML
+          article.innerHTML = `
+            <div class="img-wrapper">
+              <img src="${src}" alt="${prod.titulo}" loading="lazy">
             </div>
-          </div>
-        `;
-        
-        // Hacemos que al hacer clic en la imagen (wrapper) se abra el lightbox
-        const imgDiv = article.querySelector('.img-wrapper');
-        imgDiv.addEventListener('click', (e) => { 
-            e.stopPropagation(); // Evita clics dobles
-            openLightbox(src); 
+            <div class="info-content">
+              <h3>${prod.titulo}</h3>
+              <p class="desc">${prod.descripcion}</p>
+              
+              <div class="specs">
+                <span>${prod.material || '-'}</span>
+                <span>${prod.color || '-'}</span>
+                <span>${prod.tamano || '-'}</span>
+              </div>
+            </div>
+          `;
+          
+          // Evento Click para abrir Lightbox
+          const imgDiv = article.querySelector('.img-wrapper');
+          imgDiv.addEventListener('click', (e) => { 
+              e.stopPropagation(); 
+              openLightbox(src); 
+          });
+          
+          grid.appendChild(article);
         });
-        
-        // Añadimos la tarjeta a la grilla
-        grid.appendChild(article);
-        
-        // Agregamos a la lista del lightbox
-        list.push(src);
-      });
 
-  } catch (error) {
-      console.error("Error:", error);
-      grid.innerHTML = `<p style="color:white; text-align:center;">
-        Error cargando la galería. Verifica que <b>datos.json</b> esté subido a GitHub.
-      </p>`;
-  }
+    } catch (error) {
+        console.error("Error:", error);
+        grid.innerHTML = `<p style="text-align:center; color:#ff5555;">
+          No se pudieron cargar los trabajos. <br>
+          <small>Verifica que el archivo <b>datos.json</b> esté en la carpeta correcta de GitHub.</small>
+        </p>`;
+    }
 
-  // ===== LÓGICA DEL LIGHTBOX (Igual que antes, solo ajustada) =====
-  const list = []; // Se llena arriba en el bucle
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lb-img');
-  const btnClose = lb.querySelector('.lb-close');
-  const btnPrev  = lb.querySelector('.lb-prev');
-  const btnNext  = lb.querySelector('.lb-next');
-  let idx = 0;
+    // --- LÓGICA DEL LIGHTBOX ---
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const btnClose = lb.querySelector('.lb-close');
+    const btnPrev  = lb.querySelector('.lb-prev');
+    const btnNext  = lb.querySelector('.lb-next');
+    let idx = 0;
 
-  function openLightbox(src){
-    idx = list.indexOf(src);
-    lbImg.src = src;
-    lb.classList.add('open');
-  }
-  function closeLightbox(){ lb.classList.remove('open'); lbImg.src=""; }
-  function step(d){ idx=(idx+d+list.length)%list.length; lbImg.src=list[idx]; }
+    function openLightbox(src){
+      idx = list.indexOf(src);
+      lbImg.src = src;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+    }
+    function closeLightbox(){ 
+      lb.classList.remove('open'); 
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.src = ""; // Limpiar
+    }
+    function step(d){ 
+      idx = (idx + d + list.length) % list.length; 
+      lbImg.src = list[idx]; 
+    }
 
-  btnClose.onclick = closeLightbox;
-  btnPrev.onclick = ()=>step(-1);
-  btnNext.onclick = ()=>step(1);
-  lb.onclick = (e)=>{ if(e.target===lb) closeLightbox() };
-})();
-</script>
+    btnClose.onclick = closeLightbox;
+    btnPrev.onclick  = () => step(-1);
+    btnNext.onclick  = () => step(1);
+    
+    // Cerrar al hacer clic fuera de la imagen
+    lb.onclick = (e) => { if(e.target === lb) closeLightbox(); };
+    
+    // Teclado
+    window.addEventListener('keydown', (e) => {
+      if(!lb.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') step(-1);
+      if(e.key === 'ArrowRight') step(1);
+    });
+
+  })();
+  </script>
+</body>
+</html>
