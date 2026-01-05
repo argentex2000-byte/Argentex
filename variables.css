@@ -1,16 +1,30 @@
 :root {
-  /* Énfasis y Acciones: Usamos un tono de azul muy oscuro y el negro (000000) */
-  --color-primario: #000000;           /* Negro puro (Tu nuevo color primario para el footer y elementos principales) */
-  --color-primario-hover: #1A1A1A;     /* Negro muy oscuro (Para efectos hover) */
+  /* --- TUS NUEVOS COLORES DE MARCA --- */
+  --brand-cyan:   #3FB5F7;  /* Azul Tecnológico */
+  --brand-orange: #FF9929;  /* Naranja Energético */
+  --brand-white:  #FFFFFF;  /* Blanco Puro */
+  --brand-gray:   #CFC9C0;  /* Gris Perla / Beige */
 
-  /* Estructura y Confianza: Usamos un negro carbón para diferenciar fondos */
-  --color-secundario: #111111;         /* Negro Carbón (Ideal para el footer y header) */
+  /* --- ASIGNACIÓN SEMÁNTICA --- */
+
+  /* 1. Fondo y Estructura (Base Oscura) */
+  --color-fondo:      #000000;       /* Negro Puro (Fondo principal) */
+  --color-secundario: #111111;       /* Negro Carbón (Header, Footer, Bloques oscuros) */
+  --color-neutro:     #1A1A1A;       /* Gris muy oscuro (Fondo de tarjetas) */
+
+  /* 2. Textos */
+  --color-texto:      var(--brand-white); /* Todo el texto principal en Blanco */
   
-  /* Alertas y Notificaciones: Mantenemos un acento de alto contraste */
-  --color-acento: #FFC300;             /* Amarillo/Dorado Brillante (Acento visible en negro) */
+  /* 3. Acciones y Énfasis (Aquí usamos tu paleta) */
   
-  /* Fondos y Legibilidad: Todo debe ser oscuro */
-  --color-fondo: #000000;              /* Negro Puro (El fondo principal) */
-  --color-texto: #FFFFFF;              /* Blanco Puro (Texto EXCLUSIVAMENTE en blanco) */
-  --color-neutro: #333333;             /* Gris Oscuro/Negro (Para tarjetas o elementos que NO DEBEN ser blancos) */
+  /* El color principal de interacción (Enlaces, bordes activos) */
+  --color-primario:   var(--brand-cyan); 
+  
+  /* Color para efectos Hover (al pasar el mouse) */
+  /* Usamos el Gris Perla para un efecto metálico sutil al pasar el mouse */
+  --color-primario-hover: var(--brand-gray); 
+
+  /* Llamadas a la Acción (Botones, Ofertas, "Contactanos") */
+  /* Usamos el Naranja para que destaque al máximo sobre el negro y el azul */
+  --color-acento:     var(--brand-orange); 
 }
