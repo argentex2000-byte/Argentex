@@ -1,110 +1,118 @@
-@import url('variables.css');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería – Argentex</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .gallery-wrap { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 80vh; width: 100%; }
+    .gallery-head { text-align: center; margin-bottom: 3rem; }
+    .gallery-head h1 { font-family: 'Michroma', sans-serif; color: var(--brand-cyan, #3fb5f7); font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 1rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .g-item { display: flex; flex-direction: column; background: var(--color-neutro, #1a1a1a); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0, 0.5); border: 1px solid #222; transition: 0.3s; }
+    .g-item:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(63, 181, 247, 0.15); }
+    .img-wrapper { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background-color: #0a0a0a; display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
+    .img-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.4s; }
+    .info-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; text-align: left; }
+    .desc { font-size: 0.9rem; color: #ccc; margin-bottom: 1.2rem; line-height: 1.4; }
+    .specs-grid { margin-top: auto; border-top: 1px solid #333; padding-top: 1rem; display: flex; flex-wrap: wrap; gap: 10px; }
+    .spec-item { flex: 1; display: flex; flex-direction: column; }
+    .spec-item.full-width { flex: 100%; margin-top: 5px; }
+    .label { font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: 700; }
+    .value { font-family: 'Michroma', sans-serif; font-size: 0.75rem; color: var(--brand-orange, #ff9929); }
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0, 0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 1rem; backdrop-filter: blur(5px); }
+    .lightbox.open { display: flex; }
+    .lb-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #fff; font-size: 40px; cursor: pointer; }
+    .lb-img { max-width: 95vw; max-height: 85vh; object-fit: contain; }
+  </style>
+</head>
+<body>
+  <header id="main-header"></header>
 
-/* === RESET BÁSICO === */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-}
+  <main class="gallery-wrap">
+    <div class="gallery-head">
+      <h1>Galería de Trabajos</h1>
+      <p>Nuestros proyectos de impresión 3D más recientes.</p>
+    </div>
+    <div id="grid" class="gallery-grid">
+      <p style="text-align: center; color: #888;">Cargando trabajos...</p>
+    </div>
+  </main>
 
-html, body {
-  width: 100%;
-  overflow-x: hidden; 
-  background: var(--color-fondo, #0a0a0a);
-  color: var(--color-texto, #ffffff);
-}
+  <footer id="main-footer"></footer>
 
-h1, h2, h3, h4, nav a, .cta {
-  font-family: 'Michroma', sans-serif;
-  letter-spacing: 1px;
-}
+  <div id="lightbox" class="lightbox">
+    <button class="lb-close">✕</button>
+    <img id="lb-img" class="lb-img" alt="">
+  </div>
 
-/* === HEADER === */
-header {
-  background: var(--color-secundario, #111);
-  padding: 0.6rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2000;
-  transition: transform 0.4s ease, opacity 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
+  <script>
+    async function loadComponent(id, file) {
+      try {
+        const res = await fetch(file);
+        document.getElementById(id).innerHTML = await res.text();
+        if(id === 'main-header') initScroll();
+      } catch (e) { console.error(e); }
+    }
 
-.header-hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-}
+    function initScroll() {
+      let lastScroll = 0;
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if(!header) return;
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st > lastScroll && st > 80) header.classList.add('header-hidden');
+        else header.classList.remove('header-hidden');
+        lastScroll = st <= 0 ? 0 : st;
+      });
+    }
 
-.header-logo { height: 50px; width: auto; margin-bottom: 5px; }
+    loadComponent('main-header', 'header.html');
+    loadComponent('main-footer', 'footer.html');
 
-nav { display: flex; gap: 1.5rem; }
-nav a { color: var(--color-texto); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
-nav a:hover { color: var(--color-acento, #3fb5f7); }
+    (async function(){
+      const username = "argentex2000-byte";
+      const repo = "Argentex";
+      const folder = "files_galeria"; 
+      const imgBaseUrl = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
+      const dataUrl = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/datos.json`;
+      const grid = document.getElementById('grid');
 
-/* === MAIN & HERO === */
-main { margin-top: 100px; width: 100%; }
+      try {
+          const res = await fetch(dataUrl);
+          const productos = await res.json();
+          grid.innerHTML = "";
 
-.hero {
-  position: relative;
-  width: 100vw;
-  height: 70vh;
-  min-height: 450px;
-  overflow: hidden;
-  background: #000;
-}
+          productos.forEach(prod => {
+            const src = imgBaseUrl + prod.Archivo;
+            const article = document.createElement('article');
+            article.className = 'g-item'; 
+            article.innerHTML = `
+              <div class="img-wrapper"><img src="${src}" alt="${prod.Título}" loading="lazy"></div>
+              <div class="info-content">
+                <h3>${prod.Título}</h3>
+                <p class="desc">${prod.Descripción}</p>
+                <div class="specs-grid">
+                  <div class="spec-item"><span class="label">Material</span><span class="value">${prod.Material}</span></div>
+                  <div class="spec-item"><span class="label">Color</span><span class="value">${prod.Color}</span></div>
+                  <div class="spec-item full-width"><span class="label">Dimensiones</span><span class="value">${prod.Dimensiones.Largo}x${prod.Dimensiones.Ancho}x${prod.Dimensiones.Alto}mm</span></div>
+                </div>
+              </div>`;
+            article.querySelector('.img-wrapper').onclick = () => {
+              document.getElementById('lb-img').src = src;
+              document.getElementById('lightbox').classList.add('open');
+            };
+            grid.appendChild(article);
+          });
+      } catch (e) { grid.innerHTML = "<p>Error al cargar la galería.</p>"; }
+    })();
 
-.track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-.slide { flex: 0 0 100vw; width: 100vw; height: 100%; object-fit: cover; }
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 5;
-}
-
-.hero-content {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  text-align: center;
-  width: 90%;
-  pointer-events: none;
-}
-
-.hero-content h3, .hero-content p, .hero-content .cta { pointer-events: auto; }
-
-/* === BOTONES === */
-.arrow {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  z-index: 100;
-  width: 45px; height: 45px;
-  border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.6); color: var(--color-acento);
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
-.arrow.prev { left: 20px; }
-.arrow.next { right: 20px; }
-
-.dots { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: center; gap: 15px; z-index: 100; }
-.dots button { width: 10px; height: 10px; border: none; background: rgba(255,255,255,0.3); cursor: pointer; transform: rotate(45deg); transition: 0.3s; }
-.dots button.active { background: var(--color-acento); transform: rotate(0deg) scale(1.3); }
-
-.cta { display: inline-block; background: var(--color-acento, #3fb5f7); color: #000 !important; padding: 0.8rem 2rem; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; }
-.cta:hover { filter: brightness(1.1); }
-
-@media (max-width: 768px) {
-  main { margin-top: 90px; }
-  .hero { height: 50vh; }
-  nav { gap: 1rem; }
-  nav a { font-size: 0.7rem; }
-}
+    document.querySelector('.lb-close').onclick = () => document.getElementById('lightbox').classList.remove('open');
+  </script>
+</body>
+</html>
