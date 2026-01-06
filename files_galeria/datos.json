@@ -1,8 +1,8 @@
 [
   {
     "Archivo": "1.png",
-    "Titulo": "Homero y Bart Simpson",
-    "Descripcion": "Pintado a mano",
+    "Título": "Homero y Bart Simpson",
+    "Descripción": "Figura decorativa pintada a mano con gran detalle.",
     "Color": "Varios",
     "Material": "PLA",
     "Dimensiones": {
@@ -13,8 +13,8 @@
   },
   {
     "Archivo": "2.png",
-    "Titulo": "Portacelular",
-    "Descripcion": "",
+    "Título": "Portacelular",
+    "Descripción": "Soporte de escritorio estable y minimalista para smartphone.",
     "Color": "Blanco (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -25,8 +25,8 @@
   },
   {
     "Archivo": "3.png",
-    "Titulo": "Portacelular plegable",
-    "Descripcion": "Se puede añadir un logo",
+    "Título": "Portacelular plegable",
+    "Descripción": "Diseño compacto y portátil. Se puede personalizar con logo.",
     "Color": "Blanco (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -37,8 +37,8 @@
   },
   {
     "Archivo": "4.png",
-    "Titulo": "San Miguel Arcángel",
-    "Descripcion": "",
+    "Título": "San Miguel Arcángel",
+    "Descripción": "Figura religiosa detallada, ideal para altares o decoración.",
     "Color": "Blanco (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -49,8 +49,8 @@
   },
   {
     "Archivo": "5.png",
-    "Titulo": "Saturno",
-    "Descripcion": "Con luces a pilas",
+    "Título": "Saturno",
+    "Descripción": "Lámpara decorativa con iluminación LED a pilas.",
     "Color": "Blanco (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -61,8 +61,8 @@
   },
   {
     "Archivo": "6.png",
-    "Titulo": "Lámpara Grogu",
-    "Descripcion": "Litofanía de Grogu con lámpara E27 intercambiable.",
+    "Título": "Lámpara Grogu",
+    "Descripción": "Litofanía de Star Wars con lámpara E27 intercambiable.",
     "Color": "Blanco",
     "Material": "PLA",
     "Dimensiones": {
@@ -73,8 +73,8 @@
   },
   {
     "Archivo": "7.png",
-    "Titulo": "Maceta sentada",
-    "Descripcion": "",
+    "Título": "Maceta Sentada",
+    "Descripción": "Diseño moderno tipo 'Robert Plant'. Ideal para suculentas.",
     "Color": "Negro (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -85,8 +85,8 @@
   },
   {
     "Archivo": "8.png",
-    "Titulo": "Maceta Gatito",
-    "Descripcion": "",
+    "Título": "Maceta Gatito",
+    "Descripción": "Maceta temática con silueta de gato minimalista.",
     "Color": "Negro (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -97,8 +97,8 @@
   },
   {
     "Archivo": "9.png",
-    "Titulo": "Maceta Recostada",
-    "Descripcion": "",
+    "Título": "Maceta Recostada",
+    "Descripción": "Variante de diseño relajado para decoración de interiores.",
     "Color": "Negro (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -109,8 +109,8 @@
   },
   {
     "Archivo": "10.png",
-    "Titulo": "Maceta Varias",
-    "Descripcion": "",
+    "Título": "Maceta Varias",
+    "Descripción": "Colección de formas geométricas y orgánicas.",
     "Color": "Negro (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -121,8 +121,8 @@
   },
   {
     "Archivo": "11.png",
-    "Titulo": "Pesebre",
-    "Descripcion": "",
+    "Título": "Pesebre",
+    "Descripción": "Conjunto estilizado de la Sagrada Familia.",
     "Color": "Blanco (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -133,8 +133,8 @@
   },
   {
     "Archivo": "12.png",
-    "Titulo": "Virgen María",
-    "Descripcion": "",
+    "Título": "Virgen María",
+    "Descripción": "Estatua con acabado suave y pliegues detallados.",
     "Color": "Blanco (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
@@ -145,8 +145,8 @@
   },
   {
     "Archivo": "13.png",
-    "Titulo": "Busto Maradona",
-    "Descripcion": "",
+    "Título": "Busto Maradona",
+    "Descripción": "Homenaje al 10 con alto nivel de realismo.",
     "Color": "Beige (a elegir)",
     "Material": "PLA",
     "Dimensiones": {
