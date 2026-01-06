@@ -102,10 +102,10 @@
     }
 
     function update() {
-      if (!slides.length) return;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      const dots = dotsWrap.querySelectorAll('button');
-      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      track.style.transform = `translateX(-${index * 100}vw)`;
+      document.querySelectorAll('.dots button').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
     }
 
     function goTo(idx, userAction = false) {
@@ -151,6 +151,7 @@
 </script>
 </body>
 </html>
+
 
 
 
