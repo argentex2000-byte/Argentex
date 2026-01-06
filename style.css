@@ -42,12 +42,16 @@ header {
   align-items: center;     /* Centra horizontalmente los hijos */
   justify-content: center; /* Centra verticalmente */
   
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   width: 100%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  text-align: center;      /* Refuerzo de centrado */
+  transition: top 0.4s ease; /* Esto hace que el movimiento sea fluido */
+  z-index: 1000;
+}
+
+.header-hidden {
+  top: -160px !important; /* Ajustá este número según el alto de tu header */
 }
 
 header h1 {
