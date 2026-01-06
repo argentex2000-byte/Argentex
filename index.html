@@ -17,7 +17,8 @@
   <main>
     <section class="hero" id="inicio">
       <div class="hero-carousel" role="region" aria-label="Carrusel de ejemplos">
-        <div class="track" id="track"></div>
+        <div class="track" id="track">
+           </div>
         <button class="arrow prev" aria-label="Anterior">‹</button>
         <button class="arrow next" aria-label="Siguiente">›</button>
         <div class="dots" id="dots"></div>
@@ -33,7 +34,7 @@
     <section id="contacto" class="contacto">
       <h3>Contacto</h3>
       <p>Envianos un mail a <a href="mailto:arg.entex.2025@gmail.com">contactoargentex@gmail.com</a></p>
-      <div style="margin-top: 20px;" id="contacto-botones">
+      <div style="margin-top: 20px;">
           <a href="https://wa.me/541171274479" target="_blank" class="cta" style="background:#25d366; margin-right: 10px;">WhatsApp</a>
           <a href="https://www.instagram.com/argentex.3d/" target="_blank" class="cta" style="background:#e1306c;">Instagram</a>
       </div>
@@ -53,7 +54,7 @@
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
 
-    // --- 2. LÓGICA DEL CARRUSEL (GITHUB API) ---
+    // --- 2. LÓGICA DEL CARRUSEL (APUNTANDO A FILES_CARRUSEL) ---
     const track = document.getElementById('track');
     const dotsWrap = document.getElementById('dots');
     const prevBtn = document.querySelector('.arrow.prev');
@@ -66,19 +67,24 @@
     async function cargarHeroDesdeRepo() {
       const user = "argentex2000-byte";
       const repo = "Argentex";
-      const folder = "files_galeria";
+      const folder = "files_carrusel"; // <-- CAMBIO AQUÍ
       const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/${folder}`;
 
       try {
         const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error("No se pudo acceder a la carpeta de carrusel");
         const files = await res.json();
-        const images = files.filter(f => /\.(png|jpe?g|webp)$/i.test(f.name));
+        
+        // Filtrar imágenes y ordenarlas por nombre (1.png, 2.png...)
+        const images = files
+          .filter(f => /\.(png|jpe?g|webp)$/i.test(f.name))
+          .sort((a, b) => parseInt(a.name) - parseInt(b.name));
 
         images.forEach((file, idx) => {
           const img = document.createElement('img');
           img.className = 'slide';
           img.src = file.download_url;
-          img.alt = "Trabajo Argentex";
+          img.alt = `Argentex Impresión 3D - Slide ${idx + 1}`;
           track.appendChild(img);
 
           const dot = document.createElement('button');
@@ -89,7 +95,10 @@
         slides = document.querySelectorAll('.slide');
         update();
         start();
-      } catch (e) { console.error("Error:", e); }
+      } catch (e) { 
+        console.error("Error cargando imágenes del carrusel:", e);
+        track.innerHTML = "<p style='color:white; padding:20px;'>Sube tus fotos a la carpeta files_carrusel para verlas aquí.</p>";
+      }
     }
 
     function update() {
