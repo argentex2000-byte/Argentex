@@ -10,9 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* CORRECCIÓN 1: Agregada la unidad 'rem' al padding */
+    /* CORRECCIÓN: Agregado 'rem' al padding y width 100% */
     .gallery-wrap { 
-        padding: 2rem;  
+        padding: 2rem; /* <--- IMPORTANTE: 'rem' */
         max-width: 100%; 
         margin-left: auto; 
         margin-right: auto;
@@ -23,11 +23,12 @@
     .gallery-head { text-align: center; margin-bottom: 3rem; }
     .gallery-head h1 { font-family: 'Michroma', sans-serif; color: var(--brand-cyan, #3fb5f7); font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 1rem; }
     
-    /* CORRECCIÓN 2: Mantenemos 280px. Si pones 150px, las tarjetas serán demasiado delgadas */
     .gallery-grid { 
         display: grid; 
+        /* Usamos 280px para que las tarjetas no queden muy flacas */
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
         gap: 2rem; 
+        width: 100%; /* Asegura que la grilla use todo el ancho disponible */
     }
 
     .g-item { display: flex; flex-direction: column; background: var(--color-neutro, #1a1a1a); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0, 0.5); border: 1px solid #222; transition: 0.3s; }
