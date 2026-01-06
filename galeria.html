@@ -275,5 +275,30 @@
       lb.onclick = (e) => { if(e.target === lb) closeLightbox(); };
     })();
   </script>
+  <script>
+  let lastScrollTop = 0;
+  // Buscamos el header. Como se carga dinámicamente, 
+  // usamos un intervalo corto para asegurarnos de que ya existe.
+  const checkHeader = setInterval(() => {
+    const header = document.querySelector('header');
+    if (header) {
+      clearInterval(checkHeader);
+      
+      window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Si el usuario baja más de 50px, comparamos posiciones
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          // Bajando: Escondemos
+          header.classList.add('header-hidden');
+        } else {
+          // Subiendo: Mostramos
+          header.classList.remove('header-hidden');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+    }
+  }, 100);
+</script>
 </body>
 </html>
