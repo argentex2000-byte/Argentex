@@ -58,12 +58,12 @@
       box-shadow: 0 10px 25px rgba(63, 181, 247, 0.15); 
     }
 
-    /* CONTENEDOR DE IMAGEN CUADRADO (800x800) */
+    /* IMAGEN CUADRADA 800x800 */
     .img-wrapper {
       width: 100%;
-      aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada */
+      aspect-ratio: 1 / 1;
       overflow: hidden;
-      background-color: #0a0a0a; /* Fondo para fotos no cuadradas */
+      background-color: #0a0a0a;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -73,7 +73,7 @@
     .img-wrapper img {
       max-width: 100%;
       max-height: 100%;
-      object-fit: contain; /* Muestra la imagen COMPLETA sin recortar */
+      object-fit: contain;
       display: block;
       transition: transform 0.4s ease;
     }
@@ -102,7 +102,7 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* ESPECIFICACIONES (Ficha Técnica) */
+    /* ESPECIFICACIONES */
     .specs-grid {
       margin-top: auto;
       border-top: 1px solid #333;
@@ -151,12 +151,7 @@
       backdrop-filter: blur(5px);
     }
     .lightbox.open { display: flex; }
-    
-    .lightbox img {
-      max-width: 95vw; max-height: 85vh; 
-      object-fit: contain; 
-      border-radius: 4px;
-    }
+    .lightbox img { max-width: 95vw; max-height: 85vh; object-fit: contain; border-radius: 4px; }
     
     .lb-close, .lb-prev, .lb-next {
       position: absolute; top: 50%; transform: translateY(-50%);
@@ -172,18 +167,7 @@
 </head>
 <body>
 
-  <header>
-    <h1>
-      <a href="index.html" aria-label="ARGENTEX - Ir al inicio">
-        <img src="favicon.png" alt="ARGENTEX Logo" class="header-logo">
-      </a>
-    </h1>
-    <nav>
-      <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank">Productos</a>
-      <a href="galeria.html" style="color: var(--brand-cyan);">Galería</a>
-      <a href="index.html#contacto">Contacto</a>
-    </nav>
-  </header>
+  <header id="main-header"></header>
 
   <main class="gallery-wrap">
     <div class="gallery-head">
@@ -196,9 +180,7 @@
     </div>
   </main>
 
-  <footer>
-    <p>© 2026 Argentex – Impresión 3D Argentina</p>
-  </footer>
+  <footer id="main-footer"></footer>
 
   <div id="lightbox" class="lightbox">
     <button class="lb-close">✕</button>
@@ -208,79 +190,90 @@
   </div>
 
   <script>
-  (async function(){
-    const username = "argentex2000-byte";
-    const repo     = "Argentex";
-    const folder   = "files_galeria"; 
-    
-    const imgBaseUrl  = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
-    const dataUrl     = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/datos.json`;
+    // --- 1. CARGADOR DE COMPONENTES GLOBALES ---
+    async function loadComponent(id, file) {
+      try {
+        const res = await fetch(file);
+        document.getElementById(id).innerHTML = await res.text();
+      } catch (e) { console.error("Error cargando " + file, e); }
+    }
+    loadComponent('main-header', 'header.html');
+    loadComponent('main-footer', 'footer.html');
 
-    const grid = document.getElementById('grid');
-    const list = []; 
+    // --- 2. LÓGICA DE LA GALERÍA (JSON) ---
+    (async function(){
+      const username = "argentex2000-byte";
+      const repo     = "Argentex";
+      const folder   = "files_galeria"; 
+      
+      const imgBaseUrl  = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
+      const dataUrl     = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/datos.json`;
 
-    try {
-        const res = await fetch(dataUrl);
-        if (!res.ok) throw new Error("Error al cargar JSON");
-        const productos = await res.json();
+      const grid = document.getElementById('grid');
+      const list = []; 
 
-        grid.innerHTML = "";
+      try {
+          const res = await fetch(dataUrl);
+          if (!res.ok) throw new Error("Error al cargar JSON");
+          const productos = await res.json();
 
-        productos.forEach(prod => {
-          const src = imgBaseUrl + prod.Archivo;
-          list.push(src); 
+          grid.innerHTML = "";
 
-          const article = document.createElement('article');
-          article.className = 'g-item'; 
-          
-          article.innerHTML = `
-            <div class="img-wrapper">
-              <img src="${src}" alt="${prod.Título || 'Trabajo'}" loading="lazy">
-            </div>
-            <div class="info-content">
-              <h3>${prod.Título || "Sin Título"}</h3>
-              <p class="desc">${prod.Descripción || ""}</p>
-              
-              <div class="specs-grid">
-                <div class="spec-item">
-                    <span class="label">Material</span>
-                    <span class="value">${prod.Material || '-'}</span>
-                </div>
-                <div class="spec-item">
-                    <span class="label">Color</span>
-                    <span class="value">${prod.Color || '-'}</span>
-                </div>
-                <div class="spec-item full-width">
-                    <span class="label">Dimensiones (L x A x Alt)</span>
-                    <span class="value measures">
-                        ${prod.Dimensiones?.Largo || '0'} x ${prod.Dimensiones?.Ancho || '0'} x ${prod.Dimensiones?.Alto || '0'}
-                    </span>
+          productos.forEach(prod => {
+            const src = imgBaseUrl + prod.Archivo;
+            list.push(src); 
+
+            const article = document.createElement('article');
+            article.className = 'g-item'; 
+            
+            article.innerHTML = `
+              <div class="img-wrapper">
+                <img src="${src}" alt="${prod.Título || 'Trabajo'}" loading="lazy">
+              </div>
+              <div class="info-content">
+                <h3>${prod.Título || "Sin Título"}</h3>
+                <p class="desc">${prod.Descripción || ""}</p>
+                <div class="specs-grid">
+                  <div class="spec-item">
+                      <span class="label">Material</span>
+                      <span class="value">${prod.Material || '-'}</span>
+                  </div>
+                  <div class="spec-item">
+                      <span class="label">Color</span>
+                      <span class="value">${prod.Color || '-'}</span>
+                  </div>
+                  <div class="spec-item full-width">
+                      <span class="label">Dimensiones (L x A x Alt)</span>
+                      <span class="value measures">
+                          ${prod.Dimensiones?.Largo || '0'} x ${prod.Dimensiones?.Ancho || '0'} x ${prod.Dimensiones?.Alto || '0'}
+                      </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          `;
-          
-          article.querySelector('.img-wrapper').onclick = () => openLightbox(src);
-          grid.appendChild(article);
-        });
+            `;
+            
+            article.querySelector('.img-wrapper').onclick = () => openLightbox(src);
+            grid.appendChild(article);
+          });
 
-    } catch (e) {
-        grid.innerHTML = "<p style='color:red;'>Error cargando la galería.</p>";
-    }
+      } catch (e) {
+          grid.innerHTML = "<p style='color:red;'>Error cargando la galería.</p>";
+      }
 
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lb-img');
-    let idx = 0;
+      // --- 3. LÓGICA DEL LIGHTBOX ---
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lb-img');
+      let idx = 0;
 
-    function openLightbox(src){ idx = list.indexOf(src); lbImg.src = src; lb.classList.add('open'); }
-    function closeLightbox(){ lb.classList.remove('open'); lbImg.src = ""; }
-    function step(d){ idx = (idx + d + list.length) % list.length; lbImg.src = list[idx]; }
+      function openLightbox(src){ idx = list.indexOf(src); lbImg.src = src; lb.classList.add('open'); }
+      function closeLightbox(){ lb.classList.remove('open'); lbImg.src = ""; }
+      function step(d){ idx = (idx + d + list.length) % list.length; lbImg.src = list[idx]; }
 
-    lb.querySelector('.lb-close').onclick = closeLightbox;
-    lb.querySelector('.lb-prev').onclick = () => step(-1);
-    lb.querySelector('.lb-next').onclick = () => step(1);
-    lb.onclick = (e) => { if(e.target === lb) closeLightbox(); };
-  })();
+      lb.querySelector('.lb-close').onclick = closeLightbox;
+      lb.querySelector('.lb-prev').onclick = () => step(-1);
+      lb.querySelector('.lb-next').onclick = () => step(1);
+      lb.onclick = (e) => { if(e.target === lb) closeLightbox(); };
+    })();
   </script>
 </body>
 </html>
