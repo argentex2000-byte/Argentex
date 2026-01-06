@@ -11,50 +11,49 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>
-      <a href="#inicio" aria-label="ARGENTEX - Ir al inicio">
-        <img src="favicon.png" alt="ARGENTEX Logo" class="header-logo">
-      </a>
-    </h1>
-    <nav aria-label="Navegación principal">
-      <a href="#inicio">Inicio</a>
-      <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank">Comprá ahora</a>
-      <a href="galeria.html">Galería</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </header>
 
-  <section class="hero" id="inicio">
-    <div class="hero-carousel" role="region" aria-label="Carrusel de ejemplos">
-      <div class="track" id="track"></div>
-      <button class="arrow prev" aria-label="Anterior">‹</button>
-      <button class="arrow next" aria-label="Siguiente">›</button>
-      <div class="dots" id="dots"></div>
-    </div>
+  <header id="main-header"></header>
 
-    <div class="hero-content">
-      <h3>Argentex - Impresión 3D</h3>
-      <p>Diseñamos y fabricamos objetos únicos.</p>
-      <a href="https://argentexproductos.mitiendanube.com/productos/" class="cta">Comprá ahora</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-carousel" role="region" aria-label="Carrusel de ejemplos">
+        <div class="track" id="track"></div>
+        <button class="arrow prev" aria-label="Anterior">‹</button>
+        <button class="arrow next" aria-label="Siguiente">›</button>
+        <div class="dots" id="dots"></div>
+      </div>
 
-  <section id="contacto" class="contacto">
-    <h3>Contacto</h3>
-    <p>Envianos un mail a <a href="mailto:arg.entex.2025@gmail.com">contactoargentex@gmail.com</a></p>
-    <div style="margin-top: 20px;">
-        <a href="https://wa.me/541171274479" target="_blank" class="cta" style="background:#25d366; margin-right: 10px;">WhatsApp</a>
-        <a href="https://www.instagram.com/argentex.3d/" target="_blank" class="cta" style="background:#e1306c;">Instagram</a>
-    </div>
-  </section>
+      <div class="hero-content">
+        <h3>Argentex - Impresión 3D</h3>
+        <p>Diseñamos y fabricamos objetos únicos.</p>
+        <a href="https://argentexproductos.mitiendanube.com/productos/" class="cta">Comprá ahora</a>
+      </div>
+    </section>
 
-  <footer>
-    <p>© 2026 Argentex – Impresión 3D Argentina</p>
-    <p><small>IG: @argentex.3d | WA: 11 7127-4479</small></p>
-  </footer>
+    <section id="contacto" class="contacto">
+      <h3>Contacto</h3>
+      <p>Envianos un mail a <a href="mailto:arg.entex.2025@gmail.com">contactoargentex@gmail.com</a></p>
+      <div style="margin-top: 20px;" id="contacto-botones">
+          <a href="https://wa.me/541171274479" target="_blank" class="cta" style="background:#25d366; margin-right: 10px;">WhatsApp</a>
+          <a href="https://www.instagram.com/argentex.3d/" target="_blank" class="cta" style="background:#e1306c;">Instagram</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="main-footer"></footer>
 
   <script>
+    // --- 1. CARGADOR DE COMPONENTES GLOBALES ---
+    async function loadComponent(id, file) {
+      try {
+        const res = await fetch(file);
+        document.getElementById(id).innerHTML = await res.text();
+      } catch (e) { console.error("Error cargando " + file, e); }
+    }
+    loadComponent('main-header', 'header.html');
+    loadComponent('main-footer', 'footer.html');
+
+    // --- 2. LÓGICA DEL CARRUSEL (GITHUB API) ---
     const track = document.getElementById('track');
     const dotsWrap = document.getElementById('dots');
     const prevBtn = document.querySelector('.arrow.prev');
@@ -118,4 +117,3 @@
   </script>
 </body>
 </html>
-
