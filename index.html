@@ -42,7 +42,7 @@
   <footer id="main-footer"></footer>
 
   <script>
-    // Carga de componentes y scroll logic
+    // Componentes y Scroll
     async function loadComponent(id, file) {
       try {
         const res = await fetch(file);
@@ -87,7 +87,6 @@
           const img = document.createElement('img');
           img.className = 'slide';
           img.src = file.download_url;
-          img.alt = "Slide " + (idx + 1);
           track.appendChild(img);
 
           const dot = document.createElement('button');
@@ -102,7 +101,7 @@
 
     function update() {
       if(slides.length === 0) return;
-      track.style.transform = `translateX(-${index * 100}vw)`;
+      track.style.transform = `translateX(-${index * 100}%)`;
       document.querySelectorAll('.dots button').forEach((btn, i) => {
         btn.classList.toggle('active', i === index);
       });
