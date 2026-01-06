@@ -10,7 +10,7 @@
   /* 1. Fondo y Estructura (Base Oscura) */
   --color-fondo:      #ffffff;       /* (Fondo principal) */
   --color-secundario: #ffffff;       /* Negro Carbón (Header, Footer, Bloques oscuros) */
-  --color-neutro:     #1A1A1A;       /* Gris muy oscuro (Fondo de tarjetas) */
+  --color-neutro:     #fffff1;       /* Gris muy oscuro (Fondo de tarjetas) */
 
   /* 2. Textos */
   --color-texto:      var(--brand-white); /* Todo el texto principal en Blanco */
