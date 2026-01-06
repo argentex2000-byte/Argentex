@@ -17,8 +17,7 @@
   <main>
     <section class="hero" id="inicio">
       <div class="hero-carousel" role="region" aria-label="Carrusel de ejemplos">
-        <div class="track" id="track">
-           </div>
+        <div class="track" id="track"></div>
         <button class="arrow prev" aria-label="Anterior">‹</button>
         <button class="arrow next" aria-label="Siguiente">›</button>
         <div class="dots" id="dots"></div>
@@ -35,8 +34,8 @@
       <h3>Contacto</h3>
       <p>Envianos un mail a <a href="mailto:arg.entex.2025@gmail.com">contactoargentex@gmail.com</a></p>
       <div style="margin-top: 20px;">
-          <a href="https://wa.me/541171274479" target="_blank" class="cta" style="background:#ff9929; color: #000000; margin-right: 10px; ">WhatsApp</a>
-          <a href="https://www.instagram.com/argentex3d/" target="_blank" class="cta" style="background:#ff9929; color: #000000; margin-right: 10px; ">Instagram</a>
+          <a href="https://wa.me/541171274479" target="_blank" class="cta" style="background:#ff9929; color: #000000; margin-right: 10px;">WhatsApp</a>
+          <a href="https://www.instagram.com/argentex3d/" target="_blank" class="cta" style="background:#ff9929; color: #000000; margin-right: 10px;">Instagram</a>
       </div>
     </section>
   </main>
@@ -48,13 +47,14 @@
     async function loadComponent(id, file) {
       try {
         const res = await fetch(file);
-        document.getElementById(id).innerHTML = await res.text();
+        const html = await res.text();
+        document.getElementById(id).innerHTML = html;
       } catch (e) { console.error("Error cargando " + file, e); }
     }
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
 
-    // --- 2. LÓGICA DEL CARRUSEL (APUNTANDO A FILES_CARRUSEL) ---
+    // --- 2. LÓGICA DEL CARRUSEL ---
     const track = document.getElementById('track');
     const dotsWrap = document.getElementById('dots');
     const prevBtn = document.querySelector('.arrow.prev');
@@ -67,7 +67,7 @@
     async function cargarHeroDesdeRepo() {
       const user = "argentex2000-byte";
       const repo = "Argentex";
-      const folder = "files_carrusel"; // <-- CAMBIO AQUÍ
+      const folder = "files_carrusel";
       const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/${folder}`;
 
       try {
@@ -75,7 +75,6 @@
         if (!res.ok) throw new Error("No se pudo acceder a la carpeta de carrusel");
         const files = await res.json();
         
-        // Filtrar imágenes y ordenarlas por nombre (1.png, 2.png...)
         const images = files
           .filter(f => /\.(png|jpe?g|webp)$/i.test(f.name))
           .sort((a, b) => parseInt(a.name) - parseInt(b.name));
@@ -84,7 +83,7 @@
           const img = document.createElement('img');
           img.className = 'slide';
           img.src = file.download_url;
-          img.alt = `Argentex Impresión 3D - Slide ${idx + 1}`;
+          img.alt = `Slide ${idx + 1}`;
           track.appendChild(img);
 
           const dot = document.createElement('button');
@@ -96,14 +95,15 @@
         update();
         start();
       } catch (e) { 
-        console.error("Error cargando imágenes del carrusel:", e);
-        track.innerHTML = "<p style='color:white; padding:20px;'>Sube tus fotos a la carpeta files_carrusel para verlas aquí.</p>";
+        track.innerHTML = "<p style='color:white; padding:20px;'>Error cargando imágenes.</p>";
       }
     }
 
     function update() {
+      // Usamos vw para que el movimiento sea perfecto en cualquier pantalla
       track.style.transform = `translateX(-${index * 100}vw)`;
-      document.querySelectorAll('.dots button').forEach((btn, i) => {
+      const allDots = document.querySelectorAll('.dots button');
+      allDots.forEach((btn, i) => {
         btn.classList.toggle('active', i === index);
       });
     }
@@ -123,35 +123,21 @@
     nextBtn.onclick = () => goTo(index + 1, true);
 
     cargarHeroDesdeRepo();
-  </script>
-  <script>
-  let lastScrollTop = 0;
-  // Buscamos el header. Como se carga dinámicamente, 
-  // usamos un intervalo corto para asegurarnos de que ya existe.
-  const checkHeader = setInterval(() => {
-    const header = document.querySelector('header');
-    if (header) {
-      clearInterval(checkHeader);
+
+    // --- 3. OCULTAR HEADER AL HACER SCROLL ---
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (!header) return;
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       
-      window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Si el usuario baja más de 50px, comparamos posiciones
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-          // Bajando: Escondemos
-          header.classList.add('header-hidden');
-        } else {
-          // Subiendo: Mostramos
-          header.classList.remove('header-hidden');
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-      });
-    }
-  }, 100);
-</script>
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        header.classList.add('header-hidden');
+      } else {
+        header.classList.remove('header-hidden');
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }, { passive: true });
+  </script>
 </body>
 </html>
-
-
-
-
