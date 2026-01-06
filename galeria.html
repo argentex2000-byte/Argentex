@@ -21,7 +21,6 @@
         min-height: 80vh; 
     }
 
-    /* Encabezado de la sección */
     .gallery-head { text-align: center; margin-bottom: 3rem; }
     
     .gallery-head h1 { 
@@ -36,21 +35,20 @@
         font-family: 'Montserrat', sans-serif;
     }
 
-    /* --- GRID RESPONSIVO (Mampostería / Masonry) --- */
+    /* GRID */
     .gallery-grid {
       display: grid;
-      /* Columnas automáticas: mínimo 300px de ancho */
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
     }
 
-    /* --- TARJETA DE PRODUCTO (NUEVO DISEÑO CON TEXTO) --- */
+    /* TARJETA */
     .g-item {
       display: flex;
       flex-direction: column;
       background: var(--color-neutro);
       border-radius: 12px;
-      overflow: hidden; /* Para recortar la imagen en las esquinas */
+      overflow: hidden; 
       box-shadow: 0 6px 20px rgba(0,0,0, 0.5);
       border: 1px solid #222;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -58,12 +56,11 @@
 
     .g-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(63, 181, 247, 0.15); /* Brillo azul sutil */
+      box-shadow: 0 10px 25px rgba(63, 181, 247, 0.15); 
     }
 
-    /* Imagen */
     .img-wrapper {
-      height: 250px; /* Altura fija para uniformidad */
+      height: 250px; 
       overflow: hidden;
       cursor: zoom-in;
       position: relative;
@@ -77,7 +74,6 @@
     }
     .g-item:hover .img-wrapper img { transform: scale(1.08); }
 
-    /* Información (Título, descripción, specs) */
     .info-content {
       padding: 1.5rem;
       flex-grow: 1;
@@ -102,21 +98,48 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* Especificaciones (Material, Color, Tamaño) */
-    .specs {
-      margin-top: auto; /* Empuja esto al final de la tarjeta */
-      display: flex;
-      justify-content: space-between;
+    /* === NUEVOS ESTILOS PARA LAS MEDIDAS (Specs Grid) === */
+    .specs-grid {
+      margin-top: auto;
       border-top: 1px solid #333;
       padding-top: 1rem;
-      font-size: 0.7rem;
-      font-family: 'Michroma', sans-serif;
-      color: var(--brand-orange);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .spec-item {
+      flex: 1; 
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-item.full-width {
+      flex: 100%; 
+      margin-top: 5px;
+    }
+
+    .label {
+      font-size: 0.65rem;
+      color: #888;
       text-transform: uppercase;
+      margin-bottom: 2px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    .value {
+      font-family: 'Michroma', sans-serif;
+      font-size: 0.75rem;
+      color: var(--brand-orange); 
+    }
+
+    .measures {
+      color: var(--brand-white); 
       letter-spacing: 1px;
     }
 
-    /* --- LIGHTBOX (Visor pantalla completa) --- */
+    /* Lightbox */
     .lightbox {
       position: fixed; inset: 0; 
       background: rgba(0,0,0, 0.95);
@@ -148,7 +171,6 @@
     .lb-prev:hover, .lb-next:hover { background: var(--brand-cyan); color: #000; }
     .lb-close:hover { color: var(--brand-orange); }
 
-    /* Mensaje de carga / Error */
     .loading-msg { color: #888; text-align: center; margin-top: 2rem; }
   </style>
 </head>
@@ -194,54 +216,63 @@
     // --- CONFIGURACIÓN ---
     const username = "argentex2000-byte";
     const repo     = "Argentex";
+    
+    // IMPORTANTE: ¿Tu carpeta se llama "fondo" o "files_galeria"?
+    // Si tu JSON está en "fondo", cambia la línea de abajo a: const folder = "fondo";
     const folder   = "files_galeria"; 
     
-    // URL base de las imágenes
+    // URL base
     const imgBaseUrl  = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
-    
-    // URL del archivo de datos (JSON)
     const dataUrl     = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/datos.json`;
 
     const grid = document.getElementById('grid');
-    const list = []; // Array para guardar las URLs para el lightbox
+    const list = []; 
 
     try {
-        // 1. Pedir el archivo JSON con la info
+        // 1. Pedir JSON
         const res = await fetch(dataUrl);
         if (!res.ok) throw new Error("No se pudo leer datos.json");
         const productos = await res.json();
 
-        // Limpiar mensaje de carga
         grid.innerHTML = "";
 
-        // 2. Crear una tarjeta por cada producto del JSON
+        // 2. Renderizar (USANDO MAYÚSCULAS COMO EN TU JSON)
         productos.forEach(prod => {
-          // Construir la ruta completa de la imagen
-          const src = imgBaseUrl + prod.archivo;
-          list.push(src); // Guardar para el lightbox
+          // Nota: El JSON tiene "Archivo" con mayúscula
+          const src = imgBaseUrl + prod.Archivo;
+          list.push(src); 
 
-          // Crear elemento HTML
           const article = document.createElement('article');
           article.className = 'g-item'; 
           
-          // Llenar el contenido HTML
           article.innerHTML = `
             <div class="img-wrapper">
-              <img src="${src}" alt="${prod.titulo}" loading="lazy">
+              <img src="${src}" alt="${prod.Titulo}" loading="lazy">
             </div>
             <div class="info-content">
-              <h3>${prod.titulo}</h3>
-              <p class="desc">${prod.descripcion}</p>
+              <h3>${prod.Titulo}</h3>
+              <p class="desc">${prod.Descripcion}</p>
               
-              <div class="specs">
-                <span>${prod.material || '-'}</span>
-                <span>${prod.color || '-'}</span>
-                <span>${prod.tamano || '-'}</span>
+              <div class="specs-grid">
+                <div class="spec-item">
+                    <span class="label">Material</span>
+                    <span class="value">${prod.Material || '-'}</span>
+                </div>
+                <div class="spec-item">
+                    <span class="label">Color</span>
+                    <span class="value">${prod.Color || '-'}</span>
+                </div>
+                
+                <div class="spec-item full-width">
+                    <span class="label">Dimensiones (L x A x Alt)</span>
+                    <span class="value measures">
+                        ${prod.Dimensiones?.Largo || '0'} x ${prod.Dimensiones?.Ancho || '0'} x ${prod.Dimensiones?.Alto || '0'}
+                    </span>
+                </div>
               </div>
             </div>
           `;
           
-          // Evento Click para abrir Lightbox
           const imgDiv = article.querySelector('.img-wrapper');
           imgDiv.addEventListener('click', (e) => { 
               e.stopPropagation(); 
@@ -255,11 +286,11 @@
         console.error("Error:", error);
         grid.innerHTML = `<p style="text-align:center; color:#ff5555;">
           No se pudieron cargar los trabajos. <br>
-          <small>Verifica que el archivo <b>datos.json</b> esté en la carpeta correcta de GitHub.</small>
+          <small>Verifica que <b>datos.json</b> esté subido a la carpeta correcta.</small>
         </p>`;
     }
 
-    // --- LÓGICA DEL LIGHTBOX ---
+    // --- LIGHTBOX ---
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
     const btnClose = lb.querySelector('.lb-close');
@@ -276,7 +307,7 @@
     function closeLightbox(){ 
       lb.classList.remove('open'); 
       lb.setAttribute('aria-hidden', 'true');
-      lbImg.src = ""; // Limpiar
+      lbImg.src = ""; 
     }
     function step(d){ 
       idx = (idx + d + list.length) % list.length; 
@@ -286,11 +317,7 @@
     btnClose.onclick = closeLightbox;
     btnPrev.onclick  = () => step(-1);
     btnNext.onclick  = () => step(1);
-    
-    // Cerrar al hacer clic fuera de la imagen
     lb.onclick = (e) => { if(e.target === lb) closeLightbox(); };
-    
-    // Teclado
     window.addEventListener('keydown', (e) => {
       if(!lb.classList.contains('open')) return;
       if(e.key === 'Escape') closeLightbox();
