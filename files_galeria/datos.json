@@ -1,0 +1,158 @@
+[
+  {
+    "Archivo": "1.png",
+    "Título": "Homero y Bart Simpson",
+    "Descripción": "Pintado a mano",
+    "Color": "Varios",
+    "Material": "PLA",
+    "Dimensiones": {
+      "Largo": "4 cm",
+      "Ancho": "4 cm",
+      "Alto": "10 cm"
+    }
+  },
+  {
+    "Archivo": "2.png",
+    "Título": "Portacelular",
+    "Descripción": "",
+    "Color": "Blanco (a elegir)",
+    "Material": "PLA",
+    "Dimensiones": {
+      "Largo": "3 cm",
+      "Ancho": "8 cm",
+      "Alto": "5 cm"
+    }
+  },
+    {
+    "Archivo": "3.png",
+    "Título": "Portacelular plegable",
+    "Descripción": "Se puede añadir un logo",
+    "Color": "Blanco (a elegir)",
+    "Material": "PLA",
+    "Dimensiones": {
+      "Largo": "10 cm",
+      "Ancho": "0.2 cm",
+      "Alto": "2 cm"
+    }
+  },
+    {
+    "Archivo": "4.png",
+    "Título": "San Miguel Árcangel",
+    "Descripción": "",
+    "Color": "Blanco (a elegir)",
+    "Material": "PLA",
+    "Dimensiones": {
+      "Largo": "4 cm",
+      "Ancho": "4 cm",
+      "Alto": "15 cm"
+    }
+  },
+    {
+    "archivo": "5.png",
+    "titulo": "Saturno",
+    "descripcion": "Con luces a pilas",
+    "color": "Blanco (a elegir)",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "25 cm",
+      "Ancho": "25 cm",
+      "Alto": "15 cm"
+    }
+  },
+      {
+    "archivo": "6.png",
+    "titulo": "Lámpara Grogu",
+    "descripcion": "Litofanía de Grogu con lámpara E27 intercambiable.",
+    "color": "Blanco",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "7.5 cm",
+      "Ancho": "7.5 cm",
+      "Alto": "15 cm"
+    }
+  },
+        {
+    "archivo": "7.png",
+    "titulo": "Maceta sentada",
+    "descripcion": "",
+    "color": "Negro (a elegir)",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "10 cm",
+      "Ancho": "10 cm",
+      "Alto": "15 cm"
+    }
+  },
+          {
+    "archivo": "8.png",
+    "titulo": "Maceta Gatito",
+    "descripcion": "",
+    "color": "Negro (a elegir)",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "10 cm",
+      "Ancho": "10 cm",
+      "Alto": "15 cm"
+    }
+  },
+          {
+    "archivo": "9.png",
+    "titulo": "Maceta Recostada",
+    "descripcion": "",
+    "color": "Negro (a elegir)",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "10 cm",
+      "Ancho": "10 cm",
+      "Alto": "15 cm"
+    }
+  },
+          {
+    "archivo": "10.png",
+    "titulo": "Maceta Varias",
+    "descripcion": "",
+    "color": "Negro (a elegir)",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "10 cm",
+      "Ancho": "10 cm",
+      "Alto": "15 cm"
+    }
+  },
+            {
+    "archivo": "11.png",
+    "titulo": "Pesebre",
+    "descripcion": "",
+    "color": "Blanco (a elegir)",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "10 cm",
+      "Ancho": "10 cm",
+      "Alto": "15 cm"
+    }
+  },
+            {
+    "archivo": "12.png",
+    "titulo": "Virgen María",
+    "descripcion": "",
+    "color": "Blanco (a elegir)",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "10 cm",
+      "Ancho": "10 cm",
+      "Alto": "20 cm"
+    }
+  },
+          {
+    "archivo": "13.png",
+    "titulo": "Busto Maradona",
+    "descripcion": "",
+    "color": "Beige (a elegir)",
+    "material": "PLA",
+    "Dimensiones": {
+      "Largo": "2 cm",
+      "Ancho": "5 cm",
+      "Alto": "8 cm"
+    }
+  },
+]
