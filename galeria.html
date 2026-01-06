@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="style.css"/>
 
   <style>
-    /* Ajustes del contenedor principal */
     .gallery-wrap { 
         padding: 4rem 2rem; 
         max-width: 1200px; 
@@ -35,7 +34,7 @@
         font-family: 'Montserrat', sans-serif;
     }
 
-    /* GRID */
+    /* GRID RESPONSIVO */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -59,20 +58,25 @@
       box-shadow: 0 10px 25px rgba(63, 181, 247, 0.15); 
     }
 
+    /* CONTENEDOR DE IMAGEN CUADRADO (800x800) */
     .img-wrapper {
-      height: 250px; 
-      overflow: hidden;
-      cursor: zoom-in;
-      position: relative;
-    }
-    .img-wrapper img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada */
+      overflow: hidden;
+      background-color: #0a0a0a; /* Fondo para fotos no cuadradas */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-in;
+    }
+
+    .img-wrapper img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain; /* Muestra la imagen COMPLETA sin recortar */
       display: block;
       transition: transform 0.4s ease;
     }
-    .g-item:hover .img-wrapper img { transform: scale(1.08); }
 
     .info-content {
       padding: 1.5rem;
@@ -98,7 +102,7 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* === NUEVOS ESTILOS PARA LAS MEDIDAS (Specs Grid) === */
+    /* ESPECIFICACIONES (Ficha Técnica) */
     .specs-grid {
       margin-top: auto;
       border-top: 1px solid #333;
@@ -124,7 +128,6 @@
       color: #888;
       text-transform: uppercase;
       margin-bottom: 2px;
-      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
     }
 
@@ -139,7 +142,7 @@
       letter-spacing: 1px;
     }
 
-    /* Lightbox */
+    /* LIGHTBOX */
     .lightbox {
       position: fixed; inset: 0; 
       background: rgba(0,0,0, 0.95);
@@ -153,7 +156,6 @@
       max-width: 95vw; max-height: 85vh; 
       object-fit: contain; 
       border-radius: 4px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.8);
     }
     
     .lb-close, .lb-prev, .lb-next {
@@ -162,16 +164,10 @@
       background: rgba(255,255,255,0.1); 
       color: var(--brand-white); font-size: 24px;
       display: grid; place-items: center; cursor: pointer;
-      transition: all 0.3s ease;
     }
     .lb-close { top: 20px; right: 20px; transform: none; background: transparent; font-size: 40px;}
     .lb-prev { left: 20px; }
     .lb-next { right: 20px; }
-    
-    .lb-prev:hover, .lb-next:hover { background: var(--brand-cyan); color: #000; }
-    .lb-close:hover { color: var(--brand-orange); }
-
-    .loading-msg { color: #888; text-align: center; margin-top: 2rem; }
   </style>
 </head>
 <body>
@@ -182,7 +178,7 @@
         <img src="favicon.png" alt="ARGENTEX Logo" class="header-logo">
       </a>
     </h1>
-    <nav aria-label="Navegación principal">
+    <nav>
       <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank">Productos</a>
       <a href="galeria.html" style="color: var(--brand-cyan);">Galería</a>
       <a href="index.html#contacto">Contacto</a>
@@ -195,33 +191,28 @@
       <p>Nuestros proyectos de impresión 3D más recientes.</p>
     </div>
 
-    <div id="grid" class="gallery-grid" aria-live="polite">
-      <p class="loading-msg">Cargando trabajos...</p>
+    <div id="grid" class="gallery-grid">
+      <p style="text-align: center; color: #888;">Cargando trabajos...</p>
     </div>
   </main>
 
   <footer>
-    <p>© 2025 Argentex – Impresión 3D Argentina</p>
+    <p>© 2026 Argentex – Impresión 3D Argentina</p>
   </footer>
 
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lb-close" aria-label="Cerrar">✕</button>
-    <button class="lb-prev"  aria-label="Anterior">‹</button>
-    <img id="lb-img" alt="Vista ampliada">
-    <button class="lb-next"  aria-label="Siguiente">›</button>
+  <div id="lightbox" class="lightbox">
+    <button class="lb-close">✕</button>
+    <button class="lb-prev">‹</button>
+    <img id="lb-img" alt="">
+    <button class="lb-next">›</button>
   </div>
 
   <script>
   (async function(){
-    // --- CONFIGURACIÓN ---
     const username = "argentex2000-byte";
     const repo     = "Argentex";
-    
-    // IMPORTANTE: ¿Tu carpeta se llama "fondo" o "files_galeria"?
-    // Si tu JSON está en "fondo", cambia la línea de abajo a: const folder = "fondo";
     const folder   = "files_galeria"; 
     
-    // URL base
     const imgBaseUrl  = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
     const dataUrl     = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/datos.json`;
 
@@ -229,16 +220,13 @@
     const list = []; 
 
     try {
-        // 1. Pedir JSON
         const res = await fetch(dataUrl);
-        if (!res.ok) throw new Error("No se pudo leer datos.json");
+        if (!res.ok) throw new Error("Error al cargar JSON");
         const productos = await res.json();
 
         grid.innerHTML = "";
 
-        // 2. Renderizar (USANDO MAYÚSCULAS COMO EN TU JSON)
         productos.forEach(prod => {
-          // Nota: El JSON tiene "Archivo" con mayúscula
           const src = imgBaseUrl + prod.Archivo;
           list.push(src); 
 
@@ -247,11 +235,11 @@
           
           article.innerHTML = `
             <div class="img-wrapper">
-              <img src="${src}" alt="${prod.Título}" loading="lazy">
+              <img src="${src}" alt="${prod.Título || 'Trabajo'}" loading="lazy">
             </div>
             <div class="info-content">
-              <h3>${prod.Titulo}</h3>
-              <p class="desc">${prod.Descripción}</p>
+              <h3>${prod.Título || "Sin Título"}</h3>
+              <p class="desc">${prod.Descripción || ""}</p>
               
               <div class="specs-grid">
                 <div class="spec-item">
@@ -262,7 +250,6 @@
                     <span class="label">Color</span>
                     <span class="value">${prod.Color || '-'}</span>
                 </div>
-                
                 <div class="spec-item full-width">
                     <span class="label">Dimensiones (L x A x Alt)</span>
                     <span class="value measures">
@@ -273,58 +260,26 @@
             </div>
           `;
           
-          const imgDiv = article.querySelector('.img-wrapper');
-          imgDiv.addEventListener('click', (e) => { 
-              e.stopPropagation(); 
-              openLightbox(src); 
-          });
-          
+          article.querySelector('.img-wrapper').onclick = () => openLightbox(src);
           grid.appendChild(article);
         });
 
-    } catch (error) {
-        console.error("Error:", error);
-        grid.innerHTML = `<p style="text-align:center; color:#ff5555;">
-          No se pudieron cargar los trabajos. <br>
-          <small>Verifica que <b>datos.json</b> esté subido a la carpeta correcta.</small>
-        </p>`;
+    } catch (e) {
+        grid.innerHTML = "<p style='color:red;'>Error cargando la galería.</p>";
     }
 
-    // --- LIGHTBOX ---
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
-    const btnClose = lb.querySelector('.lb-close');
-    const btnPrev  = lb.querySelector('.lb-prev');
-    const btnNext  = lb.querySelector('.lb-next');
     let idx = 0;
 
-    function openLightbox(src){
-      idx = list.indexOf(src);
-      lbImg.src = src;
-      lb.classList.add('open');
-      lb.setAttribute('aria-hidden', 'false');
-    }
-    function closeLightbox(){ 
-      lb.classList.remove('open'); 
-      lb.setAttribute('aria-hidden', 'true');
-      lbImg.src = ""; 
-    }
-    function step(d){ 
-      idx = (idx + d + list.length) % list.length; 
-      lbImg.src = list[idx]; 
-    }
+    function openLightbox(src){ idx = list.indexOf(src); lbImg.src = src; lb.classList.add('open'); }
+    function closeLightbox(){ lb.classList.remove('open'); lbImg.src = ""; }
+    function step(d){ idx = (idx + d + list.length) % list.length; lbImg.src = list[idx]; }
 
-    btnClose.onclick = closeLightbox;
-    btnPrev.onclick  = () => step(-1);
-    btnNext.onclick  = () => step(1);
+    lb.querySelector('.lb-close').onclick = closeLightbox;
+    lb.querySelector('.lb-prev').onclick = () => step(-1);
+    lb.querySelector('.lb-next').onclick = () => step(1);
     lb.onclick = (e) => { if(e.target === lb) closeLightbox(); };
-    window.addEventListener('keydown', (e) => {
-      if(!lb.classList.contains('open')) return;
-      if(e.key === 'Escape') closeLightbox();
-      if(e.key === 'ArrowLeft') step(-1);
-      if(e.key === 'ArrowRight') step(1);
-    });
-
   })();
   </script>
 </body>
