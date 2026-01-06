@@ -56,7 +56,7 @@ header h1 {
 }
 
 .header-logo {
-    height: 100px; /* <--- AQUÍ ESTÁ EL CAMBIO DE TAMAÑO (antes era 40px) */
+    height: 80px; /* <--- AQUÍ ESTÁ EL CAMBIO DE TAMAÑO (antes era 40px) */
     width: auto;
     vertical-align: middle;
     display: block; 
