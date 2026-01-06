@@ -59,38 +59,64 @@ main {
   width: 100%;
 }
 
-/* === HERO / CARRUSEL (ANCHO TOTAL REAL) === */
+/* === HERO / CARRUSEL (PANTALLA COMPLETA REAL) === */
 .hero {
   position: relative;
   width: 100vw;
   height: 70vh;
   min-height: 450px;
-  /* Centrado absoluto para romper cualquier margen del padre */
+  /* Forzamos que ignore cualquier margen padre */
   left: 50%;
   transform: translateX(-50%);
   overflow: hidden;
   background: #000;
 }
 
-.hero-carousel { width: 100%; height: 100%; }
+.hero-carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 
 .track {
   display: flex;
   height: 100%;
-  /* IMPORTANTE: Quitamos width: 100% para que las fotos se pongan una al lado de la otra */
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
 .slide {
-  flex: 0 0 100vw; /* Cada imagen ocupa exactamente el ancho de la pantalla */
+  flex: 0 0 100vw;
   width: 100vw;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* Flechas con estilo Tech */
+/* Capa oscura para que el texto resalte */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 5;
+}
+
+/* Contenido centrado sobre el carrusel */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+}
+
+.hero-content h3 { font-size: 2.5rem; margin-bottom: 10px; }
+
+/* === BOTONES (FLECHAS) === */
 .arrow {
   position: absolute;
   top: 50%;
@@ -120,10 +146,10 @@ main {
 .arrow.prev { left: 20px; }
 .arrow.next { right: 20px; }
 
-/* Puntos indicadores (Diamantes) */
+/* === DIAMANTES (DOTS) === */
 .dots {
   position: absolute;
-  bottom: 20px;
+  bottom: 25px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -147,7 +173,7 @@ main {
   box-shadow: 0 0 10px var(--color-acento);
 }
 
-/* === SECCIONES Y TEXTO === */
+/* === SECCIONES Y CONTACTO === */
 section {
   max-width: 1200px;
   margin: 0 auto;
@@ -166,7 +192,6 @@ section {
   font-weight: bold;
 }
 
-/* === FOOTER === */
 footer {
   background: var(--color-secundario);
   padding: 3rem 1rem;
@@ -179,5 +204,6 @@ footer {
 @media (max-width: 768px) {
   main { margin-top: 90px; }
   .hero { height: 50vh; min-height: 350px; }
+  .hero-content h3 { font-size: 1.5rem; }
   .arrow { width: 40px; height: 40px; font-size: 18px; }
 }
