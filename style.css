@@ -35,7 +35,7 @@ body {
 header {
   background: var(--color-secundario);
   color: var(--color-texto); 
-  padding: 2rem 1rem; /* Más espacio vertical */
+  padding: 1rem 1rem; /* Más espacio vertical */
   
   /* CAMBIO: Columna centrada en lugar de fila */
   display: flex;
