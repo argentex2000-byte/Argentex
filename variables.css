@@ -2,14 +2,14 @@
   /* --- TUS NUEVOS COLORES DE MARCA --- */
   --brand-cyan:   #3FB5F7;  /* Azul Tecnológico */
   --brand-orange: #FF9929;  /* Naranja Energético */
-  --brand-white:  #FFFFFF;  /* Blanco Puro */
+  --brand-white:  #000000;  /* Blanco Puro */
   --brand-gray:   #CFC9C0;  /* Gris Perla / Beige */
 
   /* --- ASIGNACIÓN SEMÁNTICA --- */
 
   /* 1. Fondo y Estructura (Base Oscura) */
-  --color-fondo:      #000000;       /* Negro Puro (Fondo principal) */
-  --color-secundario: #000000;       /* Negro Carbón (Header, Footer, Bloques oscuros) */
+  --color-fondo:      #ffffff;       /* (Fondo principal) */
+  --color-secundario: #ffffff;       /* Negro Carbón (Header, Footer, Bloques oscuros) */
   --color-neutro:     #1A1A1A;       /* Gris muy oscuro (Fondo de tarjetas) */
 
   /* 2. Textos */
