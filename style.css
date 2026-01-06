@@ -57,7 +57,6 @@ nav a:hover { color: var(--color-acento); }
 main {
   margin-top: 100px; 
   width: 100%;
-  overflow-x: hidden; /* Evita desbordes por el ancho del hero */
 }
 
 /* === HERO / CARRUSEL (ANCHO TOTAL REAL) === */
@@ -66,9 +65,9 @@ main {
   width: 100vw;
   height: 70vh;
   min-height: 450px;
-  /* Truco para centrar y expandir al 100% de la ventana */
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
+  /* Centrado absoluto para romper cualquier margen del padre */
+  left: 50%;
+  transform: translateX(-50%);
   overflow: hidden;
   background: #000;
 }
@@ -78,12 +77,13 @@ main {
 .track {
   display: flex;
   height: 100%;
-  width: 100%;
+  /* IMPORTANTE: Quitamos width: 100% para que las fotos se pongan una al lado de la otra */
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .slide {
-  flex: 0 0 100vw; /* Cada imagen ocupa exactamente el ancho de la ventana */
+  flex: 0 0 100vw; /* Cada imagen ocupa exactamente el ancho de la pantalla */
   width: 100vw;
   height: 100%;
   object-fit: cover;
@@ -180,5 +180,4 @@ footer {
   main { margin-top: 90px; }
   .hero { height: 50vh; min-height: 350px; }
   .arrow { width: 40px; height: 40px; font-size: 18px; }
-  .slide { flex: 0 0 100vw; width: 100vw; }
 }
