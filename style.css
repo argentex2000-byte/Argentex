@@ -10,12 +10,12 @@
 
 html, body {
   width: 100%;
-  overflow-x: hidden; /* Evita que la página se mueva de costado */
+  overflow-x: hidden; 
   background: var(--color-fondo);
   color: var(--color-texto);
 }
 
-/* === TIPOGRAFÍA === */
+/* === TIPOGRAFÍA TECH === */
 h1, h2, h3, h4, nav a, .cta {
   font-family: 'Michroma', sans-serif;
   letter-spacing: 1px;
@@ -38,9 +38,10 @@ header {
 }
 
 .header-hidden {
-  top: -260px !important; /* Más alto para asegurar que desaparezca el menú en móvil */
+  top: -260px !important; 
   opacity: 0;
 }
+
 .header-logo { height: 50px; width: auto; margin-bottom: 5px; }
 
 nav { display: flex; gap: 1.5rem; }
@@ -54,19 +55,25 @@ nav a:hover { color: var(--color-acento); }
 
 /* === CONTENEDOR PRINCIPAL === */
 main {
-  margin-top: 100px; /* Espacio para el header fijo */
+  margin-top: 100px; 
   width: 100%;
+  overflow-x: hidden; /* Evita desbordes por el ancho del hero */
 }
 
-/* === CARRUSEL (ANCHO TOTAL Y BOTONES PRO) === */
+/* === HERO / CARRUSEL (ANCHO TOTAL REAL) === */
 .hero {
   position: relative;
   width: 100vw;
   height: 70vh;
   min-height: 450px;
+  /* Truco para centrar y expandir al 100% de la ventana */
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   overflow: hidden;
   background: #000;
 }
+
+.hero-carousel { width: 100%; height: 100%; }
 
 .track {
   display: flex;
@@ -76,7 +83,7 @@ main {
 }
 
 .slide {
-  flex: 0 0 100vw;
+  flex: 0 0 100vw; /* Cada imagen ocupa exactamente el ancho de la ventana */
   width: 100vw;
   height: 100%;
   object-fit: cover;
@@ -130,7 +137,7 @@ main {
   border: none;
   background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transform: rotate(45deg); /* Forma de diamante */
+  transform: rotate(45deg); 
   transition: all 0.3s ease;
 }
 
@@ -173,4 +180,5 @@ footer {
   main { margin-top: 90px; }
   .hero { height: 50vh; min-height: 350px; }
   .arrow { width: 40px; height: 40px; font-size: 18px; }
+  .slide { flex: 0 0 100vw; width: 100vw; }
 }
