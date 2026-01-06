@@ -4,13 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Argentex – Impresión 3D</title>
-  
   <link rel="icon" type="image/png" href="favicon.png" />
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,25 +17,20 @@
         <img src="favicon.png" alt="ARGENTEX Logo" class="header-logo">
       </a>
     </h1>
-   <nav aria-label="Navegación principal">
-     <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank">Productos</a>
-     <a href="galeria.html">Galería</a>
-     <a href="#contacto">Contacto</a>
-  </nav>
+    <nav aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank">Productos</a>
+      <a href="galeria.html">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
   </header>
 
   <section class="hero" id="inicio">
-    <div class="hero-carousel" role="region" aria-label="Carrusel de ejemplos de impresiones 3D">
-      <div class="track" id="track">
-        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/1C8AF502-94A2-486C-BB6C-A8325B3307FD.jpg" alt="Impresión de pieza mecánica en filamento azul">
-        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_0413.jpg" alt="Impresión 3D de un busto artístico de color dorado">
-        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1410.jpg" alt="Varias piezas de impresión 3D en diferentes colores sobre una mesa">
-        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1496.jpg" alt="Pieza de diseño complejo en impresión 3D">
-        <img class="slide" src="https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/fondo/IMG_1531.jpg" alt="Detalle de la textura y capas de una impresión 3D de un recipiente">
-      </div>
-      <button class="arrow prev" aria-label="Diapositiva anterior" tabindex="-1">‹</button>
-      <button class="arrow next" aria-label="Diapositiva siguiente" tabindex="-1">›</button>
-      <div class="dots" id="dots" role="tablist" aria-label="Indicadores de diapositivas"></div>
+    <div class="hero-carousel" role="region" aria-label="Carrusel de ejemplos">
+      <div class="track" id="track"></div>
+      <button class="arrow prev" aria-label="Anterior">‹</button>
+      <button class="arrow next" aria-label="Siguiente">›</button>
+      <div class="dots" id="dots"></div>
     </div>
 
     <div class="hero-content">
@@ -48,86 +40,81 @@
     </div>
   </section>
 
-  <section id="productos" class="grid" aria-labelledby="productos-heading">
-    <h3 id="productos-heading">Nuestros productos</h3>
-    <div class="cards">
-      <div class="card"><h4>Decoración</h4><p>Piezas personalizadas para tu hogar.</p></div>
-      <div class="card"><h4>Accesorios</h4><p>Funcionales y a medida.</p></div>
-      <div class="card"><h4>Prototipos</h4><p>Desarrollo rápido para tus ideas.</p></div>
+  <section id="contacto" class="contacto">
+    <h3>Contacto</h3>
+    <p>Envianos un mail a <a href="mailto:arg.entex.2025@gmail.com">arg.entex.2025@gmail.com</a></p>
+    <div style="margin-top: 20px;">
+        <a href="https://wa.me/541171274479" target="_blank" class="cta" style="background:#25d366; margin-right: 10px;">WhatsApp</a>
+        <a href="https://www.instagram.com/argentex.3d/" target="_blank" class="cta" style="background:#e1306c;">Instagram</a>
     </div>
-  </section>
-
-<section id="galeria" class="grid" aria-labelledby="galeria-heading">
-  <h3 id="galeria-heading">Galería de trabajos</h3>
-  <p>Explora nuestros proyectos más recientes de impresión 3D.</p>
-  
-  <br>
-  <a href="galeria.html" class="cta">Ver Galería Completa</a>
-</section>
-
-  <section id="contacto" class="contacto" aria-labelledby="contacto-heading">
-    <h3 id="contacto-heading">Contacto</h3>
-    <p>Envianos un mail a <a href="mailto:arg.entex.2025@gmail.com">contactoargentex@gmail.com</a> o hablanos por Whatsapp.</p>
   </section>
 
   <footer>
     <p>© 2026 Argentex – Impresión 3D Argentina</p>
+    <p><small>IG: @argentex.3d | WA: 11 7127-4479</small></p>
   </footer>
 
   <script>
     const track = document.getElementById('track');
-    const slides = document.querySelectorAll('.slide');
     const dotsWrap = document.getElementById('dots');
     const prevBtn = document.querySelector('.arrow.prev');
     const nextBtn = document.querySelector('.arrow.next');
-
     let index = 0;
     let timer;
+    let slides = [];
     const AUTOPLAY_MS = 4000;
 
-    // Crear puntos
-    slides.forEach((_, idx) => {
-      const dot = document.createElement('button');
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-controls', 'track');
-      dot.addEventListener('click', () => goTo(idx, true));
-      dotsWrap.appendChild(dot);
-    });
+    async function cargarHeroDesdeRepo() {
+      const user = "argentex2000-byte";
+      const repo = "Argentex";
+      const folder = "files_galeria";
+      const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/${folder}`;
 
-    const dots = dotsWrap.querySelectorAll('button');
+      try {
+        const res = await fetch(apiUrl);
+        const files = await res.json();
+        const images = files.filter(f => /\.(png|jpe?g|webp)$/i.test(f.name));
+
+        images.forEach((file, idx) => {
+          const img = document.createElement('img');
+          img.className = 'slide';
+          img.src = file.download_url;
+          img.alt = "Trabajo Argentex";
+          track.appendChild(img);
+
+          const dot = document.createElement('button');
+          dot.addEventListener('click', () => goTo(idx, true));
+          dotsWrap.appendChild(dot);
+        });
+
+        slides = document.querySelectorAll('.slide');
+        update();
+        start();
+      } catch (e) { console.error("Error:", e); }
+    }
 
     function update() {
+      if (!slides.length) return;
       track.style.transform = `translateX(-${index * 100}%)`;
+      const dots = dotsWrap.querySelectorAll('button');
       dots.forEach((d, i) => d.classList.toggle('active', i === index));
-      dots.forEach((d, i) => d.setAttribute('aria-selected', i === index)); 
     }
 
-    function goTo(idx, user = false) {
+    function goTo(idx, userAction = false) {
+      if (!slides.length) return;
       index = (idx + slides.length) % slides.length;
       update();
-      if (user) restart();
+      if (userAction) restart();
     }
 
-    function nextSlide() { goTo(index + 1); }
-    function prevSlide() { goTo(index - 1); }
-
-    prevBtn.addEventListener('click', () => goTo(index - 1, true));
-    nextBtn.addEventListener('click', () => goTo(index + 1, true));
-
-    function start() { stop(); timer = setInterval(nextSlide, AUTOPLAY_MS); }
+    function start() { stop(); timer = setInterval(() => goTo(index + 1), AUTOPLAY_MS); }
     function stop() { if (timer) clearInterval(timer); }
     function restart() { start(); }
 
-    document.querySelector('.hero-carousel').addEventListener('mouseenter', stop);
-    document.querySelector('.hero-carousel').addEventListener('mouseleave', start);
+    prevBtn.onclick = () => goTo(index - 1, true);
+    nextBtn.onclick = () => goTo(index + 1, true);
 
-    update();
-    start();
+    cargarHeroDesdeRepo();
   </script>
 </body>
 </html>
-
-
-
-
-
