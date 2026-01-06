@@ -51,7 +51,7 @@ header {
 }
 
 .header-hidden {
-  top: -160px !important; /* Ajustá este número según el alto de tu header */
+  top: -300px !important; /* Ajustá este número según el alto de tu header */
 }
 
 header h1 {
