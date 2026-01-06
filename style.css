@@ -33,10 +33,12 @@ body {
 /* === HEADER (MODIFICADO: Logo Grande y Centrado) === */
 /* ========================================= */
 header {
-  background: var(--color-secundario);
-  color: var(--color-texto); 
-  padding: 1rem 1rem; /* Más espacio vertical */
-  
+  /* ... tus otros estilos ... */
+  padding: 0.8rem 1rem;    /* Reducimos de 2rem a 0.8rem */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
   /* CAMBIO: Columna centrada en lugar de fila */
   display: flex;
   flex-direction: column; 
@@ -50,16 +52,15 @@ header {
 }
 
 header h1 {
-  font-size: 0; 
+  font-size: 0;
   line-height: 0;
-  margin-bottom: 1.5rem; /* Espacio entre el logo y el menú */
+  margin-bottom: 0.5rem;   /* Reducimos de 1.5rem a 0.5rem (espacio entre logo y nav) */
 }
 
 .header-logo {
-    height: 80px; /* <--- AQUÍ ESTÁ EL CAMBIO DE TAMAÑO (antes era 40px) */
-    width: auto;
-    vertical-align: middle;
-    display: block; 
+  height: 60px;            /* Reducimos de 80px a 60px para ganar espacio vertical */
+  width: auto;
+  display: block;
 }
 
 header h1 a {
@@ -70,8 +71,7 @@ header h1 a {
 /* CAMBIO: Menú centrado debajo del logo */
 nav {
   display: flex;
-  gap: 2rem;       /* Espacio entre enlaces */
-  flex-wrap: wrap; /* Para móviles */
+  gap: 1.5rem;             /* Un poco menos de espacio entre enlaces */
   justify-content: center;
 }
 
