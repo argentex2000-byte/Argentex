@@ -33,34 +33,35 @@ body {
 /* === HEADER (MODIFICADO: Logo Grande y Centrado) === */
 /* ========================================= */
 header {
-  /* ... tus otros estilos ... */
-  padding: 0.8rem 1rem;    /* Reducimos de 2rem a 0.8rem */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-  /* CAMBIO: Columna centrada en lugar de fila */
+  background: var(--color-secundario);
+  color: var(--color-texto); 
+  padding: 1rem 0; /* Ajustamos el alto con menos padding */
+  
   display: flex;
   flex-direction: column; 
-  align-items: center;    
-  justify-content: center;
+  align-items: center;     /* Centra horizontalmente los hijos */
+  justify-content: center; /* Centra verticalmente */
   
   position: sticky;
   top: 0;
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Sombra para separar del contenido */
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  text-align: center;      /* Refuerzo de centrado */
 }
 
 header h1 {
-  font-size: 0;
+  margin: 0 0 0.8rem 0;   /* Solo margen abajo para separar del menú */
   line-height: 0;
-  margin-bottom: 0.5rem;   /* Reducimos de 1.5rem a 0.5rem (espacio entre logo y nav) */
+  display: flex;
+  justify-content: center; /* Centra el contenido del h1 */
 }
 
 .header-logo {
-  height: 60px;            /* Reducimos de 80px a 60px para ganar espacio vertical */
-  width: auto;
-  display: block;
+    height: 60px;          /* Tamaño sugerido para que no sea gigante */
+    width: auto;
+    display: block;
+    margin: 0 auto;        /* Centrado automático */
 }
 
 header h1 a {
@@ -71,17 +72,18 @@ header h1 a {
 /* CAMBIO: Menú centrado debajo del logo */
 nav {
   display: flex;
-  gap: 1.5rem;             /* Un poco menos de espacio entre enlaces */
-  justify-content: center;
+  gap: 1.5rem;             /* Espacio entre botones */
+  justify-content: center; /* Centra los links del menú */
+  align-items: center;
+  width: 100%;
 }
 
 nav a {
   color: var(--color-texto);
   text-decoration: none;
-  margin: 0; /* Reseteamos márgenes antiguos */
-  font-weight: 500;
-  font-size: 0.9rem; 
+  font-size: 0.85rem; 
   text-transform: uppercase;
+  white-space: nowrap;     /* Evita que los nombres se partan en dos filas */
 }
 
 nav a:hover {
