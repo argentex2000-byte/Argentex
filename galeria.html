@@ -10,7 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .gallery-wrap { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 80vh; width: 100%; }
+    /* CORRECCIÓN AQUÍ: Usamos margin-inline para no borrar el margin-top */
+    .gallery-wrap { 
+        padding: 2rem; 
+        max-width: 1200px; 
+        margin-left: auto; 
+        margin-right: auto;
+        min-height: 80vh; 
+        width: 100%; 
+    }
     .gallery-head { text-align: center; margin-bottom: 3rem; }
     .gallery-head h1 { font-family: 'Michroma', sans-serif; color: var(--brand-cyan, #3fb5f7); font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 1rem; }
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
