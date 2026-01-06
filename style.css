@@ -98,7 +98,7 @@ nav a:hover {
 /* === HERO === */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 70vh; /* Bajamos de 100vh a 70vh para que entre cómodo en la pantalla */
   display: grid;
   place-items: center;
   text-align: center;
