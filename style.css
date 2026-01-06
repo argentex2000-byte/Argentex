@@ -37,7 +37,10 @@ header {
   box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-.header-hidden { top: -250px !important; opacity: 0; }
+.header-hidden {
+  top: -260px !important; /* Más alto para asegurar que desaparezca el menú en móvil */
+  opacity: 0;
+}
 .header-logo { height: 50px; width: auto; margin-bottom: 5px; }
 
 nav { display: flex; gap: 1.5rem; }
