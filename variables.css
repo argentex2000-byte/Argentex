@@ -1,30 +1,18 @@
 :root {
-  /* --- TUS NUEVOS COLORES DE MARCA --- */
-  --brand-cyan:   #3FB5F7;  /* Azul Tecnológico */
-  --brand-orange: #FF9929;  /* Naranja Energético */
-  --brand-white:  #000000;  /* Blanco Puro */
-  --brand-gray:   #CFC9C0;  /* Gris Perla / Beige */
+  /* --- PALETA DE MARCA (MANUAL) --- */
+  --brand-cyan:   #3FB5F7;  /* Identidad principal */
+  --brand-orange: #FF9929;  /* Acción de compra (Tienda) */
+  --brand-dark:   #111111;  /* Texto principal */
+  --brand-gray:   #F4F4F4;  /* Fondos secundarios sutiles */
+  --brand-white:  #FFFFFF;  /* Fondo base */
 
   /* --- ASIGNACIÓN SEMÁNTICA --- */
-
-  /* 1. Fondo y Estructura (Base Oscura) */
-  --color-fondo:      #ffffff;       /* (Fondo principal) */
-  --color-secundario: #ffffff;       /* Negro Carbón (Header, Footer, Bloques oscuros) */
-  --color-neutro:     #fffff1;       /* Gris muy oscuro (Fondo de tarjetas) */
-
-  /* 2. Textos */
-  --color-texto:      var(--brand-white); /* Todo el texto principal en Blanco */
+  --color-fondo:      var(--brand-white);
+  --color-secundario: var(--brand-white); /* Header/Footer blancos */
+  --color-texto:      #333333; /* Gris oscuro para lectura cómoda (Montserrat) */
+  --color-titulos:    #000000; /* Negro puro para Michroma */
   
-  /* 3. Acciones y Énfasis (Aquí usamos tu paleta) */
-  
-  /* El color principal de interacción (Enlaces, bordes activos) */
-  --color-primario:   var(--brand-cyan); 
-  
-  /* Color para efectos Hover (al pasar el mouse) */
-  /* Usamos el Gris Perla para un efecto metálico sutil al pasar el mouse */
-  --color-primario-hover: var(--brand-gray); 
-
-  /* Llamadas a la Acción (Botones, Ofertas, "Contactanos") */
-  /* Usamos el Naranja para que destaque al máximo sobre el negro y el azul */
-  --color-acento:     var(--brand-orange); 
+  /* --- UI ELEMENTS --- */
+  --color-borde:      #E0E0E0;
+  --shadow-card:      0 10px 30px rgba(0,0,0,0.08); /* Sombra suave para fondo blanco */
 }
