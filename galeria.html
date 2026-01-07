@@ -5,78 +5,210 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Galería – Argentex</title>
   <link rel="icon" type="image/png" href="favicon.png" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css"/>
+
   <style>
-    /* CORRECCIÓN: Agregado 'rem' al padding y width 100% */
+    /* === CONFIGURACIÓN DEL CONTENEDOR === */
     .gallery-wrap { 
-        padding: 2rem; /* <--- IMPORTANTE: 'rem' */
-        max-width: 100%; 
-        margin-left: auto; 
-        margin-right: auto;
+        padding: 2rem; 
+        max-width: 1200px; /* Limitamos el ancho máximo para que no se estire demasiado en monitores gigantes */
+        margin: 0 auto;
         min-height: 80vh; 
         width: 100%; 
     }
     
-    .gallery-head { text-align: center; margin-bottom: 3rem; }
-    .gallery-head h1 { font-family: 'Michroma', sans-serif; color: var(--brand-cyan, #ffffff); font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 1rem; }
+    .gallery-head { text-align: center; margin-bottom: 4rem; }
     
+    /* CORRECCIÓN: Color de respaldo #3FB5F7 (no blanco) para evitar texto invisible */
+    .gallery-head h1 { 
+        font-family: 'Michroma', sans-serif; 
+        color: var(--brand-cyan, #3FB5F7); 
+        font-size: clamp(1.6rem, 3vw, 2.4rem); 
+        margin-bottom: 1rem; 
+        text-transform: uppercase;
+    }
+    
+    .gallery-head p { color: #666; font-size: 1.1rem; }
+
+    /* === GRILLA === */
     .gallery-grid { 
         display: grid; 
-        /* Usamos 280px para que las tarjetas no queden muy flacas */
+        /* Tarjetas con ancho mínimo de 280px */
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
         gap: 2rem; 
-        width: 100%; /* Asegura que la grilla use todo el ancho disponible */
+        width: 100%; 
     }
 
-    .g-item { display: flex; flex-direction: column; background: var(--color-neutro, #ffffff); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0, 0.5); border: 1px solid #000; transition: 0.3s; }
-    .g-item:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(63, 181, 247, 0.15); }
-    .img-wrapper { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background-color: #0a0a0a; display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
-    .img-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.4s; }
-    .info-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; text-align: left; }
-    .desc { font-size: 0.9rem; color: #ccc; margin-bottom: 1.2rem; line-height: 1.4; }
-    .specs-grid { margin-top: auto; border-top: 1px solid #333; padding-top: 1rem; display: flex; flex-wrap: wrap; gap: 10px; }
-    .spec-item { flex: 1; display: flex; flex-direction: column; }
+    /* === TARJETA (ESTILO WHITE) === */
+    .g-item { 
+        display: flex; 
+        flex-direction: column; 
+        background: #FFFFFF; /* Fondo Blanco Puro */
+        border-radius: 12px; 
+        overflow: hidden; 
+        /* Sombra suave inicial */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+        border: 1px solid #f0f0f0; 
+        transition: all 0.3s ease; 
+    }
+
+    .g-item:hover { 
+        transform: translateY(-5px); 
+        /* Sombra Cyan al pasar el mouse */
+        box-shadow: 0 15px 30px rgba(63, 181, 247, 0.2); 
+        border-color: var(--brand-cyan, #3FB5F7);
+    }
+
+    /* IMAGEN */
+    .img-wrapper { 
+        width: 100%; 
+        aspect-ratio: 1 / 1; 
+        overflow: hidden; 
+        background-color: #fafafa; /* Fondo gris muy suave para la imagen */
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        cursor: zoom-in; 
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .img-wrapper img { 
+        max-width: 100%; 
+        max-height: 100%; 
+        object-fit: contain; 
+        transition: 0.4s; 
+    }
+    
+    .g-item:hover .img-wrapper img { transform: scale(1.05); }
+
+    /* INFO CONTENT */
+    .info-content { 
+        padding: 1.5rem; 
+        flex-grow: 1; 
+        display: flex; 
+        flex-direction: column; 
+        text-align: left; 
+    }
+
+    .info-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: #000;
+    }
+
+    .desc { 
+        font-size: 0.9rem; 
+        color: #555; /* Gris oscuro para lectura */
+        margin-bottom: 1.5rem; 
+        line-height: 1.5; 
+    }
+
+    /* SPEC GRID (DATOS TÉCNICOS) */
+    .specs-grid { 
+        margin-top: auto; 
+        border-top: 1px solid #eee; 
+        padding-top: 1rem; 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 15px; 
+    }
+    
+    .spec-item { flex: 1; display: flex; flex-direction: column; min-width: 80px; }
     .spec-item.full-width { flex: 100%; margin-top: 5px; }
-    .label { font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: 700; }
-    .value { font-family: 'Michroma', sans-serif; font-size: 0.75rem; color: var(--brand-orange, #ff9929); }
-    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0, 0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 1rem; backdrop-filter: blur(5px); }
+    
+    .label { 
+        font-size: 0.7rem; 
+        color: #999; 
+        text-transform: uppercase; 
+        font-weight: 700; 
+        margin-bottom: 2px;
+    }
+    
+    .value { 
+        font-family: 'Montserrat', sans-serif; /* Usamos Montserrat negrita para datos */
+        font-weight: 700;
+        font-size: 0.8rem; 
+        /* Mantenemos naranja para destacar el dato, o cambiar a cyan si prefieres */
+        color: var(--brand-orange, #FF9929); 
+    }
+
+    /* === LIGHTBOX === */
+    .lightbox { 
+        position: fixed; 
+        inset: 0; 
+        background: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido para lightbox */
+        display: none; 
+        align-items: center; 
+        justify-content: center; 
+        z-index: 3000; 
+        padding: 2rem; 
+        backdrop-filter: blur(5px); 
+    }
+    
     .lightbox.open { display: flex; }
-    .lb-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #fff; font-size: 40px; cursor: pointer; }
-    .lb-img { max-width: 95vw; max-height: 85vh; object-fit: contain; }
+    
+    .lb-close { 
+        position: absolute; 
+        top: 30px; 
+        right: 30px; 
+        background: transparent; 
+        border: none; 
+        color: #000; /* X negra */
+        font-size: 40px; 
+        cursor: pointer; 
+        transition: 0.2s;
+    }
+    .lb-close:hover { color: var(--brand-cyan, #3FB5F7); transform: scale(1.1); }
+    
+    .lb-img { 
+        max-width: 90vw; 
+        max-height: 85vh; 
+        object-fit: contain; 
+        box-shadow: 0 20px 50px rgba(0,0,0,0.15); /* Sombra fuerte para destacar imagen */
+        border-radius: 8px;
+    }
   </style>
 </head>
 <body>
+
   <header id="main-header"></header>
 
   <main class="gallery-wrap">
     <div class="gallery-head">
       <h1>Galería de Trabajos</h1>
-      <p>Nuestros proyectos de impresión 3D más recientes.</p>
+      <p>Explorá nuestros proyectos de impresión 3D más recientes.</p>
     </div>
+    
     <div id="grid" class="gallery-grid">
-      <p style="text-align: center; color: #888;">Cargando trabajos...</p>
+      <p style="text-align: center; color: #888; grid-column: 1/-1;">Cargando trabajos...</p>
     </div>
   </main>
 
   <footer id="main-footer"></footer>
 
   <div id="lightbox" class="lightbox">
-    <button class="lb-close">✕</button>
-    <img id="lb-img" class="lb-img" alt="">
+    <button class="lb-close" aria-label="Cerrar">✕</button>
+    <img id="lb-img" class="lb-img" alt="Vista ampliada">
   </div>
 
   <script>
+    // --- Lógica de Componentes (Header/Footer) ---
     async function loadComponent(id, file) {
       try {
         const res = await fetch(file);
+        if (!res.ok) throw new Error(`Error al cargar ${file}`);
         document.getElementById(id).innerHTML = await res.text();
+        // Inicializar efecto scroll si es el header
         if(id === 'main-header') initScroll();
       } catch (e) { console.error(e); }
     }
 
+    // Efecto de ocultar Header al bajar
     function initScroll() {
       let lastScroll = 0;
       window.addEventListener('scroll', () => {
@@ -89,47 +221,93 @@
       });
     }
 
+    // Cargar Header y Footer
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
 
+    // --- Lógica de la Galería (JSON Fetch) ---
     (async function(){
       const username = "argentex2000-byte";
       const repo = "Argentex";
       const folder = "files_galeria"; 
+      
+      // URLs para obtener imágenes y datos
       const imgBaseUrl = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/`;
       const dataUrl = `https://raw.githubusercontent.com/${username}/${repo}/main/${folder}/datos.json`;
+      
       const grid = document.getElementById('grid');
 
       try {
           const res = await fetch(dataUrl);
+          if (!res.ok) throw new Error("No se pudo cargar el JSON");
           const productos = await res.json();
+          
+          // Limpiar mensaje de carga
           grid.innerHTML = "";
 
           productos.forEach(prod => {
             const src = imgBaseUrl + prod.Archivo;
+            
+            // Crear tarjeta
             const article = document.createElement('article');
             article.className = 'g-item'; 
             article.innerHTML = `
-              <div class="img-wrapper"><img src="${src}" alt="${prod.Título}" loading="lazy"></div>
+              <div class="img-wrapper" title="Click para ampliar">
+                  <img src="${src}" alt="${prod.Título}" loading="lazy">
+              </div>
               <div class="info-content">
                 <h3>${prod.Título}</h3>
                 <p class="desc">${prod.Descripción}</p>
                 <div class="specs-grid">
-                  <div class="spec-item"><span class="label">Material</span><span class="value">${prod.Material}</span></div>
-                  <div class="spec-item"><span class="label">Color</span><span class="value">${prod.Color}</span></div>
-                  <div class="spec-item full-width"><span class="label">Dimensiones</span><span class="value">${prod.Dimensiones.Largo}x${prod.Dimensiones.Ancho}x${prod.Dimensiones.Alto}mm</span></div>
+                  <div class="spec-item">
+                      <span class="label">Material</span>
+                      <span class="value">${prod.Material}</span>
+                  </div>
+                  <div class="spec-item">
+                      <span class="label">Color</span>
+                      <span class="value">${prod.Color}</span>
+                  </div>
+                  <div class="spec-item full-width">
+                      <span class="label">Dimensiones</span>
+                      <span class="value">${prod.Dimensiones.Largo} x ${prod.Dimensiones.Ancho} x ${prod.Dimensiones.Alto} mm</span>
+                  </div>
                 </div>
               </div>`;
+            
+            // Evento Click para Lightbox
             article.querySelector('.img-wrapper').onclick = () => {
               document.getElementById('lb-img').src = src;
               document.getElementById('lightbox').classList.add('open');
             };
+            
             grid.appendChild(article);
           });
-      } catch (e) { grid.innerHTML = "<p>Error al cargar la galería.</p>"; }
+
+      } catch (e) { 
+          console.error(e);
+          grid.innerHTML = "<p style='text-align:center; color:red;'>Hubo un error al cargar la galería. Por favor intentá más tarde.</p>"; 
+      }
     })();
 
-    document.querySelector('.lb-close').onclick = () => document.getElementById('lightbox').classList.remove('open');
+    // --- Lógica de Lightbox ---
+    const lb = document.getElementById('lightbox');
+    const closeBtn = document.querySelector('.lb-close');
+
+    // Cerrar con botón X
+    closeBtn.onclick = () => lb.classList.remove('open');
+    
+    // Cerrar clickeando afuera de la imagen
+    lb.onclick = (e) => {
+        if(e.target === lb) lb.classList.remove('open');
+    }
+    
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape" && lb.classList.contains('open')) {
+            lb.classList.remove('open');
+        }
+    });
+
   </script>
 </body>
 </html>
