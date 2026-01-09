@@ -16,7 +16,11 @@
 
   <main>
     <section class="hero" id="inicio">
-      <div class="track" id="track"></div>
+      <video autoplay muted loop playsinline class="hero-video">
+        <source src="video_banner.mp4" type="video/mp4">
+        Tu navegador no soporta video.
+      </video>
+      <div class="hero-overlay"></div>
       
       <div class="hero-content">
         <h3>MATERIALIZAMOS TUS IDEAS</h3>
@@ -24,74 +28,47 @@
         
         <div class="hero-buttons">
             <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank" class="btn btn-store">IR A TIENDA ONLINE</a>
-            <a href="#soluciones" class="btn btn-primary">SERVICIOS EMPRESAS</a>
+            <a href="soluciones.html" class="btn btn-primary">SERVICIOS EMPRESAS</a>
         </div>
       </div>
-      
-      <div class="dots" id="dots" style="position:absolute; bottom:20px; width:100%; text-align:center;"></div>
     </section>
 
-    <section id="soluciones">
-        <h2 style="margin-bottom: 3rem;">NUESTRAS SOLUCIONES</h2>
-        
-        <div class="branches-section">
-            <div class="branch-card">
-                <h3>INDUSTRIA & B2B</h3>
-                <p>
-                    <strong>Repuestos Descatalogados:</strong> Si se rompió y no existe, lo diseñamos y fabricamos.<br><br>
-                    <strong>Merchandising:</strong> Llaveros y regalos corporativos en volumen.<br><br>
-                    <strong>Prototipado:</strong> Validación funcional para ingenieros.
-                </p>
-                <a href="#contacto" class="btn btn-outline">SOLICITAR COTIZACIÓN</a>
-            </div>
-
-            <div class="branch-card">
-                <h3>DECO & HOGAR</h3>
-                <p>
-                    Dale vida a tus espacios con objetos de diseño único. Macetas, lámparas, soportes y figuras de colección fabricados con materiales biodegradables (PLA) de alta precisión.
-                </p>
-                <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank" class="btn btn-store">VER CATÁLOGO</a>
+    <section class="solutions-preview" id="soluciones">
+        <div class="container">
+            <h2 class="section-title">Nuestras Soluciones</h2>
+            <div class="branch-grid">
+                <div class="branch-card">
+                    <h3>INDUSTRIA & B2B</h3>
+                    <p>Repuestos descatalogados, prototipado funcional y producción de piezas técnicas en materiales de ingeniería.</p>
+                    <a href="soluciones.html#industria" class="btn-link">Saber más →</a>
+                </div>
+                <div class="branch-card">
+                    <h3>DECO & HOGAR</h3>
+                    <p>Objetos con diseño único para tus espacios, fabricados con materiales biodegradables de alta precisión.</p>
+                    <a href="https://argentexproductos.mitiendanube.com/productos/" class="btn-link">Ver catálogo →</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section style="background-color: #FAFAFA;">
-        <h2>ARGENTEX EN TU ESPACIO</h2>
-        <p>No son solo plásticos, son soluciones.</p>
-        
-        <div class="context-grid">
-            <div class="context-item"><img src="placeholder1.jpg" alt="Maceta con planta"></div>
-            <div class="context-item"><img src="placeholder2.jpg" alt="Soporte auriculares"></div>
-            <div class="context-item"><img src="placeholder3.jpg" alt="Lámpara encendida"></div>
-            <div class="context-item"><img src="placeholder4.jpg" alt="Repuesto industrial colocado"></div>
+    <section class="contact-cta">
+        <h3>¿Tenés un proyecto en mente?</h3>
+        <p>Contactanos para recibir asesoramiento técnico y presupuestos a medida.</p>
+        <div class="hero-buttons">
+            <a href="https://wa.me/541171274479" class="btn btn-primary">WHATSAPP</a>
+            <a href="mailto:contacto@argentex.com.ar" class="btn btn-outline">EMAIL</a>
         </div>
-        <div style="margin-top: 2rem;">
-            <a href="galeria.html" class="btn btn-outline">VER GALERÍA COMPLETA</a>
-        </div>
-    </section>
-
-    <section id="contacto">
-      <h3>¿TENÉS UN PROYECTO?</h3>
-      <p style="margin-bottom: 2rem;">Contanos tu idea o envianos tu archivo .STL para cotizar.</p>
-      
-      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-          <a href="https://wa.me/541171274479" target="_blank" class="btn btn-primary">
-             HABLAR POR WHATSAPP
-          </a>
-          <a href="mailto:contactoargentex@gmail.com" class="btn btn-outline">
-             ENVIAR EMAIL
-          </a>
-      </div>
     </section>
   </main>
 
   <footer id="main-footer"></footer>
 
   <script>
-    // Script de carga de componentes y carrusel (Mantenemos tu lógica existente)
+    // Carga dinámica de Header y Footer
     async function loadComponent(id, file) {
       try {
         const res = await fetch(file);
+        if (!res.ok) throw new Error(`Error ${res.status}`);
         document.getElementById(id).innerHTML = await res.text();
         if(id === 'main-header') initScroll();
       } catch (e) { console.error(e); }
@@ -109,43 +86,8 @@
       });
     }
 
-    // Cargar componentes
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
-
-    // Lógica del Carrusel (Simplificada para no bloquear)
-    const track = document.getElementById('track');
-    const dotsWrap = document.getElementById('dots');
-    let index = 0;
-    
-    // Tu función original cargarHero() va aquí...
-    // Asegúrate de que las imágenes del carrusel sean oscuras o tengan overlay en CSS
-    // para que el texto blanco se lea.
-    
-    // ... (Mantén tu script de carrusel existente del archivo original) ...
-     async function cargarHero() {
-      const user = "argentex2000-byte";
-      const repo = "Argentex";
-      const folder = "files_carrusel";
-      const url = `https://api.github.com/repos/${user}/${repo}/contents/${folder}`;
-
-      try {
-        const res = await fetch(url);
-        const files = await res.json();
-        const images = files.filter(f => /\.(png|jpe?g|webp)$/i.test(f.name));
-
-        images.forEach((file, idx) => {
-          const img = document.createElement('img');
-          img.className = 'slide';
-          img.src = file.download_url;
-          track.appendChild(img);
-          
-          // Dots opcionales
-        });
-        // Iniciar loop si es necesario
-      } catch (e) { console.error(e); }
-    }
-    cargarHero();
   </script>
 </body>
 </html>
