@@ -1,22 +1,106 @@
-<div class="footer-content">
-    <h3 style="color: var(--brand-cyan); margin-bottom: 1rem;">ARGENTEX</h3>
-    
-    <div class="footer-data">
-        <p><strong>Ubicación:</strong> Villa Urquiza, CABA</p>
-        <p><strong>Tel:</strong> +54 11 7127 4479</p>
-        <p><strong>Email:</strong> contactoargentex@gmail.com</p>
-    </div>
+<style>
+  footer {
+    background: #f9f9f9;
+    padding: 4rem 2rem 2rem;
+    border-top: 1px solid #eee;
+    font-family: 'Montserrat', sans-serif;
+    color: #444;
+  }
 
-    <div class="social-icons">
-        <a href="https://wa.me/541171274479" target="_blank" class="social-link">
-           WhatsApp
-        </a>
-        <a href="https://www.instagram.com/argentex3d/" target="_blank" class="social-link">
-           Instagram
-        </a>
-    </div>
+  .footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    text-align: left;
+  }
 
-    <p style="margin-top: 2rem; font-size: 0.8rem; color: #999;">
-        © 2026 Argentex - Manual de Marca White
-    </p>
+  .footer-logo h2 {
+    font-family: 'Michroma', sans-serif;
+    color: #000;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-links h4 {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.8rem;
+    margin-bottom: 1.2rem;
+    color: #111;
+  }
+
+  .footer-links ul {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-links a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+  }
+
+  .footer-links a:hover {
+    color: var(--brand-cyan, #3FB5F7);
+    padding-left: 5px;
+  }
+
+  .footer-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #999;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 1rem;
+  }
+
+  .social-icons img {
+    width: 24px;
+    opacity: 0.7;
+    transition: 0.3s;
+  }
+
+  .social-icons img:hover {
+    opacity: 1;
+  }
+</style>
+
+<div class="footer-container">
+  <div class="footer-logo">
+    <h2>ARGENTEX</h2>
+    <p>Innovación y precisión en fabricación digital desde Buenos Aires, Argentina.</p>
+  </div>
+
+  <div class="footer-links">
+    <h4>Navegación</h4>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="soluciones.html">Soluciones Técnicas</a></li>
+      <li><a href="https://argentexproductos.mitiendanube.com/productos/">Tienda Online</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-links">
+    <h4>Contacto</h4>
+    <ul>
+      <li><a href="https://wa.me/541171274479">WhatsApp: +54 11 7127-4479</a></li>
+      <li><a href="mailto:contacto@argentex.com.ar">contacto@argentex.com.ar</a></li>
+      <li><a href="https://www.instagram.com/argentex3d/" target="_blank">Instagram @argentex3d</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer-bottom">
+  <p>© 2026 ARGENTEX - Impresión 3D de alta precisión. Todos los derechos reservados.</p>
 </div>
