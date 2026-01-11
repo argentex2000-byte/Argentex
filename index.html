@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ARGENTEX | Soluciones de Impresión 3D</title>
+  <title>ARGENTEX | Expertos en Impresión 3D a pedido</title>
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,53 +18,50 @@
     <section class="hero" id="inicio">
       <video autoplay muted loop playsinline class="hero-video">
         <source src="video_banner.mp4" type="video/mp4">
-        Tu navegador no soporta video.
       </video>
       <div class="hero-overlay"></div>
       
-  <div class="hero-content">
-    <h3>SOLUCIONES EN IMPRESIÓN 3D</h3>
-    <h1>Materializamos tus ideas</h1>
-    <p>Desde repuestos técnicos industriales hasta objetos de diseño exclusivo para tu hogar.</p>
-  
-  <div class="hero-buttons">
-      <a href="soluciones.html" class="btn btn-primary">VER SERVICIOS</a>
-      <a href="https://argentexproductos.mitiendanube.com/" class="btn btn-outline">TIENDA ONLINE</a>
-  </div>
-</div>
+      <div class="hero-content">
+        <h3>Expertos en Fabricación Digital</h3>
+        <h1>Hacemos Impresiones 3D a pedido</h1>
+        <p>Desde repuestos técnicos industriales hasta objetos de diseño exclusivo para tu hogar.</p>
         
         <div class="hero-buttons">
-            <a href="https://argentexproductos.mitiendanube.com/productos/" target="_blank" class="btn btn-store">IR A TIENDA ONLINE</a>
-            <a href="soluciones.html" class="btn btn-primary">SERVICIOS EMPRESAS</a>
+            <a href="soluciones.html" class="btn btn-primary">VER SOLUCIONES</a>
+            <a href="https://argentexproductos.mitiendanube.com/" class="btn btn-outline">TIENDA ONLINE</a>
         </div>
       </div>
     </section>
 
-    <section class="solutions-preview" id="soluciones">
-        <div class="container">
-            <h2 class="section-title">Nuestras Soluciones</h2>
-            <div class="branch-grid">
-                <div class="branch-card">
-                    <h3>INDUSTRIA & B2B</h3>
-                    <p>Repuestos descatalogados, prototipado funcional y producción de piezas técnicas en materiales de ingeniería.</p>
-                    <a href="soluciones.html#industria" class="btn-link">Saber más →</a>
-                </div>
-                <div class="branch-card">
-                    <h3>DECO & HOGAR</h3>
-                    <p>Objetos con diseño único para tus espacios, fabricados con materiales biodegradables de alta precisión.</p>
-                    <a href="https://argentexproductos.mitiendanube.com/productos/" class="btn-link">Ver catálogo →</a>
-                </div>
+    <section class="solutions-preview">
+        <div class="section-title">
+            <h2>Nuestros Servicios</h2>
+        </div>
+        <div class="branch-grid">
+            <div class="branch-card">
+                <h3>01. Repuestos</h3>
+                <p>Piezas técnicas y componentes discontinuados en materiales de alta resistencia.</p>
+                <a href="soluciones.html#industria" class="read-more">Saber más →</a>
+            </div>
+            <div class="branch-card">
+                <h3>02. Empresas</h3>
+                <p>Merchandising y regalos corporativos personalizados para potenciar tu marca.</p>
+                <a href="soluciones.html#empresas" class="read-more">Saber más →</a>
+            </div>
+            <div class="branch-card">
+                <h3>03. Deco</h3>
+                <p>Objetos de diseño y decoración premium listos para transformar tus espacios.</p>
+                <a href="soluciones.html#deco" class="read-more">Saber más →</a>
             </div>
         </div>
     </section>
 
     <section class="contact-cta">
         <h3>¿Tenés un proyecto en mente?</h3>
-        <p>Contactanos para recibir asesoramiento técnico y presupuestos a medida.</p>
+        <p>Mandanos una foto o archivo y te asesoramos hoy mismo.</p>
         <div class="hero-buttons">
             <a href="https://wa.me/541171274479" class="btn btn-primary">WHATSAPP</a>
             <a href="mailto:contacto@argentex.com.ar" class="btn btn-outline">EMAIL</a>
-            <a href="https://www.instagram.com/argentex3d/" class="btn btn-outline">INSTAGRAM</a>
         </div>
     </section>
   </main>
@@ -72,32 +69,14 @@
   <footer id="main-footer"></footer>
 
   <script>
-    // Carga dinámica de Header y Footer
     async function loadComponent(id, file) {
       try {
         const res = await fetch(file);
-        if (!res.ok) throw new Error(`Error ${res.status}`);
         document.getElementById(id).innerHTML = await res.text();
-        if(id === 'main-header') initScroll();
       } catch (e) { console.error(e); }
     }
-
-    function initScroll() {
-      let lastScroll = 0;
-      window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if(!header) return;
-        let st = window.pageYOffset || document.documentElement.scrollTop;
-        if (st > lastScroll && st > 80) header.classList.add('header-hidden');
-        else header.classList.remove('header-hidden');
-        lastScroll = st <= 0 ? 0 : st;
-      });
-    }
-
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
   </script>
 </body>
 </html>
-
-
