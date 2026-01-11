@@ -1,228 +1,34 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Soluciones y Servicios – Argentex</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
-
-  <style>
-    /* ESTILOS ESPECÍFICOS PARA SOLUCIONES */
-    .solutions-wrap { 
-        max-width: 1200px; 
-        margin: 0 auto; 
-        padding: 4rem 2rem; 
-    }
-
-    .section-header {
-        text-align: center;
-        margin-bottom: 5rem;
-    }
-    .section-header h1 {
-        font-family: 'Michroma', sans-serif;
-        color: var(--brand-cyan, #3FB5F7);
-        font-size: clamp(2rem, 4vw, 3rem);
-        margin-bottom: 1rem;
-    }
-    .section-header p {
-        max-width: 600px;
-        margin: 0 auto;
-        color: #666;
-        font-size: 1.1rem;
-    }
-
-    /* BLOQUES DE SERVICIO (Texto + Grilla de fotos) */
-    .service-block {
-        margin-bottom: 6rem;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 4rem;
-    }
-    .service-block:last-child { border-bottom: none; }
-
-    .service-info {
-        margin-bottom: 2rem;
-    }
-    .service-info h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        color: #111;
-        border-left: 5px solid var(--brand-cyan, #3FB5F7);
-        padding-left: 1rem;
-    }
-    .service-info p {
-        color: #555;
-        line-height: 1.6;
-        font-size: 1.05rem;
-    }
-
-    /* MINI GRILLA POR CATEGORÍA */
-    .mini-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-    }
-
-    .project-card {
-        background: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        transition: 0.3s;
-        border: 1px solid #f0f0f0;
-    }
-    .project-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(63, 181, 247, 0.15);
-        border-color: var(--brand-cyan, #3FB5F7);
-    }
-
-    .img-box {
-        aspect-ratio: 4/3;
-        background: #f9f9f9;
-        overflow: hidden;
-        cursor: zoom-in;
-    }
-    .img-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: 0.5s;
-    }
-    .project-card:hover .img-box img { transform: scale(1.05); }
-
-    .card-meta {
-        padding: 1rem;
-    }
-    .card-meta h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: #000; }
-    .card-meta span { font-size: 0.8rem; color: #888; font-family: 'Montserrat', sans-serif; }
-
-    /* LIGHTBOX (Reutilizamos el mismo estilo) */
-    .lightbox { position: fixed; inset: 0; background: rgba(255,255,255,0.98); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 2rem; }
-    .lightbox.open { display: flex; }
-    .lb-img { max-width: 90vw; max-height: 85vh; object-fit: contain; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    .lb-close { position: absolute; top: 30px; right: 30px; border: none; background: transparent; font-size: 2rem; cursor: pointer; color: #111; }
-  </style>
-</head>
-<body>
-
-  <header id="main-header"></header>
-
-  <main class="solutions-wrap">
+<main class="solutions-wrap">
     
     <div class="section-header">
-      <h1>NUESTRAS CAPACIDADES</h1>
-      <p>Fusionamos ingeniería y diseño para resolver problemas reales. Estos son nuestros servicios principales y ejemplos de aplicación.</p>
+      <h1>¿CÓMO PODEMOS AYUDARTE?</h1>
+      <p>Transformamos ideas en objetos reales. Ya sea que necesites arreglar algo, potenciar tu marca o renovar tu hogar, tenemos una solución para vos.</p>
     </div>
 
     <section class="service-block" id="industria">
         <div class="service-info">
-            <h2>01. INGENIERÍA & REPUESTOS</h2>
-            <p><strong>El problema:</strong> Maquinaria parada por falta de piezas, repuestos discontinuados o importaciones demoradas.<br>
-            <strong>Nuestra solución:</strong> Ingeniería inversa. Diseñamos la pieza desde cero y la fabricamos en materiales técnicos (PETG, Nylon, ABS) que soportan carga y temperatura.</p>
+            <h2>01. PIEZAS Y REPUESTOS A MEDIDA</h2>
+            <p><strong>El problema:</strong> Algo se rompió, la pieza ya no se fabrica o es imposible de conseguir en el país.<br><br>
+            <strong>Nuestra solución:</strong> No descartes tu equipo. Recreamos piezas técnicas (engranajes, perillas, carcasas) usando materiales de alta resistencia que soportan el uso diario, el calor y el esfuerzo.</p>
         </div>
         <div class="mini-grid" id="grid-industria"></div>
     </section>
 
     <section class="service-block" id="empresas">
         <div class="service-info">
-            <h2>02. MERCHANDISING CORPORATIVO</h2>
-            <p><strong>El problema:</strong> Regalos empresariales genéricos y costosos.<br>
-            <strong>Nuestra solución:</strong> Producción en serie de objetos personalizados con tu logo. Llaveros, soportes y souvenirs únicos que destacan tu marca.</p>
+            <h2>02. IDENTIDAD PARA TU MARCA O EVENTO</h2>
+            <p><strong>El problema:</strong> Los regalos empresariales suelen ser genéricos y terminan guardados en un cajón.<br><br>
+            <strong>Nuestra solución:</strong> Creamos objetos personalizados que la gente realmente quiere conservar. Desde llaveros con tu logo hasta soportes exclusivos, fabricamos en serie detalles que destacan tu identidad.</p>
         </div>
         <div class="mini-grid" id="grid-empresas"></div>
     </section>
 
     <section class="service-block" id="deco">
         <div class="service-info">
-            <h2>03. OBJETOS DE DISEÑO</h2>
-            <p>Productos listos para embellecer espacios. Macetas, lámparas y accesorios con acabados premium para el hogar y la oficina.</p>
+            <h2>03. OBJETOS DE DISEÑO Y DECO</h2>
+            <p><strong>Para tus espacios:</strong> Una selección de productos listos para usar. Macetas modernas, lámparas con estilo y accesorios con terminaciones cuidadas para que tus ambientes se vean únicos.</p>
         </div>
         <div class="mini-grid" id="grid-deco"></div>
     </section>
 
   </main>
-
-  <footer id="main-footer"></footer>
-
-  <div id="lightbox" class="lightbox">
-    <button class="lb-close">✕</button>
-    <img id="lb-img" class="lb-img" alt="">
-  </div>
-
-  <script>
-    async function loadComponent(id, file) {
-      try {
-        const res = await fetch(file);
-        document.getElementById(id).innerHTML = await res.text();
-      } catch (e) { console.error(e); }
-    }
-    loadComponent('main-header', 'header.html');
-    loadComponent('main-footer', 'footer.html');
-
-    // LÓGICA FILTRADA
-    (async function(){
-      const user = "argentex2000-byte";
-      const repo = "Argentex";
-      const folder = "files_galeria"; 
-      const imgBase = `https://raw.githubusercontent.com/${user}/${repo}/main/${folder}/`;
-      const dataUrl = `https://raw.githubusercontent.com/${user}/${repo}/main/${folder}/datos.json`;
-
-      try {
-          const res = await fetch(dataUrl);
-          const items = await res.json();
-          
-          // Función para crear tarjeta
-          const createCard = (item) => {
-              const div = document.createElement('div');
-              div.className = 'project-card';
-              div.innerHTML = `
-                  <div class="img-box">
-                      <img src="${imgBase + item.Archivo}" loading="lazy" alt="${item.Título}">
-                  </div>
-                  <div class="card-meta">
-                      <h4>${item.Título}</h4>
-                      <span>${item.Material}</span>
-                  </div>
-              `;
-              div.querySelector('.img-box').onclick = () => {
-                  document.getElementById('lb-img').src = imgBase + item.Archivo;
-                  document.getElementById('lightbox').classList.add('open');
-              };
-              return div;
-          };
-
-          // DISTRIBUIR ITEMS EN LAS CATEGORÍAS
-          // IMPORTANTE: En tu JSON debes agregar un campo "Categoría": "Industria", "Empresas" o "Deco"
-          // Si no tienes categoría, usaremos una lógica simple por ahora o lo pondremos todo en uno si prefieres.
-          
-          // Simulamos filtrado (Para que funcione YA, tendrás que editar tu JSON)
-          // Si no quieres editar el JSON ya, el script pone todo en 'Deco' por defecto o intenta adivinar.
-          
-          items.forEach(item => {
-              // Lógica de asignación (Puedes mejorar esto agregando "Categoria" a tu JSON)
-              let targetGrid = 'grid-deco'; // Default
-              
-              const txt = (item.Título + item.Descripción).toLowerCase();
-              if(txt.includes('repuesto') || txt.includes('engranaje') || txt.includes('pieza') || txt.includes('industrial')) {
-                  targetGrid = 'grid-industria';
-              } else if (txt.includes('llavero') || txt.includes('logo') || txt.includes('souvenir') || txt.includes('lote')) {
-                  targetGrid = 'grid-empresas';
-              }
-
-              const card = createCard(item);
-              const container = document.getElementById(targetGrid);
-              if(container) container.appendChild(card);
-          });
-
-      } catch (e) { console.error("Error JSON", e); }
-    })();
-
-    // Lightbox cerrar
-    const lb = document.getElementById('lightbox');
-    document.querySelector('.lb-close').onclick = () => lb.classList.remove('open');
-    lb.onclick = (e) => { if(e.target === lb) lb.classList.remove('open'); }
-  </script>
-</body>
-</html>
