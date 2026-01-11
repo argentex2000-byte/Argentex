@@ -1,34 +1,241 @@
-<main class="solutions-wrap">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soluciones y Servicios – Argentex</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    /* ESTILOS ESPECÍFICOS PARA SOLUCIONES */
+    :root {
+        --brand-cyan: #3FB5F7;
+    }
+
+    .solutions-wrap { 
+        max-width: 1200px; 
+        margin: 0 auto; 
+        padding: 4rem 2rem; 
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+    .section-header h1 {
+        font-family: 'Michroma', sans-serif;
+        color: var(--brand-cyan);
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+    }
+    .section-header p {
+        max-width: 700px;
+        margin: 0 auto;
+        color: #555;
+        font-size: 1.15rem;
+        line-height: 1.6;
+    }
+
+    /* BLOQUES DE SERVICIO */
+    .service-block {
+        margin-bottom: 6rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 4rem;
+    }
+    .service-block:last-child { border-bottom: none; }
+
+    .service-info {
+        margin-bottom: 3rem;
+    }
+    .service-info h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+        color: #111;
+        border-left: 5px solid var(--brand-cyan);
+        padding-left: 1rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+    }
+    .service-info p {
+        color: #444;
+        line-height: 1.7;
+        font-size: 1.05rem;
+        max-width: 900px;
+    }
+    .service-info strong {
+        color: #000;
+        font-weight: 600;
+    }
+
+    /* GRILLA DE PROYECTOS */
+    .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2rem;
+    }
+
+    .project-card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+    }
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(63, 181, 247, 0.2);
+        border-color: var(--brand-cyan);
+    }
+
+    .img-box {
+        aspect-ratio: 1/1;
+        background: #fdfdfd;
+        overflow: hidden;
+        cursor: zoom-in;
+    }
+    .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .project-card:hover .img-box img { transform: scale(1.08); }
+
+    .card-meta {
+        padding: 1.2rem;
+        text-align: center;
+    }
+    .card-meta h4 { font-size: 1rem; margin-bottom: 0.4rem; color: #111; font-weight: 600; }
+    .card-meta span { font-size: 0.85rem; color: #3FB5F7; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* LIGHTBOX */
+    .lightbox { position: fixed; inset: 0; background: rgba(255,255,255,0.98); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lb-img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 4px; }
+    .lb-close { position: absolute; top: 30px; right: 30px; border: none; background: transparent; font-size: 2.5rem; cursor: pointer; color: #111; }
+
+    @media (max-width: 768px) {
+        .section-header { margin-bottom: 3rem; }
+        .service-info h2 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="main-header"></header>
+
+  <main class="solutions-wrap">
     
     <div class="section-header">
-      <h1>¿CÓMO PODEMOS AYUDARTE?</h1>
-      <p>Transformamos ideas en objetos reales. Ya sea que necesites arreglar algo, potenciar tu marca o renovar tu hogar, tenemos una solución para vos.</p>
+      <h1>¿Cómo podemos ayudarte?</h1>
+      <p>Transformamos ideas en realidades tangibles. Desde soluciones prácticas para el día a día hasta diseños exclusivos para transformar tus ambientes.</p>
     </div>
 
     <section class="service-block" id="industria">
         <div class="service-info">
-            <h2>01. PIEZAS Y REPUESTOS A MEDIDA</h2>
-            <p><strong>El problema:</strong> Algo se rompió, la pieza ya no se fabrica o es imposible de conseguir en el país.<br><br>
-            <strong>Nuestra solución:</strong> No descartes tu equipo. Recreamos piezas técnicas (engranajes, perillas, carcasas) usando materiales de alta resistencia que soportan el uso diario, el calor y el esfuerzo.</p>
+            <h2>01. Piezas y Repuestos a Medida</h2>
+            <p><strong>El problema:</strong> Algo dejó de funcionar porque una pieza se rompió, no se consigue el repuesto original o la importación es demasiado costosa.<br><br>
+            <strong>Nuestra solución:</strong> No descartes tu equipo. Diseñamos y fabricamos piezas técnicas (engranajes, perillas, soportes) en materiales resistentes que soportan el uso diario, el calor y la fricción. Recuperá tu maquinaria o electrodoméstico de forma rápida.</p>
         </div>
         <div class="mini-grid" id="grid-industria"></div>
     </section>
 
     <section class="service-block" id="empresas">
         <div class="service-info">
-            <h2>02. IDENTIDAD PARA TU MARCA O EVENTO</h2>
-            <p><strong>El problema:</strong> Los regalos empresariales suelen ser genéricos y terminan guardados en un cajón.<br><br>
-            <strong>Nuestra solución:</strong> Creamos objetos personalizados que la gente realmente quiere conservar. Desde llaveros con tu logo hasta soportes exclusivos, fabricamos en serie detalles que destacan tu identidad.</p>
+            <h2>02. Identidad para tu Marca o Evento</h2>
+            <p><strong>El problema:</strong> Los regalos empresariales suelen ser genéricos, costosos y terminan olvidados en un cajón.<br><br>
+            <strong>Nuestra solución:</strong> Creamos objetos personalizados que refuerzan tu identidad. Llaveros, soportes para celular y merchandising fabricado en serie con tu logo. Diseños únicos que tus clientes y colaboradores realmente van a querer usar.</p>
         </div>
         <div class="mini-grid" id="grid-empresas"></div>
     </section>
 
     <section class="service-block" id="deco">
         <div class="service-info">
-            <h2>03. OBJETOS DE DISEÑO Y DECO</h2>
-            <p><strong>Para tus espacios:</strong> Una selección de productos listos para usar. Macetas modernas, lámparas con estilo y accesorios con terminaciones cuidadas para que tus ambientes se vean únicos.</p>
+            <h2>03. Objetos de Diseño y Decoración</h2>
+            <p><strong>Para tus espacios:</strong> Una colección de productos listos para embellecer tu hogar u oficina. Macetas modernas, lámparas temáticas y accesorios con terminaciones premium. Arte y tecnología combinados para crear detalles que no encontrás en ningún otro lado.</p>
         </div>
         <div class="mini-grid" id="grid-deco"></div>
     </section>
 
   </main>
+
+  <footer id="main-footer"></footer>
+
+  <div id="lightbox" class="lightbox">
+    <button class="lb-close" aria-label="Cerrar">✕</button>
+    <img id="lb-img" class="lb-img" alt="Vista ampliada">
+  </div>
+
+  <script>
+    // Carga de componentes (Header/Footer)
+    async function loadComponent(id, file) {
+      try {
+        const res = await fetch(file);
+        if(res.ok) document.getElementById(id).innerHTML = await res.text();
+      } catch (e) { console.error("Error cargando componente:", e); }
+    }
+    loadComponent('main-header', 'header.html');
+    loadComponent('main-footer', 'footer.html');
+
+    // Lógica de Galería Dinámica
+    (async function(){
+      const user = "argentex2000-byte";
+      const repo = "Argentex";
+      const folder = "files_galeria"; 
+      const imgBase = `https://raw.githubusercontent.com/${user}/${repo}/main/${folder}/`;
+      const dataUrl = `https://raw.githubusercontent.com/${user}/${repo}/main/${folder}/datos.json`;
+
+      try {
+          const res = await fetch(dataUrl);
+          const items = await res.json();
+          
+          const createCard = (item) => {
+              const div = document.createElement('div');
+              div.className = 'project-card';
+              div.innerHTML = `
+                  <div class="img-box">
+                      <img src="${imgBase + item.Archivo}" loading="lazy" alt="${item.Título}">
+                  </div>
+                  <div class="card-meta">
+                      <h4>${item.Título}</h4>
+                      <span>${item.Material}</span>
+                  </div>
+              `;
+              div.querySelector('.img-box').onclick = () => {
+                  document.getElementById('lb-img').src = imgBase + item.Archivo;
+                  document.getElementById('lightbox').classList.add('open');
+              };
+              return div;
+          };
+
+          items.forEach(item => {
+              let targetGrid = 'grid-deco'; // Por defecto va a Deco
+              
+              // Lógica inteligente de filtrado por palabras clave
+              const txt = (item.Título + " " + (item.Descripción || "")).toLowerCase();
+              
+              if(txt.match(/repuesto|engranaje|pieza|industrial|técnico|tecnico|maquinaria/)) {
+                  targetGrid = 'grid-industria';
+              } else if (txt.match(/llavero|logo|souvenir|lote|corporativo|merchandising|regalo/)) {
+                  targetGrid = 'grid-empresas';
+              }
+
+              const card = createCard(item);
+              const container = document.getElementById(targetGrid);
+              if(container) container.appendChild(card);
+          });
+
+      } catch (e) { console.error("Error al cargar los datos de la galería:", e); }
+    })();
+
+    // Lógica del Lightbox
+    const lb = document.getElementById('lightbox');
+    document.querySelector('.lb-close').onclick = () => lb.classList.remove('open');
+    lb.onclick = (e) => { if(e.target === lb) lb.classList.remove('open'); }
+  </script>
+</body>
+</html>
