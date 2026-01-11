@@ -3,125 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Soluciones y Servicios – Argentex</title>
+  <title>Soluciones – Argentex</title>
   <link rel="icon" type="image/png" href="favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
 
   <style>
-    /* ESTILOS ESPECÍFICOS PARA SOLUCIONES */
-    :root {
-        --brand-cyan: #3FB5F7;
-    }
+    :root { --brand-cyan: #3FB5F7; }
 
     .solutions-wrap { 
-        max-width: 1200px; 
+        max-width: 1000px; 
         margin: 0 auto; 
-        padding: 4rem 2rem; 
+        padding: 4rem 1.5rem; 
     }
 
-    .section-header {
-        text-align: center;
-        margin-bottom: 5rem;
-    }
+    .section-header { text-align: center; margin-bottom: 3rem; }
     .section-header h1 {
         font-family: 'Michroma', sans-serif;
         color: var(--brand-cyan);
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-size: clamp(1.5rem, 5vw, 2.5rem);
+    }
+
+    /* CONTENEDOR DE ACORDEONES */
+    .accordion-item {
+        background: #fff;
+        border: 1px solid #eaeaea;
+        border-radius: 12px;
         margin-bottom: 1.5rem;
-        text-transform: uppercase;
-    }
-    .section-header p {
-        max-width: 700px;
-        margin: 0 auto;
-        color: #555;
-        font-size: 1.15rem;
-        line-height: 1.6;
+        overflow: hidden;
+        transition: 0.3s;
     }
 
-    /* BLOQUES DE SERVICIO */
-    .service-block {
-        margin-bottom: 6rem;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 4rem;
+    /* Encabezado del Acordeón */
+    .accordion-header {
+        padding: 2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s;
     }
-    .service-block:last-child { border-bottom: none; }
-
-    .service-info {
-        margin-bottom: 3rem;
-    }
-    .service-info h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1.2rem;
-        color: #111;
-        border-left: 5px solid var(--brand-cyan);
-        padding-left: 1rem;
+    .accordion-header:hover { background: #fcfcfc; }
+    
+    .header-content h2 {
         font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+        color: #111;
     }
-    .service-info p {
-        color: #444;
-        line-height: 1.7;
-        font-size: 1.05rem;
-        max-width: 900px;
-    }
-    .service-info strong {
-        color: #000;
-        font-weight: 600;
+    .header-content p { color: #777; font-size: 0.95rem; margin: 0; }
+
+    .icon-arrow {
+        font-size: 1.5rem;
+        color: var(--brand-cyan);
+        transition: transform 0.4s;
     }
 
-    /* GRILLA DE PROYECTOS */
+    /* Contenido Oculto */
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        padding: 0 2rem;
+    }
+
+    .accordion-item.active { border-color: var(--brand-cyan); box-shadow: 0 10px 30px rgba(63,181,247,0.1); }
+    .accordion-item.active .accordion-content {
+        max-height: 2000px; /* Suficiente para el contenido */
+        transition: max-height 1s ease-in-out;
+        padding-bottom: 3rem;
+    }
+    .accordion-item.active .icon-arrow { transform: rotate(180deg); }
+
+    .service-detail-text {
+        padding: 1.5rem 0;
+        border-top: 1px solid #f0f0f0;
+        line-height: 1.7;
+        color: #444;
+    }
+
+    /* GRILLA INTERNA */
     .mini-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
     }
 
     .project-card {
-        background: #fff;
-        border-radius: 12px;
+        border-radius: 8px;
+        border: 1px solid #eee;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        transition: all 0.3s ease;
-        border: 1px solid #f0f0f0;
-    }
-    .project-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 25px rgba(63, 181, 247, 0.2);
-        border-color: var(--brand-cyan);
-    }
-
-    .img-box {
-        aspect-ratio: 1/1;
-        background: #fdfdfd;
-        overflow: hidden;
-        cursor: zoom-in;
-    }
-    .img-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    .project-card:hover .img-box img { transform: scale(1.08); }
-
-    .card-meta {
-        padding: 1.2rem;
         text-align: center;
+        background: #fff;
     }
-    .card-meta h4 { font-size: 1rem; margin-bottom: 0.4rem; color: #111; font-weight: 600; }
-    .card-meta span { font-size: 0.85rem; color: #3FB5F7; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .img-box { aspect-ratio: 1/1; overflow: hidden; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .card-meta { padding: 0.8rem; }
+    .card-meta h4 { font-size: 0.9rem; margin: 0; color: #333; }
 
     /* LIGHTBOX */
-    .lightbox { position: fixed; inset: 0; background: rgba(255,255,255,0.98); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 2rem; }
+    .lightbox { position: fixed; inset: 0; background: rgba(255,255,255,0.98); display: none; align-items: center; justify-content: center; z-index: 3000; }
     .lightbox.open { display: flex; }
-    .lb-img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 4px; }
-    .lb-close { position: absolute; top: 30px; right: 30px; border: none; background: transparent; font-size: 2.5rem; cursor: pointer; color: #111; }
-
-    @media (max-width: 768px) {
-        .section-header { margin-bottom: 3rem; }
-        .service-info h2 { font-size: 1.5rem; }
-    }
+    .lb-img { max-width: 90vw; max-height: 80vh; object-fit: contain; }
+    .lb-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; border: none; background: none; }
   </style>
 </head>
 <body>
@@ -132,60 +117,92 @@
     
     <div class="section-header">
       <h1>¿Cómo podemos ayudarte?</h1>
-      <p>Transformamos ideas en realidades tangibles. Desde soluciones prácticas para el día a día hasta diseños exclusivos para transformar tus ambientes.</p>
+      <p>Seleccioná una categoría para conocer nuestras soluciones y ver ejemplos de trabajos realizados.</p>
     </div>
 
-    <section class="service-block" id="industria">
-        <div class="service-info">
-            <h2>01. Piezas y Repuestos a Medida</h2>
-            <p><strong>El problema:</strong> Algo dejó de funcionar porque una pieza se rompió, no se consigue el repuesto original o la importación es demasiado costosa.<br><br>
-            <strong>Nuestra solución:</strong> No descartes tu equipo. Diseñamos y fabricamos piezas técnicas (engranajes, perillas, soportes) en materiales resistentes que soportan el uso diario, el calor y la fricción. Recuperá tu maquinaria o electrodoméstico de forma rápida.</p>
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="header-content">
+                <h2>01. Piezas y Repuestos</h2>
+                <p>Soluciones para componentes rotos o imposibles de conseguir.</p>
+            </div>
+            <div class="icon-arrow">▾</div>
         </div>
-        <div class="mini-grid" id="grid-industria"></div>
-    </section>
+        <div class="accordion-content">
+            <div class="service-detail-text">
+                No descartes tus máquinas o electrodomésticos. Recreamos piezas con precisión utilizando materiales de ingeniería que soportan esfuerzo y temperatura. Ideal para engranajes, perillas y carcasas.
+            </div>
+            <div class="mini-grid" id="grid-industria"></div>
+        </div>
+    </div>
 
-    <section class="service-block" id="empresas">
-        <div class="service-info">
-            <h2>02. Identidad para tu Marca o Evento</h2>
-            <p><strong>El problema:</strong> Los regalos empresariales suelen ser genéricos, costosos y terminan olvidados en un cajón.<br><br>
-            <strong>Nuestra solución:</strong> Creamos objetos personalizados que refuerzan tu identidad. Llaveros, soportes para celular y merchandising fabricado en serie con tu logo. Diseños únicos que tus clientes y colaboradores realmente van a querer usar.</p>
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="header-content">
+                <h2>02. Para tu Marca o Evento</h2>
+                <p>Merchandising personalizado y regalos que la gente valora.</p>
+            </div>
+            <div class="icon-arrow">▾</div>
         </div>
-        <div class="mini-grid" id="grid-empresas"></div>
-    </section>
+        <div class="accordion-content">
+            <div class="service-detail-text">
+                Creamos objetos que llevan tu logo al siguiente nivel. Llaveros, soportes y souvenirs diseñados especialmente para destacar tu marca en eventos o regalos corporativos.
+            </div>
+            <div class="mini-grid" id="grid-empresas"></div>
+        </div>
+    </div>
 
-    <section class="service-block" id="deco">
-        <div class="service-info">
-            <h2>03. Objetos de Diseño y Decoración</h2>
-            <p><strong>Para tus espacios:</strong> Una colección de productos listos para embellecer tu hogar u oficina. Macetas modernas, lámparas temáticas y accesorios con terminaciones premium. Arte y tecnología combinados para crear detalles que no encontrás en ningún otro lado.</p>
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="header-content">
+                <h2>03. Decoración y Diseño</h2>
+                <p>Productos listos para darle vida a tus ambientes.</p>
+            </div>
+            <div class="icon-arrow">▾</div>
         </div>
-        <div class="mini-grid" id="grid-deco"></div>
-    </section>
+        <div class="accordion-content">
+            <div class="service-detail-text">
+                Explorá nuestra línea de macetas, lámparas y figuras coleccionables. Diseño moderno con acabados premium para el hogar o la oficina.
+            </div>
+            <div class="mini-grid" id="grid-deco"></div>
+        </div>
+    </div>
 
   </main>
 
   <footer id="main-footer"></footer>
 
   <div id="lightbox" class="lightbox">
-    <button class="lb-close" aria-label="Cerrar">✕</button>
-    <img id="lb-img" class="lb-img" alt="Vista ampliada">
+    <button class="lb-close">✕</button>
+    <img id="lb-img" class="lb-img" alt="">
   </div>
 
   <script>
-    // Carga de componentes (Header/Footer)
+    // Función para abrir/cerrar acordeón
+    function toggleAccordion(element) {
+        const item = element.parentElement;
+        const isActive = item.classList.contains('active');
+        
+        // Cerrar todos los demás (opcional, si querés que solo uno esté abierto)
+        document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+        
+        // Abrir el actual si no estaba abierto
+        if (!isActive) item.classList.add('active');
+    }
+
+    // Carga de componentes
     async function loadComponent(id, file) {
       try {
         const res = await fetch(file);
-        if(res.ok) document.getElementById(id).innerHTML = await res.text();
-      } catch (e) { console.error("Error cargando componente:", e); }
+        document.getElementById(id).innerHTML = await res.text();
+      } catch (e) {}
     }
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
 
-    // Lógica de Galería Dinámica
+    // Lógica de Galería
     (async function(){
-      const user = "argentex2000-byte";
-      const repo = "Argentex";
-      const folder = "files_galeria"; 
+      const user = "argentex2000-byte", repo = "Argentex", folder = "files_galeria"; 
       const imgBase = `https://raw.githubusercontent.com/${user}/${repo}/main/${folder}/`;
       const dataUrl = `https://raw.githubusercontent.com/${user}/${repo}/main/${folder}/datos.json`;
 
@@ -193,46 +210,28 @@
           const res = await fetch(dataUrl);
           const items = await res.json();
           
-          const createCard = (item) => {
-              const div = document.createElement('div');
-              div.className = 'project-card';
-              div.innerHTML = `
-                  <div class="img-box">
-                      <img src="${imgBase + item.Archivo}" loading="lazy" alt="${item.Título}">
-                  </div>
-                  <div class="card-meta">
-                      <h4>${item.Título}</h4>
-                      <span>${item.Material}</span>
-                  </div>
+          items.forEach(item => {
+              let targetGrid = 'grid-deco';
+              const txt = (item.Título + " " + (item.Descripción || "")).toLowerCase();
+              if(txt.match(/repuesto|engranaje|pieza|industrial/)) targetGrid = 'grid-industria';
+              else if (txt.match(/llavero|logo|souvenir|empresa/)) targetGrid = 'grid-empresas';
+
+              const card = document.createElement('div');
+              card.className = 'project-card';
+              card.innerHTML = `
+                  <div class="img-box"><img src="${imgBase + item.Archivo}" alt="${item.Título}"></div>
+                  <div class="card-meta"><h4>${item.Título}</h4></div>
               `;
-              div.querySelector('.img-box').onclick = () => {
+              card.onclick = (e) => {
+                  e.stopPropagation(); // Para que no cierre el acordeón al hacer clic
                   document.getElementById('lb-img').src = imgBase + item.Archivo;
                   document.getElementById('lightbox').classList.add('open');
               };
-              return div;
-          };
-
-          items.forEach(item => {
-              let targetGrid = 'grid-deco'; // Por defecto va a Deco
-              
-              // Lógica inteligente de filtrado por palabras clave
-              const txt = (item.Título + " " + (item.Descripción || "")).toLowerCase();
-              
-              if(txt.match(/repuesto|engranaje|pieza|industrial|técnico|tecnico|maquinaria/)) {
-                  targetGrid = 'grid-industria';
-              } else if (txt.match(/llavero|logo|souvenir|lote|corporativo|merchandising|regalo/)) {
-                  targetGrid = 'grid-empresas';
-              }
-
-              const card = createCard(item);
-              const container = document.getElementById(targetGrid);
-              if(container) container.appendChild(card);
+              document.getElementById(targetGrid).appendChild(card);
           });
-
-      } catch (e) { console.error("Error al cargar los datos de la galería:", e); }
+      } catch (e) {}
     })();
 
-    // Lógica del Lightbox
     const lb = document.getElementById('lightbox');
     document.querySelector('.lb-close').onclick = () => lb.classList.remove('open');
     lb.onclick = (e) => { if(e.target === lb) lb.classList.remove('open'); }
