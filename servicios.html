@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios y Capacidades | ARGENTEX 3D</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header id="main-header"></header>
+
+  <div style="text-align: center; margin-top: 100px; padding: 0 1rem;">
+      <h1 style="font-family: 'Michroma'; font-size: 1.5rem;">Nuestros Servicios</h1>
+      <p style="margin-top: 10px;">Soluciones profesionales en fabricación digital</p>
+  </div>
+
+  <main class="solutions-wrap">
+    <div class="service-card" id="figuras">
+        <div class="card-trigger" onclick="toggleCard(this)">
+            <h2>01. FIGURAS & COLECCIONABLES</h2>
+            <div class="btn-expander">VER PROYECTOS <span class="arrow">▾</span></div>
+        </div>
+        <div class="card-content">
+            <div class="service-desc">
+                Impresiones con <strong>máximo detalle</strong>. Ideal para figuras articuladas, personajes y bustos.
+            </div>
+            <div class="mini-grid" id="grid-figuras"></div>
+        </div>
+    </div>
+
+    <div class="service-card" id="deco">
+        <div class="card-trigger" onclick="toggleCard(this)">
+            <h2>02. DISEÑO, DECO & HOGAR</h2>
+            <div class="btn-expander">VER PROYECTOS <span class="arrow">▾</span></div>
+        </div>
+        <div class="card-content">
+            <div class="service-desc">
+                Objetos funcionales y estéticos. Macetas, lámparas y accesorios personalizados.
+            </div>
+            <div class="mini-grid" id="grid-deco"></div>
+        </div>
+    </div>
+
+    <div class="service-card" id="empresas">
+        <div class="card-trigger" onclick="toggleCard(this)">
+            <h2>03. MERCHANDISING & EMPRESAS</h2>
+            <div class="btn-expander">VER PROYECTOS <span class="arrow">▾</span></div>
+        </div>
+        <div class="card-content">
+            <div class="service-desc">
+                Producción en serie para marcas. Llaveros, logos corporativos y regalos empresariales.
+            </div>
+            <div class="mini-grid" id="grid-empresas"></div>
+        </div>
+    </div>
+
+    <div class="service-card" id="industria">
+        <div class="card-trigger" onclick="toggleCard(this)">
+            <h2>04. PIEZAS & REPUESTOS A MEDIDA</h2>
+            <div class="btn-expander">VER PROYECTOS <span class="arrow">▾</span></div>
+        </div>
+        <div class="card-content">
+            <div class="service-desc">
+                Soluciones técnicas en materiales de ingeniería (PETG/ABS/ASA) de alta resistencia.
+            </div>
+            <div class="mini-grid" id="grid-industria"></div>
+        </div>
+    </div>
+  </main>
+
+  <section class="materials-table-container" style="max-width: 1200px; margin: 0 auto 4rem; padding: 2rem; background: #f9f9f9; border-radius: 12px; border: 1px solid #eee;">
+      <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem; font-family:'Michroma';">Guía de Materiales</h2>
+      <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-family: 'Montserrat'; font-size: 0.85rem;">
+              <thead>
+                  <tr style="background: #1a1a1a; color: white; text-align: left;">
+                      <th style="padding: 12px;">Material</th>
+                      <th style="padding: 12px;">Uso Recomendado</th>
+                      <th style="padding: 12px;">Resistencia</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>PLA</strong></td><td>Deco, Prototipos</td><td>Estética / Rigidez</td></tr>
+                  <tr><td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>PETG</strong></td><td>Repuestos, exterior</td><td>Impacto / UV</td></tr>
+                  <tr><td style="padding: 10px;"><strong>ABS</strong></td><td>Mecánica, calor</td><td>Térmica alta</td></tr>
+              </tbody>
+          </table>
+      </div>
+  </section>
+
+  <footer id="main-footer"></footer>
+
+  <div id="lightbox" class="lightbox" onclick="this.classList.remove('open')">
+    <img id="lb-img" class="lb-img" alt="Vista ampliada">
+  </div>
+
+  <a href="https://wa.me/541171274479" class="wpp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    function toggleCard(el) { el.parentElement.classList.toggle('active'); }
+
+    async function loadComponent(id, file) {
+      try {
+        const res = await fetch(file);
+        if(res.ok) document.getElementById(id).innerHTML = await res.text();
+      } catch (e) { console.error("Error al cargar:", file); }
+    }
+    loadComponent('main-header', 'header.html');
+    loadComponent('main-footer', 'footer.html');
+
+    // Lógica de carga de imágenes dinámica
+    (async function(){
+      const imgBase = `https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/files_galeria/`;
+      try {
+          const res = await fetch(imgBase + `datos.json`);
+          const items = await res.json();
+          items.forEach(item => {
+              let targetGrid = 'grid-deco';
+              const txt = (item.Título + " " + (item.Descripción || "")).toLowerCase();
+              
+              if(txt.match(/repuesto|engranaje|pieza|tecnico|industrial|soporte/)) targetGrid = 'grid-industria';
+              else if (txt.match(/llavero|logo|souvenir|empresa|lote/)) targetGrid = 'grid-empresas';
+              else if (txt.match(/dragon|dragón|articulado|figura|busto|coleccion|maradona|messi|pokemon/)) targetGrid = 'grid-figuras';
+
+              const card = document.createElement('div');
+              card.className = 'project-card';
+              card.innerHTML = `<div class="img-box"><img src="${imgBase + item.Archivo}" loading="lazy"></div><div class="card-meta"><h4>${item.Título}</h4></div>`;
+              card.onclick = (e) => {
+                  e.stopPropagation();
+                  document.getElementById('lb-img').src = imgBase + item.Archivo;
+                  document.querySelector('.lightbox').classList.add('open');
+              };
+              const container = document.getElementById(targetGrid);
+              if(container) container.appendChild(card);
+          });
+      } catch (e) { console.error("Error cargando galería", e); }
+    })();
+  </script>
+</body>
+</html>
