@@ -3,77 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ARGENTEX | Expertos en Impresión 3D a pedido</title>
+  <title>ARGENTEX | Expertos en Impresión 3D</title>
+  
+  <meta name="description" content="Argentex 3D: Expertos en impresión 3D premium. Fabricamos desde figuras de colección hasta repuestos industriales.">
+  <meta name="keywords" content="impresion 3d, argentina, figuras coleccionables, repuestos industriales, merchandising">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ARGENTEX 3D | Fabricación Digital Premium">
+  <meta property="og:description" content="Convertimos tus diseños digitales en objetos reales con calidad industrial.">
+  <meta property="og:image" content="preview-web.jpg">
+  
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <header id="main-header"></header>
 
   <main>
-    <section class="hero" id="inicio">
+    <section class="hero" style="height: 75vh;"> 
       <video autoplay muted loop playsinline class="hero-video">
         <source src="video_banner.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
-      
       <div class="hero-content">
-        <h3>Expertos en Fabricación Digital</h3>
-        <h1>Hacemos Impresiones 3D a pedido</h1>
-        <p>Desde repuestos técnicos industriales hasta objetos de diseño exclusivo para tu hogar.</p>
-        
+        <h3 class="text-light">Argentex</h3>
+        <p class="text-light">Expertos en convertir diseños digitales en objetos reales.</p>
         <div class="hero-buttons">
-            <a href="soluciones.html" class="btn btn-primary">VER SOLUCIONES</a>
-            <a href="https://argentexproductos.mitiendanube.com/" class="btn btn-outline">TIENDA ONLINE</a>
+            <a href="servicios.html" class="btn btn-primary">NUESTROS SERVICIOS</a>
+            <a href="https://argentexproductos.mitiendanube.com/" target="_blank" class="btn btn-outline">TIENDA ONLINE</a>
         </div>
       </div>
     </section>
 
-    <section class="solutions-preview">
+    <section class="solutions-preview" style="padding: 5rem 1rem;">
         <div class="section-title">
-            <h2>Nuestros Servicios</h2>
+            <h2>¿Qué podemos fabricar?</h2>
         </div>
         <div class="branch-grid">
             <div class="branch-card">
-                <h3>01. Repuestos</h3>
-                <p>Piezas técnicas y componentes discontinuados en materiales de alta resistencia.</p>
-                <a href="soluciones.html#industria" class="read-more">Saber más →</a>
+                <h3>01. Figuras</h3>
+                <p>Coleccionables y personajes con máximo nivel de detalle.</p>
+                <a href="servicios.html#figuras" class="btn-link">Ver detalles →</a>
             </div>
             <div class="branch-card">
-                <h3>02. Empresas</h3>
-                <p>Merchandising y regalos corporativos personalizados para potenciar tu marca.</p>
-                <a href="soluciones.html#empresas" class="read-more">Saber más →</a>
+                <h3>02. Deco & Hogar</h3>
+                <p>Macetas, lámparas y objetos funcionales con diseño exclusivo.</p>
+                <a href="servicios.html#deco" class="btn-link">Ver detalles →</a>
             </div>
             <div class="branch-card">
-                <h3>03. Deco</h3>
-                <p>Objetos de diseño y decoración premium listos para transformar tus espacios.</p>
-                <a href="soluciones.html#deco" class="read-more">Saber más →</a>
+                <h3>03. Empresas</h3>
+                <p>Merchandising y regalos corporativos personalizados para tu marca.</p>
+                <a href="servicios.html#empresas" class="btn-link">Ver detalles →</a>
+            </div>
+            <div class="branch-card">
+                <h3>04. Repuestos</h3>
+                <p>Piezas a medida con materiales técnicos de alta resistencia.</p>
+                <a href="servicios.html#industria" class="btn-link">Ver detalles →</a>
             </div>
         </div>
     </section>
 
-    <section class="contact-cta">
-        <h3>¿Tenés un proyecto en mente?</h3>
-        <p>Mandanos una foto o archivo y te asesoramos hoy mismo.</p>
-        <div class="hero-buttons">
-            <a href="https://wa.me/541171274479" class="btn btn-primary">WHATSAPP</a>
-            <a href="mailto:contacto@argentex.com.ar" class="btn btn-outline">EMAIL</a>
+    <section id="contacto" class="contact-cta">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <h2 style="color: var(--brand-cyan); margin-bottom: 1.5rem;">¿Tenés un proyecto en mente?</h2>
+            <p class="text-light" style="margin-bottom: 2.5rem; opacity: 0.8;">
+                Mandanos tu archivo STL o una foto de la pieza que necesitás. <br>
+                Recibí asesoramiento técnico hoy mismo.
+            </p>
+            
+            <div class="contact-icons-grid">
+                <a href="https://wa.me/541171274479" target="_blank" class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://www.instagram.com/argentex3d/" target="_blank" class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="mailto:contacto@argentex.com.ar" class="contact-item">
+                    <i class="far fa-envelope"></i>
+                    <span>Correo</span>
+                </a>
+            </div>
         </div>
     </section>
   </main>
 
   <footer id="main-footer"></footer>
 
+  <a href="https://wa.me/541171274479" class="wpp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
   <script>
     async function loadComponent(id, file) {
       try {
         const res = await fetch(file);
-        document.getElementById(id).innerHTML = await res.text();
-      } catch (e) { console.error(e); }
+        if(res.ok) {
+            document.getElementById(id).innerHTML = await res.text();
+        }
+      } catch (e) { console.error("Error cargando componente:", file); }
     }
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
