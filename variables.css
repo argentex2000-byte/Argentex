@@ -1,18 +1,18 @@
 :root {
-  /* --- PALETA DE MARCA (MANUAL) --- */
-  --brand-cyan:   #3FB5F7;  /* Identidad principal */
-  --brand-orange: #FF9929;  /* Acción de compra (Tienda) */
-  --brand-dark:   #111111;  /* Texto principal */
-  --brand-gray:   #F4F4F4;  /* Fondos secundarios sutiles */
-  --brand-white:  #FFFFFF;  /* Fondo base */
+  /* --- PALETA DE MARCA --- */
+  --brand-cyan:   #3FB5F7;  
+  --brand-orange: #FF9929;  
+  --brand-dark:   #111111;  
+  --brand-gray:   #F4F4F4;  
+  --brand-white:  #FFFFFF;  
 
-  /* --- ASIGNACIÓN SEMÁNTICA --- */
+  /* --- ASIGNACIÓN SEMÁNTICA (CORREGIDA) --- */
   --color-fondo:      var(--brand-white);
-  --color-secundario: var(--brand-white); /* Header/Footer blancos */
-  --color-texto:      #333333; /* Gris oscuro para lectura cómoda (Montserrat) */
-  --color-titulos:    #000000; /* Negro puro para Michroma */
+  --color-secundario: var(--brand-white); 
+  --color-texto:      #1a1a1a; /* CAMBIADO: Ahora es oscuro para fondo blanco */
+  --color-titulos:    #000000; 
   
   /* --- UI ELEMENTS --- */
   --color-borde:      #E0E0E0;
-  --shadow-card:      0 10px 30px rgba(0,0,0,0.08); /* Sombra suave para fondo blanco */
+  --shadow-card:      0 10px 30px rgba(0,0,0,0.08);
 }
