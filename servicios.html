@@ -17,6 +17,10 @@
       <p style="margin-top: 10px;">Soluciones profesionales en fabricación digital</p>
   </div>
 
+  <div class="carousel-wrapper">
+      <div class="carousel-track" id="auto-carousel"></div>
+  </div>
+
   <main class="solutions-wrap">
     <div class="service-card" id="figuras">
         <div class="card-trigger" onclick="toggleCard(this)">
@@ -93,14 +97,19 @@
 
   <footer id="main-footer"></footer>
 
-  <div id="lightbox" class="lightbox" onclick="this.classList.remove('open')">
-    <img id="lb-img" class="lb-img" alt="Vista ampliada">
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lb-img" class="lb-img" alt="Vista ampliada" onclick="event.stopPropagation()">
   </div>
 
   <a href="https://wa.me/541171274479" class="wpp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
   <script>
     function toggleCard(el) { el.parentElement.classList.toggle('active'); }
+
+    // Función para cerrar el lightbox
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+    }
 
     async function loadComponent(id, file) {
       try {
@@ -111,13 +120,17 @@
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
 
-    // Lógica de carga de imágenes dinámica
+    // Lógica principal: Carga galería y arma el carrusel
     (async function(){
       const imgBase = `https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/files_galeria/`;
       try {
           const res = await fetch(imgBase + `datos.json`);
           const items = await res.json();
+          
+          const carouselTrack = document.getElementById('auto-carousel');
+          
           items.forEach(item => {
+              // 1. Clasificación para las grillas de servicios
               let targetGrid = 'grid-deco';
               const txt = (item.Título + " " + (item.Descripción || "")).toLowerCase();
               
@@ -125,17 +138,38 @@
               else if (txt.match(/llavero|logo|souvenir|empresa|lote/)) targetGrid = 'grid-empresas';
               else if (txt.match(/dragon|dragón|articulado|figura|busto|coleccion|maradona|messi|pokemon/)) targetGrid = 'grid-figuras';
 
+              // 2. Crear tarjeta en la grilla
               const card = document.createElement('div');
               card.className = 'project-card';
+              card.style.cursor = 'pointer'; // Indicador visual de click
               card.innerHTML = `<div class="img-box"><img src="${imgBase + item.Archivo}" loading="lazy"></div><div class="card-meta"><h4>${item.Título}</h4></div>`;
+              
+              // Click abre Lightbox
               card.onclick = (e) => {
                   e.stopPropagation();
-                  document.getElementById('lb-img').src = imgBase + item.Archivo;
-                  document.querySelector('.lightbox').classList.add('open');
+                  const lb = document.getElementById('lightbox');
+                  const lbImg = document.getElementById('lb-img');
+                  lbImg.src = imgBase + item.Archivo;
+                  lb.classList.add('open');
               };
+
               const container = document.getElementById(targetGrid);
               if(container) container.appendChild(card);
+
+              // 3. Agregar imagen al carrusel
+              const cItem = document.createElement('div');
+              cItem.className = 'carousel-item';
+              cItem.innerHTML = `<img src="${imgBase + item.Archivo}" loading="lazy" alt="${item.Título}">`;
+              carouselTrack.appendChild(cItem);
           });
+
+          // 4. Duplicar elementos para efecto infinito suave
+          const originalItems = Array.from(carouselTrack.children);
+          originalItems.forEach(child => {
+             const clone = child.cloneNode(true);
+             carouselTrack.appendChild(clone);
+          });
+
       } catch (e) { console.error("Error cargando galería", e); }
     })();
   </script>
