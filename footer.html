@@ -11,7 +11,7 @@
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Aumenté un poco el min-width */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 3rem;
     text-align: left;
   }
@@ -39,7 +39,7 @@
     margin-bottom: 0.8rem;
   }
 
-  .footer-links a.text-link { /* Clase específica para los links de texto normal */
+  .footer-links a.text-link {
     color: #666;
     text-decoration: none;
     font-size: 0.9rem;
@@ -51,38 +51,61 @@
     padding-left: 5px;
   }
 
-  /* === ESTILOS NUEVOS PARA BOTONES DE CONTACTO EN FOOTER === */
-  .footer-contact-grid {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap; /* Para que bajen si no entran */
-    justify-content: flex-start; /* Alineados a la izquierda */
-  }
-
-  .footer-btn {
+  /* === ESTILOS NUEVOS: BOTONES CON DATOS VISIBLES === */
+  .footer-contact-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #555; /* Color oscuro para el fondo claro */
-    font-size: 0.8rem;
-    transition: transform 0.3s, color 0.3s;
-    gap: 8px;
+    gap: 1rem; /* Espacio entre cada botón */
   }
 
-  .footer-btn i {
-    font-size: 1.8rem; /* Tamaño del icono */
-    color: var(--brand-cyan, #3FB5F7); /* Color celeste de la marca */
+  .contact-row {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #555;
+    background: #fff; /* Fondo blanco sutil para destacar */
+    border: 1px solid #eee;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .contact-row i {
+    font-size: 1.4rem;
+    color: var(--brand-cyan, #3FB5F7);
+    margin-right: 12px;
+    width: 25px; /* Para que todos los iconos ocupen lo mismo y el texto se alinee */
+    text-align: center;
+  }
+
+  .contact-info-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #999;
     margin-bottom: 2px;
   }
 
-  .footer-btn span {
+  .contact-data {
+    font-size: 0.9rem;
     font-weight: 600;
+    color: #333;
   }
 
-  .footer-btn:hover {
-    transform: translateY(-5px);
-    color: #000;
+  /* Efecto Hover */
+  .contact-row:hover {
+    transform: translateX(5px);
+    border-color: var(--brand-cyan, #3FB5F7);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .contact-row:hover .contact-data {
+    color: var(--brand-cyan, #3FB5F7);
   }
 
   .footer-bottom {
@@ -112,21 +135,30 @@
 
   <div class="footer-links">
     <h4>Contacto</h4>
-    <div class="footer-contact-grid">
+    <div class="footer-contact-list">
       
-      <a href="https://wa.me/541171274479" target="_blank" class="footer-btn">
+      <a href="https://wa.me/541171274479" target="_blank" class="contact-row">
         <i class="fab fa-whatsapp"></i>
-        <span>WhatsApp</span>
+        <div class="contact-info-text">
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-data">+54 11 7127-4479</span>
+        </div>
       </a>
 
-      <a href="https://www.instagram.com/argentex3d/" target="_blank" class="footer-btn">
+      <a href="https://www.instagram.com/argentex3d/" target="_blank" class="contact-row">
         <i class="fab fa-instagram"></i>
-        <span>Instagram</span>
+        <div class="contact-info-text">
+            <span class="contact-label">Instagram</span>
+            <span class="contact-data">@argentex3d</span>
+        </div>
       </a>
 
-      <a href="mailto:contactoargentex@gmail.com" class="footer-btn">
+      <a href="mailto:contactoargentex@gmail.com" class="contact-row">
         <i class="far fa-envelope"></i>
-        <span>Correo</span>
+        <div class="contact-info-text">
+            <span class="contact-label">Correo</span>
+            <span class="contact-data">contactoargentex@gmail.com</span>
+        </div>
       </a>
 
     </div>
