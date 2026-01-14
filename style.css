@@ -26,9 +26,7 @@ p {
 }
 
 /* Clase para textos en fondos oscuros */
-.text-light {
-    color: #ffffff !important;
-}
+.text-light { color: #ffffff !important; }
 
 /* === HEADER === */
 #main-header { height: 70px; }
@@ -81,7 +79,7 @@ p {
     border: 2px solid transparent;
     display: inline-block;
     cursor: pointer;
-    margin: 5px; /* Espacio si se apilan */
+    margin: 5px;
 }
 
 .btn-store { background: var(--brand-orange, #FF9929); color: #fff; }
@@ -89,15 +87,9 @@ p {
 .btn-outline { border-color: #fff; color: #fff; }
 .btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
-/* === ESTILOS FALTANTES PARA EL INDEX (Cards Pequeñas) === */
-.solutions-preview {
-    background: #fdfdfd;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 3rem;
-}
+/* === ESTILOS INDEX === */
+.solutions-preview { background: #fdfdfd; }
+.section-title { text-align: center; margin-bottom: 3rem; }
 
 .branch-grid {
     display: grid;
@@ -123,17 +115,8 @@ p {
     border-color: var(--brand-cyan);
 }
 
-.branch-card h3 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    color: var(--brand-cyan);
-}
-
-.branch-card p {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 1.5rem;
-}
+.branch-card h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--brand-cyan); }
+.branch-card p { font-size: 0.9rem; color: #555; margin-bottom: 1.5rem; }
 
 .btn-link {
     color: var(--brand-cyan);
@@ -144,18 +127,16 @@ p {
     transition: 0.3s;
 }
 
-.btn-link:hover {
-    padding-left: 5px;
-}
+.btn-link:hover { padding-left: 5px; }
 
 /* === SECCIÓN DE SERVICIOS (ACORDEONES) === */
 .solutions-wrap { 
     max-width: 1300px; 
-    margin: 80px auto 4rem; 
+    margin: 40px auto 4rem; /* Ajustado margen superior para el carrusel */
     padding: 2rem 1.5rem; 
-    display: flex;       
-    flex-wrap: wrap;     
-    gap: 25px;           
+    display: flex;        
+    flex-wrap: wrap;      
+    gap: 25px;            
     justify-content: center; 
 }
 
@@ -171,9 +152,7 @@ p {
     animation: fadeIn 0.6s ease forwards;
 }
 
-.service-card:hover {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
+.service-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
 
 .card-trigger { 
     padding: 1.2rem 1.5rem; 
@@ -192,9 +171,7 @@ p {
     margin-left: 8px;
 }
 
-.service-card.active .arrow {
-    transform: rotate(180deg);
-}
+.service-card.active .arrow { transform: rotate(180deg); }
 
 .card-content { 
     max-height: 0; 
@@ -262,23 +239,7 @@ p {
 .contact-item i { font-size: 2rem; color: var(--brand-cyan); }
 .contact-item:hover { transform: translateY(-5px); filter: brightness(1.2); }
 
-/* === RESPONSIVE === */
-@media (min-width: 1400px) {
-    .service-card { flex: 1 1 calc(50% - 25px); }
-}
-
-@media (max-width: 768px) {
-    .service-card { flex: 1 1 100%; }
-    .solutions-wrap { padding: 1rem; margin-top: 60px; }
-    .branch-grid { grid-template-columns: 1fr; }
-}
-
-/* === ANIMACIONES === */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
+/* === WHATSAPP FLOTANTE === */
 .wpp-float {
     position: fixed;
     width: 60px;
@@ -297,5 +258,105 @@ p {
     text-decoration: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-
 .wpp-float:hover { transform: scale(1.1); }
+
+/* === RESPONSIVE === */
+@media (min-width: 1400px) {
+    .service-card { flex: 1 1 calc(50% - 25px); }
+}
+
+@media (max-width: 768px) {
+    .service-card { flex: 1 1 100%; }
+    .solutions-wrap { padding: 1rem; margin-top: 60px; }
+    .branch-grid { grid-template-columns: 1fr; }
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   NUEVOS ESTILOS AGREGADOS (Lightbox + Carrusel)
+   ========================================= */
+
+/* --- 1. LIGHTBOX (VISTA AMPLIADA) CORREGIDO --- */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* Fondo oscuro */
+    z-index: 9999; /* Encima de todo (incluso del chat de wpp) */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: zoom-out;
+}
+
+.lightbox.open {
+    display: flex;
+    opacity: 1;
+}
+
+.lb-img {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    transform: scale(0.9);
+    transition: transform 0.3s;
+}
+
+.lightbox.open .lb-img {
+    transform: scale(1);
+}
+
+/* --- 2. CARRUSEL AUTOMÁTICO INFINITO --- */
+.carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background: #f4f4f4;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.carousel-track {
+    display: flex;
+    width: max-content;
+    gap: 20px;
+    /* Animación de desplazamiento infinito */
+    animation: scrollLoop 40s linear infinite; 
+}
+
+.carousel-item {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background: white;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes scrollLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+
+/* Pausar carrusel al pasar el mouse */
+.carousel-track:hover {
+    animation-play-state: paused;
+}
