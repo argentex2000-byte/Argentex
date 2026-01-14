@@ -65,37 +65,108 @@
         </div>
     </section>
 
-    <section id="contacto" class="contact-cta">
-        <div style="max-width: 1400px; margin: 0 auto;">
-            <h2 style="color: var(--brand-cyan); margin-bottom: 1.5rem;">¿Tenés un proyecto en mente?</h2>
-            <p class="text-light" style="margin-bottom: 2.5rem; opacity: 0.8;">
-                Mandanos tu archivo STL o una foto de la pieza que necesitás. <br>
-                Recibí asesoramiento técnico hoy mismo.
-            </p>
+<style>
+  /* === ESTILOS PARA LOS BOTONES EN FONDO OSCURO (CTA) === */
+  .cta-buttons-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap; /* Para que bajen en pantallas chicas */
+    margin-top: 2.5rem;
+  }
+
+  .cta-btn-dark {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.05); /* Fondo "vidrio" semitransparente */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 240px; /* Ancho mínimo para que se vean uniformes */
+    text-align: left;
+  }
+
+  .cta-btn-dark i {
+    font-size: 1.8rem;
+    color: var(--brand-cyan, #3FB5F7); /* Icono celeste */
+    margin-right: 15px;
+  }
+
+  .cta-text-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cta-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #aaa; /* Gris claro para el título */
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .cta-data {
+    font-size: 1rem;
+    color: #fff; /* Blanco puro para el dato importante */
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* Efecto Hover */
+  .cta-btn-dark:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--brand-cyan, #3FB5F7); /* Borde se ilumina celeste */
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(63, 181, 247, 0.15); /* Resplandor */
+  }
+
+  /* Ajuste para celulares */
+  @media (max-width: 600px) {
+    .cta-btn-dark {
+        width: 100%; /* Ocupar todo el ancho en móvil */
+    }
+  }
+</style>
+
+<section id="contacto" class="contact-cta">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2 style="color: var(--brand-cyan); margin-bottom: 1.5rem;">¿Tenés un proyecto en mente?</h2>
+        <p class="text-light" style="margin-bottom: 2.5rem; opacity: 0.8; font-size: 1.1rem;">
+            Mandanos tu archivo STL o una foto de la pieza que necesitás. <br>
+            Recibí asesoramiento técnico hoy mismo.
+        </p>
+        
+        <div class="cta-buttons-grid">
             
-            <div class="contact-icons-grid">
-                <a href="https://wa.me/541171274479" target="_blank" class="contact-item">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="https://www.instagram.com/argentex3d/" target="_blank" class="contact-item">
-                    <i class="fab fa-instagram"></i>
-                    <span>Instagram</span>
-                </a>
-                <a href="mailto:contacto@argentex.com.ar" class="contact-item">
-                    <i class="far fa-envelope"></i>
-                    <span>Correo</span>
-                </a>
-            </div>
+            <a href="https://wa.me/541171274479" target="_blank" class="cta-btn-dark">
+                <i class="fab fa-whatsapp"></i>
+                <div class="cta-text-box">
+                    <span class="cta-label">Escribinos al</span>
+                    <span class="cta-data">+54 11 7127-4479</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/argentex3d/" target="_blank" class="cta-btn-dark">
+                <i class="fab fa-instagram"></i>
+                <div class="cta-text-box">
+                    <span class="cta-label">Seguinos en</span>
+                    <span class="cta-data">@argentex3d</span>
+                </div>
+            </a>
+
+            <a href="mailto:contacto@argentex.com.ar" class="cta-btn-dark">
+                <i class="far fa-envelope"></i>
+                <div class="cta-text-box">
+                    <span class="cta-label">Envianos un mail</span>
+                    <span class="cta-data">contacto@argentex...</span>
+                </div>
+            </a>
+
         </div>
-    </section>
-  </main>
-
-  <footer id="main-footer"></footer>
-
-  <a href="https://wa.me/541171274479" class="wpp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+    </div>
+</section>
 
   <script>
     async function loadComponent(id, file) {
@@ -111,3 +182,4 @@
   </script>
 </body>
 </html>
+
