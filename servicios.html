@@ -172,6 +172,60 @@
 
       } catch (e) { console.error("Error cargando galería", e); }
     })();
+/* === WHATSAPP FLOTANTE (ESTILO CÁPSULA / RECTÁNGULO) === */
+.wpp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px; /* Bordes redondeados tipo cápsula */
+    text-decoration: none;
+    z-index: 5000;
+    
+    /* Flexbox para alinear texto e icono */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre el texto y el logo de WP */
+    
+    /* Tamaño dinámico (se ajusta al texto) */
+    padding: 12px 24px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    
+    /* Evitar que se seleccione el texto al hacer clic */
+    user-select: none;
+}
+
+/* Estilo del texto dentro del botón */
+.wpp-text {
+    font-weight: 700; /* Texto en negrita */
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+}
+
+/* Estilo del icono */
+.wpp-float i {
+    font-size: 1.6rem; /* Tamaño del logo de WP */
+}
+
+/* Efecto al pasar el mouse */
+.wpp-float:hover {
+    transform: translateY(-3px) scale(1.05); /* Sube un poquito y crece */
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); /* Sombra verde brillante */
+    background-color: #20b858; /* Un verde un poco más oscuro */
+}
+
+/* --- OPCIONAL: SOLO ICONO EN CELULAR MUY CHICO --- */
+/* Si el texto es muy largo y tapa mucho en celulares, descomenta esto: */
+
+@media (max-width: 480px) {
+    .wpp-text { display: none; }
+    .wpp-float { padding: 15px; width: 60px; height: 60px; border-radius: 50%; }
+}
+    
   </script>
 </body>
 </html>
