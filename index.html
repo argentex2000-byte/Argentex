@@ -32,7 +32,7 @@
         <p class="text-light">Expertos en convertir diseños digitales en objetos reales.</p>
         <div class="hero-buttons">
             <a href="servicios.html" class="btn btn-primary">NUESTROS SERVICIOS</a>
-            <a href="https://argentexproductos.mitiendanube.com/" target="_blank" class="btn btn-outline">TIENDA ONLINE</a>
+            <a href="https://argentexproductos.mitiendanube.com/" class="btn btn-outline">TIENDA ONLINE</a>
         </div>
       </div>
     </section>
@@ -76,7 +76,7 @@
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-    flex-wrap: wrap; /* Para que bajen en pantallas chicas */
+    flex-wrap: wrap; 
     margin-top: 2.5rem;
   }
 
@@ -84,18 +84,18 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.05); /* Fondo "vidrio" semitransparente */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+    background: rgba(255, 255, 255, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
     padding: 12px 25px;
     border-radius: 8px;
     transition: all 0.3s ease;
-    min-width: 240px; /* Ancho mínimo para que se vean uniformes */
+    min-width: 240px; 
     text-align: left;
   }
 
   .cta-btn-dark i {
     font-size: 1.8rem;
-    color: var(--brand-cyan, #3FB5F7); /* Icono celeste */
+    color: var(--brand-cyan, #3FB5F7); 
     margin-right: 15px;
   }
 
@@ -107,31 +107,27 @@
   .cta-label {
     font-size: 0.7rem;
     text-transform: uppercase;
-    color: #aaa; /* Gris claro para el título */
+    color: #aaa; 
     letter-spacing: 1px;
     margin-bottom: 4px;
   }
 
   .cta-data {
     font-size: 1rem;
-    color: #fff; /* Blanco puro para el dato importante */
+    color: #fff; 
     font-weight: 600;
     font-family: 'Montserrat', sans-serif;
   }
 
-  /* Efecto Hover */
   .cta-btn-dark:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--brand-cyan, #3FB5F7); /* Borde se ilumina celeste */
+    border-color: var(--brand-cyan, #3FB5F7); 
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(63, 181, 247, 0.15); /* Resplandor */
+    box-shadow: 0 5px 20px rgba(63, 181, 247, 0.15); 
   }
 
-  /* Ajuste para celulares */
   @media (max-width: 600px) {
-    .cta-btn-dark {
-        width: 100%; /* Ocupar todo el ancho en móvil */
-    }
+    .cta-btn-dark { width: 100%; }
   }
 </style>
 
@@ -172,6 +168,12 @@
         </div>
     </div>
 </section>
+  </main> <footer id="main-footer"></footer>
+
+  <a href="https://wa.me/541171274479" class="wpp-float" target="_blank">
+    <span class="wpp-text">¿Tenés un diseño? ¡Imprimo acá!</span>
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
   <script>
     async function loadComponent(id, file) {
@@ -185,7 +187,7 @@
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
 
-    // === LÓGICA DEL CARRUSEL (Carga datos.json y rellena el slider) ===
+    // === LÓGICA DEL CARRUSEL ===
     (async function(){
       const imgBase = `https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/files_galeria/`;
       try {
@@ -193,7 +195,6 @@
           const items = await res.json();
           const carouselTrack = document.getElementById('auto-carousel');
 
-          // 1. Crear elementos del carrusel
           items.forEach(item => {
               const cItem = document.createElement('div');
               cItem.className = 'carousel-item';
@@ -201,7 +202,7 @@
               carouselTrack.appendChild(cItem);
           });
 
-          // 2. Duplicar elementos para lograr el efecto infinito
+          // Duplicar para efecto infinito
           const originalItems = Array.from(carouselTrack.children);
           originalItems.forEach(child => {
              const clone = child.cloneNode(true);
@@ -211,10 +212,5 @@
       } catch (e) { console.error("Error cargando galería para carrusel", e); }
     })();
   </script>
-    
-<a href="https://wa.me/541171274479" class="wpp-float" target="_blank">
-  <span class="wpp-text">¿Tenés un diseño? ¡Imprimo acá!</span>
-  <i class="fab fa-whatsapp"></i>
-</a>
 </body>
 </html>
