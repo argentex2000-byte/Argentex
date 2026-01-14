@@ -65,6 +65,11 @@
         </div>
     </section>
 
+    <div class="carousel-wrapper">
+        <div class="carousel-track" id="auto-carousel">
+            </div>
+    </div>
+
 <style>
   /* === ESTILOS PARA LOS BOTONES EN FONDO OSCURO (CTA) === */
   .cta-buttons-grid {
@@ -179,6 +184,32 @@
     }
     loadComponent('main-header', 'header.html');
     loadComponent('main-footer', 'footer.html');
+
+    // === LÓGICA DEL CARRUSEL (Carga datos.json y rellena el slider) ===
+    (async function(){
+      const imgBase = `https://raw.githubusercontent.com/argentex2000-byte/Argentex/main/files_galeria/`;
+      try {
+          const res = await fetch(imgBase + `datos.json`);
+          const items = await res.json();
+          const carouselTrack = document.getElementById('auto-carousel');
+
+          // 1. Crear elementos del carrusel
+          items.forEach(item => {
+              const cItem = document.createElement('div');
+              cItem.className = 'carousel-item';
+              cItem.innerHTML = `<img src="${imgBase + item.Archivo}" loading="lazy" alt="${item.Título}">`;
+              carouselTrack.appendChild(cItem);
+          });
+
+          // 2. Duplicar elementos para lograr el efecto infinito
+          const originalItems = Array.from(carouselTrack.children);
+          originalItems.forEach(child => {
+             const clone = child.cloneNode(true);
+             carouselTrack.appendChild(clone);
+          });
+
+      } catch (e) { console.error("Error cargando galería para carrusel", e); }
+    })();
   </script>
     
 <a href="https://wa.me/541171274479" class="wpp-float" target="_blank">
@@ -187,5 +218,3 @@
 </a>
 </body>
 </html>
-
-
